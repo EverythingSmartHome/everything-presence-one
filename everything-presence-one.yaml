@@ -29,9 +29,6 @@ wifi:
 captive_portal:
 
 improv_serial:
-
-esp32_improv:
-  authorizer: none
   
 dashboard_import:
   package_import_url: github://everythingsmarthome/presence-one/everything-presence-one.yaml
