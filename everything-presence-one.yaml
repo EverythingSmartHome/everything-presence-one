@@ -32,6 +32,9 @@ improv_serial:
 
 esp32_improv:
   authorizer: none
+  
+dashboard_import:
+  package_import_url: github://everythingsmarthome/everything-presence-one.yaml
 
 status_led:
   pin:
