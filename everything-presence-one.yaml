@@ -1,0 +1,272 @@
+substitutions:
+  name: "esh-presence-one"
+  room: "Kitchen"
+  friendly_name: "ESH Presence One"
+  project_name: "EverythingSmartHome.presence_sensor"
+  project_version: "1.0.0"
+
+esphome:
+  name: "${name}"
+  name_add_mac_suffix: true
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
+
+esp32:
+  board: esp32dev
+
+logger:
+
+api:
+
+ota:
+  
+web_server:
+
+wifi:
+  ap: {}
+
+captive_portal:
+
+improv_serial:
+
+esp32_improv:
+  authorizer: none
+
+status_led:
+  pin:
+    number: 32
+    inverted: true
+
+i2c:
+  sda: 26
+  scl: 25
+  scan: true
+
+sensor:
+  - platform: shtcx
+    temperature:
+      name: "${room} Temperature"
+      filters:
+        offset: -2.5
+    humidity:
+      name: "${room} Humidity"
+    address: 0x70
+    update_interval: 60s
+  - platform: bh1750
+    name: "${room} Illuminance"
+    address: 0x23
+    update_interval: 30s
+
+binary_sensor:
+  - platform: gpio
+    name: ${room} mmWave
+    id: mmwave
+    device_class: occupancy
+    pin:
+      number: GPIO15
+      mode: INPUT_PULLDOWN
+  - platform: gpio
+    pin:
+      number: 33
+      mode: INPUT_PULLDOWN
+    name: ${room} PIR
+    id: pir_motion_sensor
+    device_class: motion
+    filters:
+      - delayed_off: 1s
+  - platform: template
+    name: ${room} Occupancy
+    id: occupancy
+    device_class: occupancy
+    filters:
+      - delayed_off: 15s
+    lambda: |-
+      if ( id(mmwave).state or id(pir_motion_sensor).state) {
+        return true;
+      } 
+      else if (id(mmwave).state == 0 and id(pir_motion_sensor).state == 0) {
+        return false;
+      } 
+      else {
+        return id(occupancy).state;
+      }
+
+uart:
+  id: uart_bus
+  tx_pin: GPIO13
+  rx_pin: GPIO14
+  baud_rate: 115200
+  debug:
+    direction: BOTH
+    dummy_receiver: true
+    after:
+      delimiter: "\n"
+    sequence:
+      - lambda: UARTDebug::log_string(direction, bytes);
+
+switch:
+  - platform: safe_mode
+    internal: true
+    name: use_safe_mode
+
+  - platform: template
+    name: "mmWave Sensor"
+    id: "mmwave_sensor"
+    optimistic: true
+    restore_state: true
+    assumed_state: true
+    turn_on_action:
+      - uart.write: "sensorStart"
+      - delay: 1s
+    turn_off_action:
+      - uart.write: "sensorStop"
+      - delay: 1s
+
+  - platform: template
+    name: "mmWave LED"
+    id: "mmwave_led"
+    optimistic: true
+    restore_state: true
+    assumed_state: true
+    turn_on_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setLedMode 1 0"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+    turn_off_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setLedMode 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: "uart_presence_output"
+    id: "uart_presence_output"
+    optimistic: true
+    restore_state: true
+    assumed_state: true
+    turn_on_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+    turn_off_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 1 0"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: "uart_target_output"
+    id: "uart_target_output"
+    optimistic: true
+    restore_state: true
+    assumed_state: false
+    turn_on_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 2 1 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+    turn_off_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 2 0"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+number:
+  - platform: template
+    name: mmWave Distance
+    id: mmwave_distance
+    min_value: 0
+    max_value: 800
+    initial_value: 315
+    optimistic: true
+    step: 15
+    restore_value: true
+    unit_of_measurement: cm
+    mode: box
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda int cm = (int)ceil(x / 15.0);
+          std::string cms = "detRangeCfg -1 0 " + to_string(cm);
+          return std::vector<unsigned char>(cms.begin(), cms.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave Off Latency
+    id: mmwave_latency
+    min_value: 0
+    max_value: 65000
+    initial_value: 12500
+    optimistic: true
+    step: 25
+    restore_value: true
+    unit_of_measurement: ms
+    mode: box
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda int ms = (int)ceil(x / 25.0);
+          std::string mss = "outputLatency -1 0 " + to_string(ms);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave Sensitivity
+    id: mmwave_sensitivity
+    min_value: 0
+    max_value: 9
+    initial_value: 7
+    optimistic: true
+    step: 1
+    restore_value: true
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write:
+          !lambda std::string mss = "setSensitivity " + to_string((int)x);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+button:
+  - platform: restart
+    name: Restart $name
+
+  - platform: template
+    name: "factory_reset_dfrobot"
+    id: "factory_reset_dfrobot"
+    on_press:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "resetCfg"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
