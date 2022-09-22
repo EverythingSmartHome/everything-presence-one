@@ -3,7 +3,7 @@ substitutions:
   room: "Kitchen"
   friendly_name: "ESH Presence One"
   project_name: "EverythingSmartHome.presence_sensor"
-  project_version: "1.0.0"
+  project_version: "1.0.1"
 
 esphome:
   name: "${name}"
@@ -29,6 +29,9 @@ wifi:
 captive_portal:
 
 improv_serial:
+
+esp32_improv:
+  authorizer: none
   
 dashboard_import:
   package_import_url: github://everythingsmarthome/presence-one/everything-presence-one.yaml
@@ -91,7 +94,6 @@ binary_sensor:
       else {
         return id(occupancy).state;
       }
-
 uart:
   id: uart_bus
   tx_pin: GPIO13
