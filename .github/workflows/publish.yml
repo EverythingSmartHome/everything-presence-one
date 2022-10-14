@@ -1,0 +1,18 @@
+name: Build and Publish ESPHome firmware and website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-everything-presence-one:
+    name: Publish Everything Presence One
+    uses: esphome/workflows/.github/workflows/publish.yml@main
+    with:
+      files: everything-presence-one.yaml
+      name: Everything Presence One
+      manifest_filename: everything-presence-one-manifest.json
+      clean: false
+      esphome_version: latest
