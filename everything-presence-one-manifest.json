@@ -1,0 +1,17 @@
+{
+  "name": "Everything Presence One",
+  "version": "",
+  "home_assistant_domain": "esphome",
+  "new_install_skip_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "esh-presence-one-esp32/esh-presence-one-esp32.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
