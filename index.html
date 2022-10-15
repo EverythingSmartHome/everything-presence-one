@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Everything Presence One</title>
+    <meta
+      name="description"
+      content="Web installer for the Everything Presence One board."
+    />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="color-scheme" content="dark light" />
+    <meta property="og:title" content="Everything Presence One" />
+    <meta property="og:site_name" content="Everything Presence One" />
+    <meta
+      property="og:url"
+      content="https://everythingsmarthome.github.io/everything-presence-one/"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Web installer for the Everything Presence One board."
+    />
+    <style>
+      body {
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Ubuntu, sans-serif;
+        padding: 0;
+        margin: 0;
+        line-height: 1.4;
+      }
+      .content {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 12px;
+      }
+      .header {
+        display: block;
+        width: 100%;
+        aspect-ratio: 100 / 100;
+        border-radius: 12px;
+      }
+      h3 {
+        margin-top: 1.5em;
+      }
+      a {
+        color: #03a9f4;
+      }
+      .hidden {
+        display: none;
+      }
+      li {
+        padding: 4px 0;
+      }
+      .footer {
+        margin-top: 24px;
+        border-top: 1px solid #ccc;
+        padding-top: 24px;
+        text-align: center;
+      }
+      .footer .initiative {
+        font-style: italic;
+        margin-top: 16px;
+      }
+      .radios {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .radios label {
+        padding: 4px;
+        cursor: pointer;
+        width: calc(33.3% - 16px);
+        display: block;
+        position: relative;
+      }
+      .radios input {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+      }
+      .radios img {
+        display: block;
+        width: calc(100% - 8px);
+        border: 4px solid rgba(0, 0, 0, 0);
+        aspect-ratio: 1;
+      }
+      input:checked + img {
+        border-color: #58a6ff;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #333;
+          color: #fff;
+        }
+        a {
+          color: #58a6ff;
+        }
+      }
+      @media only screen and (max-width: 450px) {
+        .radios label {
+          width: calc(50% - 16px);
+          max-width: initial;
+        }
+      }
+      .diy::after {
+        content: "DIY";
+        background-color: #f44336;
+        color: #fff;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+      }
+      body .diy {
+        display: none;
+      }
+      body.show-diy .diy {
+        display: initial;
+      }
+    </style>
+    <script
+      type="module"
+      src="https://unpkg.com/esp-web-tools@9.0.3/dist/web/install-button.js?module"
+    ></script>
+  </head>
+  <body>
+    <div class="content">
+      <img
+        class="header"
+        src="./header.png"
+        alt="Web installer for the Everything Presence One board."
+      />
+      <h1>Everything Presence One ESPHome Installer</h1>
+      <p></p>
+      <p>
+        This site installs the latest
+        <a href="https://esphome.io">ESPHome</a> firmware on the Everything
+        Presence One board for direct integration with
+        <a href="https://home-assistant.io">Home Assistant</a>.
+      </p>
+      <p>
+        Hit the connect button to install the latest ESPHome firmware on your
+        Everything Presence One board. No programming or other software
+        required.
+      </p>
+
+      <div class="radios">
+        <label>
+          <input type="radio" name="type" value="everything-presence-one" checked />
+          <img src="./everything-presence-one.png" alt="Everything Presence One" />
+        </label>
+      </div>
+
+      <p class="button-row" align="center">
+        <esp-web-install-button></esp-web-install-button>
+      </p>
+
+      <!-- <div class="hidden info esp32-generic">
+        <h3>Generic ESP32</h3>
+        <p>
+          Turn any ESP32 into a Bluetooth proxy for Home Assistant. This option
+          only works for "plain" ESP32 and not for ESP32-C3 or other variants.
+        </p>
+        <p>Buy</p>
+        <ul>
+          <li>
+            <a
+              href="https://www.amazon.com/ESP-WROOM-32-Development-Microcontroller-Integrated-Compatible/dp/B08D5ZD528/?&_encoding=UTF8&tag=homeassista0e-20&linkCode=ur2&linkId=f9087b654cd5735f0761ae5db99e1e1a&camp=1789&creative=9325"
+              >Amazon</a
+            >
+          </li>
+        </ul>
+      </div> -->
+
+      <h3>Advanced Users</h3>
+      <ul>
+        <li>
+          The device is adoptable in
+          <a
+            href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=5c53de3b_esphome&repository_url=https%3A%2F%2Fgithub.com%2Fesphome%2Fhome-assistant-addon"
+            >the ESPHome dashboard</a
+          >
+        </li>
+        <li>
+          The YAML configuration is on
+          <a
+            href="https://github.com/everythingsmarthome/everything-presence-one"
+            >GitHub</a
+          >
+        </li>
+      </ul>
+      <div class="footer">
+        <br /><br />
+        <a href="https://esphome.io">ESPHome</a>
+        &mdash; Installer powered by
+        <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('input[name="type"]').forEach((radio) =>
+        radio.addEventListener("change", () => {
+          const button = document.querySelector("esp-web-install-button");
+          button.manifest = `./${radio.value}-manifest.json`;
+
+          document.querySelectorAll(".info").forEach((info) => {
+            info.classList.add("hidden");
+          });
+          document
+            .querySelector(`.info.${radio.value}`)
+            .classList.remove("hidden");
+        })
+      );
+      document
+        .querySelector('input[name="type"]:checked')
+        .dispatchEvent(new Event("change"));
+      if (new URLSearchParams(document.location.search).has("diy")) {
+        document.body.classList.add("show-diy");
+      }
+    </script>
+  </body>
+</html>
