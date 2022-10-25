@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "parts": [
         {
-          "path": "esh-presence-one-esp32/esh-presence-one-esp32.bin",
+          "path": "everything-presence-one-esp32/everything-presence-one-esp32.bin",
           "offset": 0
         }
       ]
