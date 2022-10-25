@@ -1,6 +1,6 @@
 substitutions:
   name: "esh-presence-one"
-  room: "Kitchen"
+  room: ""
   friendly_name: "ESH Presence One"
   project_name: "EverythingSmartHome.presence_sensor"
   project_version: "1.0.1"
