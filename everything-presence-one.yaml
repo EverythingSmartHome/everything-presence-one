@@ -1,9 +1,9 @@
 substitutions:
-  name: "esh-presence-one"
+  name: "everything-presence-one"
   room: ""
-  friendly_name: "ESH Presence One"
-  project_name: "EverythingSmartHome.presence_sensor"
-  project_version: "1.0.1"
+  friendly_name: "Everything Presence One"
+  project_name: "Everything Smart Technologies.Everything Presence One"
+  project_version: "1.0.0"
 
 esphome:
   name: "${name}"
@@ -36,10 +36,10 @@ esp32_improv:
 dashboard_import:
   package_import_url: github://everythingsmarthome/presence-one/everything-presence-one.yaml
 
-status_led:
-  pin:
-    number: 32
-    inverted: true
+light:
+  - platform: status_led
+    name: "ESP32 Status LED"
+    pin: GPIO32
 
 i2c:
   sda: 26
@@ -77,7 +77,7 @@ binary_sensor:
     id: pir_motion_sensor
     device_class: motion
     filters:
-      - delayed_off: 1s
+      - delayed_off: 10s
   - platform: template
     name: ${room} Occupancy
     id: occupancy
@@ -264,8 +264,8 @@ button:
     name: Restart $name
 
   - platform: template
-    name: "factory_reset_dfrobot"
-    id: "factory_reset_dfrobot"
+    name: "Factory Reset mmWave"
+    id: "factory_reset_mmwave"
     on_press:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
