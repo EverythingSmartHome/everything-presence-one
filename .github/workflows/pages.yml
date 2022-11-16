@@ -45,6 +45,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./static
           enable_jekyll: true
+          keep_files: true
 
   # Deployment job
   deploy:
