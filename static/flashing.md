@@ -25,21 +25,13 @@ This site installs the latest [ESPHome](https://esphome.io) firmware on the Ever
 Hit the connect button to install the latest ESPHome firmware on you're
 Everything Presence One board. No programming or other software
 required.
-      <div class="radios">
-        <label>
-          <input
+<input
             type="radio"
             name="type"
             value="everything-presence-one"
             checked
           />
-          <img
-            src="./everything-presence-one.png"
-            alt="Everything Presence One"
-
-          />
-        </label>
-      </div>
+<img src="./everything-presence-one.png" alt="Everything Presence One"/>
 
 <esp-web-install-button></esp-web-install-button>
 
