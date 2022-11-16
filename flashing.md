@@ -70,8 +70,6 @@ mermaid:
   version: "9.1.3"
 ```
 
-See [the Code documentation]({{ site.baseurl }}{% link docs/ui-components/code.md %}#mermaid-diagram-code-blocks) for more configuration options and information.
-
 ## Aux links
 
 ```yaml
@@ -97,7 +95,6 @@ heading_anchors: true
 ## External navigation links
 
 External links can be added to the navigation through the `nav_external_links` option.
-See [Navigation Structure]({{ site.baseurl }}{% link docs/navigation-structure.md %}#external-navigation-links) for more details.
 
 ## Footer content
 
@@ -153,8 +150,6 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
 });
 </script>
 
-See [Customization]({{ site.baseurl }}{% link docs/customization.md %}) for more information.
-
 ## Callouts
 
 To use this feature, you need to configure a `color` and (optionally) `title` for each kind of callout you want to use, e.g.:
@@ -205,8 +200,6 @@ The value of `callouts_level` is either `quiet` or `loud`;
 `loud` increases the saturation and lightness of the backgrounds.
 The default level is `quiet` when using the `light` or custom color schemes,
 and `loud` when using the `dark color scheme.`
-
-See [Callouts]({{ site.baseurl }}{% link docs/ui-components/callouts.md %}) for more information.
 
 ## Google Analytics
 
