@@ -1,6 +1,6 @@
 title: Just the Docs Template
 description: A starter template for a Jeykll site using the Just the Docs theme!
-theme: just-the-docs
+remote_theme: pmarsceill/just-the-docs
 
 url: https://everythingsmarthome.github.io
 
