@@ -1,0 +1,8 @@
+title: Everything Presence One Documentation
+description: Documentation for the Everything Presence One smart home sensor!
+remote_theme: pmarsceill/just-the-docs
+
+url: https://everythingsmarthome.github.io
+
+aux_links:
+  Template Repository: https://github.com/just-the-docs/just-the-docs-template
