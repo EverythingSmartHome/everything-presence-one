@@ -135,6 +135,7 @@ color_scheme: dark
 ```
 
 <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
+<esp-web-install-button></esp-web-install-button>
 
 <script
   type="module"
