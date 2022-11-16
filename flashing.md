@@ -8,15 +8,9 @@ nav_order: 3
 
 {: .no_toc }
 
-Just the Docs has some specific configuration parameters that can be defined in your Jekyll site's \_config.yml file.
+This page will help you to flash your Everything Presence One back to factory firmware!
 {: .fs-6 .fw-300 }
 
-<img
-        class="header"
-        src="./header.png"
-        alt="Web installer for the Everything Presence One board."
-        width="100" height="150"
-      />
 
 ## Everything Presence One ESPHome Installer
 
@@ -25,13 +19,14 @@ This site installs the latest [ESPHome](https://esphome.io) firmware on the Ever
 Hit the connect button to install the latest ESPHome firmware on you're
 Everything Presence One board. No programming or other software
 required.
+
 <input
             type="radio"
             name="type"
             value="everything-presence-one"
             checked
           />
-<img src="./everything-presence-one.png" alt="Everything Presence One"/>
+<img src="./everything-presence-one.png" alt="Everything Presence One" width="200" height="250"/>
 
 <esp-web-install-button></esp-web-install-button>
 
