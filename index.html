@@ -29,7 +29,7 @@
         line-height: 1.4;
       }
       .content {
-        max-width: 600px;
+        max-width: 70%;
         margin: 0 auto;
         padding: 12px;
       }
@@ -132,6 +132,7 @@
         class="header"
         src="./header.png"
         alt="Web installer for the Everything Presence One board."
+        width="100" height="150"
       />
       <h1>Everything Presence One ESPHome Installer</h1>
       <p></p>
@@ -142,15 +143,24 @@
         <a href="https://home-assistant.io">Home Assistant</a>.
       </p>
       <p>
-        Hit the connect button to install the latest ESPHome firmware on your
+        Hit the connect button to install the latest ESPHome firmware on you're
         Everything Presence One board. No programming or other software
         required.
       </p>
 
       <div class="radios">
         <label>
-          <input type="radio" name="type" value="everything-presence-one" checked />
-          <img src="./everything-presence-one.png" alt="Everything Presence One" />
+          <input
+            type="radio"
+            name="type"
+            value="everything-presence-one"
+            checked
+          />
+          <img
+            src="./everything-presence-one.png"
+            alt="Everything Presence One"
+            
+          />
         </label>
       </div>
 
@@ -158,40 +168,44 @@
         <esp-web-install-button></esp-web-install-button>
       </p>
 
-      <!-- <div class="hidden info esp32-generic">
-        <h3>Generic ESP32</h3>
-        <p>
-          Turn any ESP32 into a Bluetooth proxy for Home Assistant. This option
-          only works for "plain" ESP32 and not for ESP32-C3 or other variants.
-        </p>
-        <p>Buy</p>
-        <ul>
-          <li>
-            <a
-              href="https://www.amazon.com/ESP-WROOM-32-Development-Microcontroller-Integrated-Compatible/dp/B08D5ZD528/?&_encoding=UTF8&tag=homeassista0e-20&linkCode=ur2&linkId=f9087b654cd5735f0761ae5db99e1e1a&camp=1789&creative=9325"
-              >Amazon</a
-            >
-          </li>
-        </ul>
-      </div> -->
-
-      <h3>Advanced Users</h3>
+      <h2>User Guide</h2>
+      <h3>Unboxing and Preperation</h3>
+      <p>You will need 4 items to build your EP1 with this guide:</p>
       <ul>
-        <li>
-          The device is adoptable in
-          <a
-            href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=5c53de3b_esphome&repository_url=https%3A%2F%2Fgithub.com%2Fesphome%2Fhome-assistant-addon"
-            >the ESPHome dashboard</a
-          >
-        </li>
-        <li>
-          The YAML configuration is on
-          <a
-            href="https://github.com/everythingsmarthome/everything-presence-one"
-            >GitHub</a
-          >
-        </li>
+        <li>Everything Presence One Board</li>
+        <li>Panasonic PIR</li>
+        <li>DFRobot mmWave Sensor</li>
+        <li>3D Printed Case</li>
       </ul>
+
+      <h3>Assembly</h3>
+      <p>
+        First you will want to grab all 5 pieces of the 3D printed case - front,
+        back, stand, ball socket and locking ring:
+      </p>
+      <img class="header" src="./header.png" alt="Placeholder image" />
+      <p>
+        Start by taking the back, and inserting the ball socket into it from the
+        front and use the locking ring to tighten it down:
+      </p>
+      <img
+        class="header"
+        src="./header.png"
+        alt="Web installer for the Everything Presence One board."
+      />
+      <p>
+        Note that it will be pretty tight, but will still rotate if enough
+        pressure is applied - this is intentional to allow for setting the
+        position easier. Note also that the locking ring has a slight grove on
+        one side, make sure this faces the back of the case:
+      </p>
+      <img
+        class="header"
+        src="./header.png"
+        alt="Web installer for the Everything Presence One board."
+      />
+      <p>Next, grab the EP1 base board and place it into the back of the case. Press down in all 4 corners and it will click into place securely.</p>
+
       <div class="footer">
         <br /><br />
         <a href="https://esphome.io">ESPHome</a>
