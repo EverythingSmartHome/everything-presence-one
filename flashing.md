@@ -136,6 +136,11 @@ color_scheme: dark
 
 <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
 
+<script
+  type="module"
+  src="https://unpkg.com/esp-web-tools@9.0.3/dist/web/install-button.js?module"
+></script>
+
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
 
@@ -148,6 +153,28 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
     toggleDarkMode.textContent = 'Return to the light side';
   }
 });
+</script>
+
+<script>
+  document.querySelectorAll('input[name="type"]').forEach((radio) =>
+    radio.addEventListener("change", () => {
+      const button = document.querySelector("esp-web-install-button");
+      button.manifest = `./${radio.value}-manifest.json`;
+
+      document.querySelectorAll(".info").forEach((info) => {
+        info.classList.add("hidden");
+      });
+      document
+        .querySelector(`.info.${radio.value}`)
+        .classList.remove("hidden");
+    })
+  );
+  document
+    .querySelector('input[name="type"]:checked')
+    .dispatchEvent(new Event("change"));
+  if (new URLSearchParams(document.location.search).has("diy")) {
+    document.body.classList.add("show-diy");
+  }
 </script>
 
 ## Callouts
