@@ -1,9 +1,0 @@
-{
-  "chipFamily": "ESP32",
-  "parts": [
-    {
-      "path": "everything-presence-one-esp32/everything-presence-one-esp32.bin",
-      "offset": 0
-    }
-  ]
-}
