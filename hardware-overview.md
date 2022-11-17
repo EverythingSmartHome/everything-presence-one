@@ -42,14 +42,17 @@ The Official Case for the EP1 is available for purchase [here](https://shop.ever
 The case has 5 components - Front, Back, Stand, Ball Joint and Locking Ring.
 
 Front:
+
 Image
 {: .label .label-red }
 
 Back:
+
 Image
 {: .label .label-red }
 
 Stand:
+
 Image
 {: .label .label-red }
 
@@ -89,9 +92,9 @@ The Panasonic EKMC series of sensor is the **only** compatible and validated sen
 
 ## Next Steps
 
-Now we have familiarised ourselves with the hardware, let's get the hardware installed and ready to setup!
+Now we have familiarised ourselves with the hardware, let's get the hardware assembled and ready to setup!
 
-[Hardware Setup](http://everythingsmarthome.github.io/everything-presence-one/hardware-setup.html){: .btn .btn-blue }
+[Assembly](http://everythingsmarthome.github.io/everything-presence-one/assembly.html){: .btn .btn-blue }
 
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
