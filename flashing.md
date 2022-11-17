@@ -4,21 +4,23 @@ title: Flashing
 nav_order: 3
 ---
 
-# Configuration
+# Flashing
 
 {: .no_toc }
 
 This page will help you to flash your Everything Presence One back to factory firmware!
 {: .fs-6 .fw-300 }
 
+{: .highlight }
+Please note, the Everything Presence One comes with ESPHome pre-installed out of the box - you do not need to flash it. This page is for factory resetting the board back to defaults.
 
-## Everything Presence One ESPHome Installer
+## Everything Presence One ESPHome Firmware Install
 
-This site installs the latest [ESPHome](https://esphome.io) firmware on the Everything Presence One board for direct integration with [Home Assistant](https://home-assistant.io).
+Here you can install the latest [ESPHome](https://esphome.io) firmware on the Everything Presence One board for direct integration with [Home Assistant](https://home-assistant.io).
 
 Hit the connect button to install the latest ESPHome firmware on you're
 Everything Presence One board. No programming or other software
-required.
+required. After flashing has completed, you can connect the EP1 to your Wi-Fi and integrate directly with Home Assistant.
 
 <input
             type="radio"
