@@ -10,4 +10,4 @@ This documentation will guide you through the hardware, setup and installation o
 
 Let's get started with the hardware unboxing and preperation first!
 
-[Hardware Overview](http://everythingsmarthome.github.io/hardware-overview.html){: .btn .btn-blue }
+[Hardware Overview](http://everythingsmarthome.github.io/everything-presence-one/hardware-overview.html){: .btn .btn-blue }
