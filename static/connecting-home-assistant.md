@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Assembly
-nav_order: 3
+title: Connecting Home Assistant
+nav_order: 5
 ---
 
 # Connecting Home Assistant
