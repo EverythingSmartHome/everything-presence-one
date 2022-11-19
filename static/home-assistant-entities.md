@@ -4,7 +4,7 @@ title: Home Assistant Entities
 nav_order: 6
 ---
 
-# Entities Explained
+# Home Assistant Entities Explained
 
 {: .no_toc }
 
