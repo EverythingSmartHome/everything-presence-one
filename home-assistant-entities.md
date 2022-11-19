@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Home Assistant Entities
-nav_order: 6
+nav_order: 3
 ---
 
 # Entities Explained
