@@ -71,7 +71,7 @@ Image
 
 ## Case - Part 2
 
-Finally, clip the front of the case on and into position. 
+Finally, clip the front of the case on and into position.
 
 Image
 {: .label .label-red }
@@ -82,7 +82,7 @@ The final hardware will look like this:
 
 Now we have assembled the hardware, we can power on and connect it to Wi-Fi.
 
-[Initial Setup](http://everythingsmarthome.github.io/everything-presence-one/initial-setup.html){: .btn .btn-blue }
+[Connecting to WiFi](http://everythingsmarthome.github.io/everything-presence-one/connecting-wifi.html){: .btn .btn-blue }
 
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
