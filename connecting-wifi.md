@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Assembly
-nav_order: 3
+title: Connecting To WiFi
+nav_order: 4
 ---
 
 # Connecting To WiFi

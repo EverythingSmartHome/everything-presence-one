@@ -80,7 +80,7 @@ The final hardware will look like this:
 
 ## Next Steps
 
-Now we have assembled the hardware, we can power on and connect it to Wi-Fi.
+Now we have assembled the hardware, we can power on and connect it to WiFi.
 
 [Connecting to WiFi](http://everythingsmarthome.github.io/everything-presence-one/connecting-wifi.html){: .btn .btn-blue }
 
