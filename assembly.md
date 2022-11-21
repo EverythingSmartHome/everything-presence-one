@@ -13,15 +13,15 @@ Time to assemble the hardware ready for setup!
 
 ## Case - Part 1
 
-First you are going to want to grab 4 components of the case - the back, ball join, locking ring and stand.
+First you are going to want to grab 4 components of the case - the back, ball joint, locking ring and stand.
 
-Image
-{: .label .label-red }
+![Inserting the ball joint](images/assembly-insert-ball-joint-1.jpg)
 
 Insert the ball joint through the back of the case from the front side. Then, while holding the ball joint in place, use the locking ring to tighten in place.
 
-Image
-{: .label .label-red }
+![Inserting the ball joint](images/assembly-insert-ball-joint-2.jpg)
+
+![Inserting the ball joint](images/assembly-insert-ball-joint-3.jpg)
 
 {: .important }
 The locking ring has a slight groove on one side - make sure the groove faces the back of the case.
@@ -31,25 +31,28 @@ The ball joint will be pretty tight but will still rotate with enough force - th
 
 Use your thumb to press against the back of the ball joint for support and then push the stand onto the ball joint.
 
+![Inserting the stand](images/assembly-attaching-stand.jpg)
+
 {: .note }
 The stand may be quite tight initially due to the 3D printing process, but should loosen up after a few rotations.
 
-Image
-{: .label .label-red }
+![Inserting the stand](images/assembly-attaching-stand-2.jpg)
 
 ## Board and Sensors
 
 Grab the EP1 board, mmWave Sensor and PIR.
 
-The the EP1 board and press it into the back of the case - each corner should click into place.
+The the EP1 board and press it into the back of the case - each corner should click into place. Please note we have removed the stand in the below photos for demo purposes.
 
-Image
-{: .label .label-red }
+![Inserting the EP1 Board](images/assembly-insert-ep1-board-1.jpg)
+
+![Inserting the EP1 Board](images/assembly-insert-ep1-board-2.jpg)
 
 Next, take the mmWave sensor and insert it into one of the two slots.
 
-Image
-{: .label .label-red }
+![Inserting the mmWave Sensor](images/assembly-insert-mmwave-top-slot.jpg)
+
+![Inserting the mmWave Sensor](images/assembly-insert-mmwave-side-slot.jpg)
 
 Slot 1 at the top of the board gives you a wider horizontal field of view with a narrower vertical field of view. Slot 2 at the side of the board gives you a wider vertical field of view with a narrower horizontal field of view. Slot 1 is the recommendation for most people.
 
@@ -61,22 +64,25 @@ Please take extra care with the mmWave sensor when it's inserted into the slot s
 
 Then take PIR sensor and push it into the PIR socket in the middle of the board. The PIR can only fit in the socket in one orientation.
 
-Image
-{: .label .label-red }
+![Inserting the PIR Sensor](images/assembly-insert-pir-sensor-1.jpg)
+
+![Inserting the PIR Sensor](images/assembly-insert-pir-sensor-2.jpg)
 
 With both sensors and the board installed, it should look like this:
 
-Image
-{: .label .label-red }
+![Inserting the PIR Sensor](images/assembly-insert-pir-sensor-3.jpg)
 
 ## Case - Part 2
 
 Finally, clip the front of the case on and into position.
 
-Image
-{: .label .label-red }
+![Attach the Front of the case](images/assembly-attaching-front-case.jpg)
+
+![Attach the Front of the case](images/assembly-attaching-front-case-2.jpg)
 
 The final hardware will look like this:
+
+![Completed EP1](images/assembly-complete.jpg)
 
 ## Next Steps
 
