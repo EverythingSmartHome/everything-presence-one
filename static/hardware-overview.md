@@ -33,7 +33,6 @@ Each of the main components is labelled directly on the board itself to help wit
 
 ## Official Case
 
-Image
 ![Everything Presence One Official Case](images/hardware-overview-official-case.jpg)
 
 The Official Case for the EP1 is available for purchase [here](https://shop.everythingsmart.io/products/everything-presence-one-official-case) or if you prefer to print your own, the STL is located on [Printables](https://www.printables.com/model/302846-Everything%20Presence%20One%20-%20Official%20Case)
@@ -42,28 +41,23 @@ The case has 5 components - Front, Back, Stand, Ball Joint and Locking Ring.
 
 Front:
 
-Image
-{: .label .label-red }
+![Everything Presence One Official Case Front](images/hardware-overview-case-front.jpg)
 
 Back:
 
-Image
-{: .label .label-red }
+![Everything Presence One Official Case Back](images/hardware-overview-case-back.jpg)
 
 Stand:
 
-Image
-{: .label .label-red }
+![Everything Presence One Official Case Stand](images/hardware-overview-case-stand.jpg)
 
 Ball Joint:
 
-Image
-{: .label .label-red }
+![Everything Presence One Official Case Ball Joint](images/hardware-overview-case-ball-joint.jpg)
 
 Locking Ring:
 
-Image
-{: .label .label-red }
+![Everything Presence One Official Case Ball Joint](images/hardware-overview-case-locking-ring.jpg)
 
 ## mmWave Sensor
 
