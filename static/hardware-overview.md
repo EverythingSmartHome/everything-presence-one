@@ -17,8 +17,7 @@ Each component is listed below - please familiarise yourself with each component
 
 ## Everything Presence One Board
 
-Image
-{: .label .label-red }
+![Everything Presence One Board](images/hardware-overview-ep1-board-2.jpg)
 
 The EP1 board is the main PCB for the device. It's where the ESP32 is located that provides Wi-Fi connectivity and is the brains of all of the sensors.
 
@@ -35,7 +34,7 @@ Each of the main components is labelled directly on the board itself to help wit
 ## Official Case
 
 Image
-{: .label .label-red }
+![Everything Presence One Official Case](images/hardware-overview-official-case.jpg)
 
 The Official Case for the EP1 is available for purchase [here](https://shop.everythingsmart.io/products/everything-presence-one-official-case) or if you prefer to print your own, the STL is located on [Printables](https://www.printables.com/model/302846-Everything%20Presence%20One%20-%20Official%20Case)
 
@@ -68,8 +67,7 @@ Image
 
 ## mmWave Sensor
 
-Image
-{: .label .label-red }
+![DFFRobot mmWave Sensor for EP1](images/hardware-overview-mmwave-sensor.jpg)
 
 The mmWave comes included as part of the Everything Presence One Full Kit - if you purchased the board only then you will need to supply your own mmWave sensor.
 
@@ -77,8 +75,7 @@ The DFRobot mmWave Sensor SEN0395 is the **only** compatible and validated senso
 
 ## Motion Sensor PIR
 
-Image
-{: .label .label-red }
+![Panasonic EKMC PIR](images/hardware-overview-pir-sensor.jpg)
 
 The PIR comes included as part of the Everything Presence One Full Kit - if you purchased the board only then you will need to supply your own PIR sensor.
 
