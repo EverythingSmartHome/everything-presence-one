@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Flashing
-nav_order: 6
+parent: Advanced Features
+nav_order: 3
 ---
 
 # Flashing
