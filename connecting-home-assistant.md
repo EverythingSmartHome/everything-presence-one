@@ -17,8 +17,8 @@ For most people, Home Assistant will automatically discover and add the EP1 imme
 
 To add it to Home Assistant, simply head to Settings > Devices and Services and you should see the Everything Presence One has been automatically discovered and is displayed - simply hit the configure button to add it to Home Assistant and that's it!
 
-Image
-{: .label .label-red }
+![Connecting the EP1 to Home Assistant](images/connecting-home-assistant-auto-1.png)
+![Connecting the EP1 to Home Assistant](images/connecting-home-assistant-auto-2.png)
 
 ## Connecting to Home Assistant (Manual method)
 
@@ -33,15 +33,15 @@ You can also use a program like [fing](https://www.fing.com) to discover network
 
 Once you have the IP address, head over to Home Assistant and go to Settings > Devices and Services and click the add Integration button in the bottom right.
 
-Image
-{: .label .label-red }
+![Connecting the EP1 to Home Assistant](images/connecting-home-assistant-manual-1.png)
 
 Search for ESPHome to add an ESPHome device, and then enter the IP address into the box:
 
-Image
-{: .label .label-red }
+![Connecting the EP1 to Home Assistant](images/connecting-home-assistant-manual-2.png)
 
 Hit next and finish, and the EP1 is now connected to Home Assistant.
+
+![Connecting the EP1 to Home Assistant](images/connecting-home-assistant-manual-3.png)
 
 ## Next Steps
 
