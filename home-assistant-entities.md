@@ -77,7 +77,7 @@ The EP1 has two LED's that will be visible, both of which can be turned off.
 
 The mmWave LED disables the LED on the mmWave sensor itself which flashes when in use and the ESP32 Status LED disables the LED on the EP1 board:
 
-![Home Assistant LED Controls](images/home-assistant-entities-led-controls.jpg
+![Home Assistant LED Controls](images/home-assistant-entities-led-controls.jpg)
 
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
