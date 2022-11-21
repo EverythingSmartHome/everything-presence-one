@@ -26,8 +26,7 @@ If for some reason the Everything Presence One is not automatically discovered, 
 
 You will need to first figure out what the IP address of your EP1 is by checking your routers web page:
 
-Image
-{: .label .label-red }
+![Find the IP address in your router](images/connecting-home-assistant-router-ip-address.png)
 
 You can also use a program like [fing](https://www.fing.com) to discover network devices.
 
