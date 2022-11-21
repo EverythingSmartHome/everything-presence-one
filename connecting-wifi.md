@@ -17,20 +17,17 @@ You will want to grab a USB-C cable and a power brick - any charger should suffi
 
 Plug the USB-C cable into the EP1 and a red light will illuminate on the front of the device.
 
-Image
-{: .label .label-red }
+![Powering on the sensor](images/connecting-wifi-power.jpg)
 
 ## Joining Your WiFi
 
 Once powered on, use your phone or computer to search for WiFi hotspots. The EP1 will show up as a hotspot named "everything-presence-one-xxxxxx" - connect to this hotspot.
 
-Image
-{: .label .label-red }
+![Everything Presence One Hotspot](images/connecting-wifi-1.png)
 
 Then, using a browser, navigate to http://192.168.4.1 - this will open up a webpage to configure WiFi settings.
 
-Image
-{: .label .label-red }
+![Everything Presence one Connecting to Wifi](images/connecting-wifi-2.png)
 
 Select your WiFi network and enter the password. The EP1 will now reboot and will join your WiFi network.
 
