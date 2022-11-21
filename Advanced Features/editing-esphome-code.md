@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Editing ESPHome Code
+title: Buttons
 parent: Advanced Features
 nav_order: 2
 ---
