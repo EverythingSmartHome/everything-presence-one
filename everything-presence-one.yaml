@@ -20,8 +20,6 @@ logger:
 api:
 
 ota:
-  
-web_server:
 
 wifi:
   ap: {}
