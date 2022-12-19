@@ -3,7 +3,8 @@ substitutions:
   room: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technologies.Everything Presence One"
-  project_version: "1.0.0"
+  project_version: "1.0.2"
+  temperature_offset: "-2.5"
 
 esphome:
   name: "${name}"
@@ -33,6 +34,7 @@ esp32_improv:
   
 dashboard_import:
   package_import_url: github://everythingsmarthome/presence-one/everything-presence-one.yaml
+  import_full_config: true
 
 light:
   - platform: status_led
@@ -49,7 +51,7 @@ sensor:
     temperature:
       name: "${room} Temperature"
       filters:
-        offset: -2.5
+        offset: ${temperature_offset}
     humidity:
       name: "${room} Humidity"
     address: 0x70
@@ -107,8 +109,8 @@ uart:
 
 switch:
   - platform: safe_mode
-    internal: true
-    name: use_safe_mode
+    internal: false
+    name: $name Safe Mode
 
   - platform: template
     name: "mmWave Sensor"
