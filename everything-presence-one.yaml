@@ -3,8 +3,8 @@ substitutions:
   room: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technologies.Everything Presence One"
-  project_version: "1.0.2"
-  temperature_offset: "-2.5"
+  project_version: "1.0.3"
+  temperature_offset: "-3"
 
 esphome:
   name: "${name}"
