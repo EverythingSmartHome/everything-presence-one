@@ -11,6 +11,11 @@ nav_order: 2
 
 ## Importing the ESPHome code to your dashboard
 
+If you want to make some more advanced changes to the EP1, you first need to add the ESPHome code to your dashboard.
+
+First make sure that the EP1 has been added to Home Assistant, see [Connecting Home Assistant](https://everythingsmarthome.github.io/everything-presence-one/connecting-home-assistant.html) if you have not already done that.
+
+Then, make sure that the ESPHome Add-on [is installed](https://esphome.io/guides/getting_started_hassio.html)
 
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
