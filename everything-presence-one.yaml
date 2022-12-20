@@ -34,7 +34,7 @@ esp32_improv:
   
 dashboard_import:
   package_import_url: github://everythingsmarthome/presence-one/everything-presence-one.yaml@main
-  import_full_config: true
+  import_full_config: false
 
 light:
   - platform: status_led
