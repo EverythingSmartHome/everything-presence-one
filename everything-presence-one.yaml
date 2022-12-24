@@ -3,8 +3,14 @@ substitutions:
   room: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technologies.Everything Presence One"
-  project_version: "1.0.3"
+  project_version: "1.0.5"
   temperature_offset: "-3"
+  temperature_update_interval: "60s"
+  illuminance_update_interval: "30s"
+  pir_delay_off: "10s"
+  occupancy_delay_off: "15s"
+  mmwave_delay_on: "0s"
+  hidden_ssid: "false"
 
 esphome:
   name: "${name}"
@@ -23,6 +29,7 @@ api:
 ota:
 
 wifi:
+  fast_connect: ${hidden_ssid}
   ap: {}
 
 captive_portal:
@@ -55,11 +62,11 @@ sensor:
     humidity:
       name: "${room} Humidity"
     address: 0x70
-    update_interval: 60s
+    update_interval: ${temperature_update_interval}
   - platform: bh1750
     name: "${room} Illuminance"
     address: 0x23
-    update_interval: 30s
+    update_interval: ${illuminance_update_interval}
 
 binary_sensor:
   - platform: gpio
@@ -69,6 +76,8 @@ binary_sensor:
     pin:
       number: GPIO15
       mode: INPUT_PULLDOWN
+    filters:
+      delayed_on: ${mmwave_delay_on}
   - platform: gpio
     pin:
       number: 33
@@ -77,13 +86,13 @@ binary_sensor:
     id: pir_motion_sensor
     device_class: motion
     filters:
-      - delayed_off: 10s
+      - delayed_off: ${pir_delay_off}
   - platform: template
     name: ${room} Occupancy
     id: occupancy
     device_class: occupancy
     filters:
-      - delayed_off: 15s
+      - delayed_off: ${occupancy_delay_off}
     lambda: |-
       if ( id(mmwave).state or id(pir_motion_sensor).state) {
         return true;
