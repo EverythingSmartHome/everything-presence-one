@@ -78,8 +78,6 @@ binary_sensor:
     pin:
       number: GPIO15
       mode: INPUT_PULLDOWN
-    filters:
-      delayed_on: ${mmwave_delay_on}
   - platform: gpio
     pin:
       number: 33
