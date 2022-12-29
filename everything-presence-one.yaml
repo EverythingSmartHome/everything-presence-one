@@ -2,14 +2,14 @@ substitutions:
   name: "everything-presence-one"
   room: ""
   friendly_name: "Everything Presence One"
-  project_name: "Everything Smart Technologies.Everything Presence One"
-  project_version: "1.0.5"
+  project_name: "Everything Smart Technology.Everything Presence One"
+  project_version: "1.1.0"
   temperature_offset: "-3"
+  humidity_offset: "0"
   temperature_update_interval: "60s"
   illuminance_update_interval: "30s"
   pir_delay_off: "10s"
   occupancy_delay_off: "15s"
-  mmwave_delay_on: "0s"
   hidden_ssid: "false"
 
 esphome:
@@ -61,6 +61,8 @@ sensor:
         offset: ${temperature_offset}
     humidity:
       name: "${room} Humidity"
+      filters:
+        offset: ${humidity_offset}
     address: 0x70
     update_interval: ${temperature_update_interval}
   - platform: bh1750
@@ -228,20 +230,42 @@ number:
 
   - platform: template
     name: mmWave Off Latency
-    id: mmwave_latency
-    min_value: 0
-    max_value: 65000
-    initial_value: 12500
+    id: mmwave_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 15
     optimistic: true
-    step: 25
+    step: 1
     restore_value: true
-    unit_of_measurement: ms
+    unit_of_measurement: seconds
     mode: box
     set_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
-      - uart.write: !lambda int ms = (int)ceil(x / 25.0);
-          std::string mss = "outputLatency -1 0 " + to_string(ms);
+      - uart.write: !lambda |-
+          std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave On Latency
+    id: mmwave_on_latency
+    min_value: 0
+    max_value: 60
+    initial_value: 0.5
+    optimistic: true
+    step: 0.5
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: box
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda |-
+          std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
           return std::vector<unsigned char>(mss.begin(), mss.end());
       - delay: 1s
       - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
@@ -281,3 +305,8 @@ button:
       - uart.write: "resetCfg"
       - delay: 3s
       - switch.turn_on: mmwave_sensor
+  - platform: template
+    name: "Restart mmWave Sensor"
+    id: "reset_mmwave"
+    on_press:
+      - uart.write: "resetSystem"
