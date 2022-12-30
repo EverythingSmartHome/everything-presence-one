@@ -3,7 +3,7 @@ substitutions:
   room: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.1.0"
+  project_version: "1.1.1"
   temperature_offset: "-3"
   humidity_offset: "0"
   temperature_update_interval: "60s"
@@ -47,6 +47,7 @@ light:
   - platform: status_led
     name: "ESP32 Status LED"
     pin: GPIO32
+    entity_category: config
 
 i2c:
   sda: 26
@@ -117,13 +118,10 @@ uart:
       - lambda: UARTDebug::log_string(direction, bytes);
 
 switch:
-  - platform: safe_mode
-    internal: false
-    name: $name Safe Mode
-
   - platform: template
     name: "mmWave Sensor"
     id: "mmwave_sensor"
+    entity_category: config
     optimistic: true
     restore_state: true
     assumed_state: true
@@ -137,6 +135,7 @@ switch:
   - platform: template
     name: "mmWave LED"
     id: "mmwave_led"
+    entity_category: config
     optimistic: true
     restore_state: true
     assumed_state: true
@@ -160,6 +159,8 @@ switch:
   - platform: template
     name: "uart_presence_output"
     id: "uart_presence_output"
+    entity_category: config
+    internal: true
     optimistic: true
     restore_state: true
     assumed_state: true
@@ -183,6 +184,8 @@ switch:
   - platform: template
     name: "uart_target_output"
     id: "uart_target_output"
+    entity_category: config
+    internal: true
     optimistic: true
     restore_state: true
     assumed_state: false
@@ -207,6 +210,7 @@ number:
   - platform: template
     name: mmWave Distance
     id: mmwave_distance
+    entity_category: config
     min_value: 0
     max_value: 800
     initial_value: 315
@@ -214,7 +218,7 @@ number:
     step: 15
     restore_value: true
     unit_of_measurement: cm
-    mode: box
+    mode: slider
     set_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -229,6 +233,7 @@ number:
   - platform: template
     name: mmWave Off Latency
     id: mmwave_off_latency
+    entity_category: config
     min_value: 1
     max_value: 60
     initial_value: 15
@@ -236,7 +241,7 @@ number:
     step: 1
     restore_value: true
     unit_of_measurement: seconds
-    mode: box
+    mode: slider
     set_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -251,14 +256,15 @@ number:
   - platform: template
     name: mmWave On Latency
     id: mmwave_on_latency
+    entity_category: config
     min_value: 0
     max_value: 60
-    initial_value: 0.5
+    initial_value: 0
     optimistic: true
     step: 0.5
     restore_value: true
     unit_of_measurement: seconds
-    mode: box
+    mode: slider
     set_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -273,6 +279,7 @@ number:
   - platform: template
     name: mmWave Sensitivity
     id: mmwave_sensitivity
+    entity_category: config
     min_value: 0
     max_value: 9
     initial_value: 7
@@ -293,10 +300,15 @@ number:
 button:
   - platform: restart
     name: Restart $name
-
+    entity_category: config
+  - platform: safe_mode
+    internal: false
+    name: $name Safe Mode
+    entity_category: config
   - platform: template
     name: "Factory Reset mmWave"
     id: "factory_reset_mmwave"
+    entity_category: config
     on_press:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -306,5 +318,6 @@ button:
   - platform: template
     name: "Restart mmWave Sensor"
     id: "reset_mmwave"
+    entity_category: config
     on_press:
       - uart.write: "resetSystem"
