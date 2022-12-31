@@ -3,14 +3,15 @@ substitutions:
   room: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.1.1"
+  project_version: "1.1.2"
   temperature_offset: "-3"
-  humidity_offset: "0"
+  humidity_offset: "5"
   temperature_update_interval: "60s"
   illuminance_update_interval: "30s"
   pir_delay_off: "10s"
   occupancy_delay_off: "15s"
   hidden_ssid: "false"
+  factory_reset_disabled: "true"
 
 esphome:
   name: "${name}"
@@ -124,7 +125,6 @@ switch:
     entity_category: config
     optimistic: true
     restore_state: true
-    assumed_state: true
     turn_on_action:
       - uart.write: "sensorStart"
       - delay: 1s
@@ -138,7 +138,6 @@ switch:
     entity_category: config
     optimistic: true
     restore_state: true
-    assumed_state: true
     turn_on_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -163,7 +162,6 @@ switch:
     internal: true
     optimistic: true
     restore_state: true
-    assumed_state: true
     turn_on_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -299,8 +297,23 @@ number:
 
 button:
   - platform: restart
+    name: Restart_internal
+    id: restart_internal
+    entity_category: config 
+    internal: true
+  - platform: template
+    name: "Restart mmWave Sensor"
+    id: "restart_mmwave"
+    entity_category: config
+    internal: true
+    on_press:
+      - uart.write: "resetSystem"
+  - platform: template
     name: Restart $name
     entity_category: config
+    on_press:
+      - button.press: restart_mmwave
+      - button.press: restart_internal
   - platform: safe_mode
     internal: false
     name: $name Safe Mode
@@ -308,6 +321,7 @@ button:
   - platform: template
     name: "Factory Reset mmWave"
     id: "factory_reset_mmwave"
+    internal: ${factory_reset_disabled}
     entity_category: config
     on_press:
       - switch.turn_off: mmwave_sensor
@@ -315,9 +329,3 @@ button:
       - uart.write: "resetCfg"
       - delay: 3s
       - switch.turn_on: mmwave_sensor
-  - platform: template
-    name: "Restart mmWave Sensor"
-    id: "reset_mmwave"
-    entity_category: config
-    on_press:
-      - uart.write: "resetSystem"
