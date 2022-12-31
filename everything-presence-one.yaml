@@ -3,7 +3,7 @@ substitutions:
   room: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.1.2"
+  project_version: "1.1.3"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -12,6 +12,8 @@ substitutions:
   occupancy_delay_off: "15s"
   hidden_ssid: "false"
   factory_reset_disabled: "true"
+  uart_target_output_disabled: "true"
+  uart_presence_output_disabled: "true"
 
 esphome:
   name: "${name}"
@@ -159,7 +161,7 @@ switch:
     name: "uart_presence_output"
     id: "uart_presence_output"
     entity_category: config
-    internal: true
+    internal: ${uart_presence_output_disabled}
     optimistic: true
     restore_state: true
     turn_on_action:
@@ -183,7 +185,7 @@ switch:
     name: "uart_target_output"
     id: "uart_target_output"
     entity_category: config
-    internal: true
+    internal: ${uart_target_output_disabled}
     optimistic: true
     restore_state: true
     assumed_state: false
