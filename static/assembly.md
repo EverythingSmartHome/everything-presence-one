@@ -101,7 +101,7 @@ Plug the USB-C cable into the EP1 and a red light will illuminate on the front o
 
 Now we have assembled the hardware, we can update it and connect it to WiFi!
 
-[Connecting to WiFi](http://everythingsmarthome.github.io/everything-presence-one/connecting-wifi.html){: .btn .btn-blue }
+[Updating and connecting to WiFi](http://everythingsmarthome.github.io/everything-presence-one/updating.html){: .btn .btn-blue }
 
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');

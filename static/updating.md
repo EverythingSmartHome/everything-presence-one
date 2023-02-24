@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Updating
+title: Updating and Conencting to WiFi
 nav_order: 4
 ---
 
-# Updating and Conencting To WiFi
+# Updating and Connecting To WiFi
 
 {: .no_toc }
 
