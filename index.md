@@ -7,7 +7,7 @@ nav_order: 1
 ![Everything Presence One](images/assembly-complete.jpg)
 
 {: .warning-title }
-Make sure to update your EP1 to the latest firmware that fixes known issues by [Updating](https://everythingsmarthome.github.io/everything-presence-one/flashing.html){: .btn .btn-blue }
+Make sure to update your EP1 to the latest firmware that fixes known issues by [Updating](https://everythingsmarthome.github.io/everything-presence-one/updating.html){: .btn .btn-blue }
 
 Welcome to the documentation for the Everything Presence One!
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Troubleshooting
-nav_order: 7
+nav_order: 8
 ---
 
 # FAQ
@@ -10,7 +10,7 @@ nav_order: 7
 
 
 {: .warning-title }
-Please make sure you have updated your EP1 to the latest avaliable firmware by going to [Updating](https://everythingsmarthome.github.io/everything-presence-one/flashing.html){: .btn .btn-blue }
+Please make sure you have updated your EP1 to the latest avaliable firmware by going to [Updating](https://everythingsmarthome.github.io/everything-presence-one/updating.html){: .btn .btn-blue }
 
 
 Lets cover off some of the commonly asked questions.
