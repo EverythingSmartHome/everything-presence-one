@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Updating and Conencting to WiFi
+title: Updating and Connecting to WiFi
 nav_order: 4
 ---
 
