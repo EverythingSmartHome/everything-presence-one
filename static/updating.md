@@ -1,19 +1,15 @@
 ---
 layout: default
-title: Flashing
-parent: Advanced Features
-nav_order: 3
+title: Updating
+nav_order: 4
 ---
 
-# Flashing
+# Updating and Conencting To WiFi
 
 {: .no_toc }
 
-This page will help you to flash your Everything Presence One back to factory firmware!
+This page will help you to flash and update your Everything Presence One to the latest version!
 {: .fs-6 .fw-300 }
-
-{: .highlight }
-Please note, the Everything Presence One comes with ESPHome pre-installed out of the box - you do not need to flash it. This page is for factory resetting the board back to defaults.
 
 ## Everything Presence One ESPHome Firmware Install
 
@@ -21,7 +17,12 @@ Here you can install the latest [ESPHome](https://esphome.io) firmware on the Ev
 
 Hit the connect button to install the latest ESPHome firmware on you're
 Everything Presence One board. No programming or other software
-required. After flashing has completed, you can connect the EP1 to your Wi-Fi and integrate directly with Home Assistant.
+required.
+
+{: .warning-title }
+If you do not see a "Connect" button below, use a supported web browser like Google Chrome.
+
+After flashing has completed, you can connect the EP1 to your Wi-Fi and integrate directly with Home Assistant.
 
 <input
             type="radio"
@@ -32,6 +33,12 @@ required. After flashing has completed, you can connect the EP1 to your Wi-Fi an
 <img src="./everything-presence-one.png" alt="Everything Presence One" width="200" height="250"/>
 
 <esp-web-install-button></esp-web-install-button>
+
+## Next Steps
+
+With the EP1 fully updated and connected to WiFi, the final step is to connect it to Home Assistant!
+
+[Connecting to Home Assistant](http://everythingsmarthome.github.io/everything-presence-one/connecting-home-assistant.html){: .btn .btn-blue }
 
 <script
   type="module"
