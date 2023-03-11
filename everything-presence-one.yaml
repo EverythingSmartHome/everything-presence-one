@@ -1,7 +1,6 @@
 substitutions:
   name: "everything-presence-one"
   room: ""
-  id_prefix: ""
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
   project_version: "1.1.3"
@@ -49,7 +48,7 @@ dashboard_import:
 
 light:
   - platform: status_led
-    name: "ESP32 Status LED"
+    name: "${room} ESP32 Status LED"
     pin: GPIO32
     entity_category: config
 
@@ -77,8 +76,8 @@ sensor:
 
 binary_sensor:
   - platform: gpio
-    name: ${room} mmWave
-    id: ${id_prefix}mmwave
+    name: "${room} mmWave"
+    id: mmwave
     device_class: occupancy
     pin:
       number: GPIO15
@@ -87,26 +86,26 @@ binary_sensor:
     pin:
       number: 33
       mode: INPUT_PULLDOWN
-    name: ${room} PIR
-    id: ${id_prefix}pir_motion_sensor
+    name: "${room} PIR"
+    id: pir_motion_sensor
     device_class: motion
     filters:
       - delayed_off: ${pir_delay_off}
   - platform: template
-    name: ${room} Occupancy
-    id: ${id_prefix}occupancy
+    name: "${room} Occupancy"
+    id: occupancy
     device_class: occupancy
     filters:
       - delayed_off: ${occupancy_delay_off}
     lambda: |-
-      if ( id(${id_prefix}mmwave).state or id(${id_prefix}pir_motion_sensor).state) {
+      if ( id(mmwave).state or id(pir_motion_sensor).state) {
         return true;
       } 
-      else if (id(${id_prefix}mmwave).state == 0 and id(${id_prefix}pir_motion_sensor).state == 0) {
+      else if (id(mmwave).state == 0 and id(pir_motion_sensor).state == 0) {
         return false;
       } 
       else {
-        return id(${id_prefix}occupancy).state;
+        return id(occupancy).state;
       }
 uart:
   id: uart_bus
@@ -123,7 +122,7 @@ uart:
 
 switch:
   - platform: template
-    name: "mmWave Sensor"
+    name: "${room} mmWave Sensor"
     id: "mmwave_sensor"
     entity_category: config
     optimistic: true
@@ -136,7 +135,7 @@ switch:
       - delay: 1s
 
   - platform: template
-    name: "mmWave LED"
+    name: "${room} mmWave LED"
     id: "mmwave_led"
     entity_category: config
     optimistic: true
@@ -209,7 +208,7 @@ switch:
 
 number:
   - platform: template
-    name: mmWave Distance
+    name: "${room} mmWave Distance"
     id: mmwave_distance
     entity_category: config
     min_value: 0
@@ -232,7 +231,7 @@ number:
       - switch.turn_on: mmwave_sensor
 
   - platform: template
-    name: mmWave Off Latency
+    name: "${room} mmWave Off Latency"
     id: mmwave_off_latency
     entity_category: config
     min_value: 1
@@ -255,7 +254,7 @@ number:
       - switch.turn_on: mmwave_sensor
 
   - platform: template
-    name: mmWave On Latency
+    name: "${room} mmWave On Latency"
     id: mmwave_on_latency
     entity_category: config
     min_value: 0
@@ -278,7 +277,7 @@ number:
       - switch.turn_on: mmwave_sensor
 
   - platform: template
-    name: mmWave Sensitivity
+    name: "${room} mmWave Sensitivity"
     id: mmwave_sensitivity
     entity_category: config
     min_value: 0
@@ -305,24 +304,24 @@ button:
     entity_category: config 
     internal: true
   - platform: template
-    name: "Restart mmWave Sensor"
+    name: "${room} Restart mmWave Sensor"
     id: "restart_mmwave"
     entity_category: config
     internal: true
     on_press:
       - uart.write: "resetSystem"
   - platform: template
-    name: Restart $name
+    name: "${room} Restart $name"
     entity_category: config
     on_press:
       - button.press: restart_mmwave
       - button.press: restart_internal
   - platform: safe_mode
     internal: false
-    name: $name Safe Mode
+    name: "${room} $name Safe Mode"
     entity_category: config
   - platform: template
-    name: "Factory Reset mmWave"
+    name: "${room} Factory Reset mmWave"
     id: "factory_reset_mmwave"
     internal: ${factory_reset_disabled}
     entity_category: config
