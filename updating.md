@@ -30,7 +30,7 @@ After flashing has completed, you can connect the EP1 to your Wi-Fi and integrat
     <img src="images/everything-presence-one-ha.png" alt="Everything Presence One Home Assistant" width="200" height="250"/>
   </label>
   <label>
-    <input type="radio" name="type" value="everything-presence-st" />
+    <input type="radio" name="type" value="everything-presence-one-st" />
     <img src="images/everything-presence-one-st.png" alt="Everything Presence One Smartthings Beta" width="200" height="250"/>
   </label>
 </div>
