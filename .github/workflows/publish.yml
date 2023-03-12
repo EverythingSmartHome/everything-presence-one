@@ -11,8 +11,8 @@ jobs:
     name: Publish Everything Presence One
     uses: esphome/workflows/.github/workflows/publish.yml@main
     with:
-      files: everything-presence-one.yaml
+      files: everything-presence-one.yaml,everything-presence-one-st.yaml
       name: Everything Presence One
-      manifest_filename: everything-presence-one-manifest.json
+      #manifest_filename: everything-presence-one-manifest.json
       clean: false
       esphome_version: latest
