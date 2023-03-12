@@ -24,13 +24,16 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
 
 After flashing has completed, you can connect the EP1 to your Wi-Fi and integrate directly with Home Assistant.
 
-<input
-            type="radio"
-            name="type"
-            value="everything-presence-one"
-            checked
-          />
-<img src="./everything-presence-one.png" alt="Everything Presence One" width="200" height="250"/>
+<div class="radios">
+<label>
+  <input type="radio" name="type" value="everything-presence-one" checked/>
+  <img src="./everything-presence-one-ha.png" alt="Everything Presence One Home Assistant" width="200" height="250"/>
+</label>
+<label>
+  <input type="radio" name="type" value="everything-presence-st" />
+  <img src="./everything-presence-one-st.png" alt="Everything Presence One Smartthings Beta" width="200" height="250"/>
+</label>
+<div class="radios">
 
 <esp-web-install-button></esp-web-install-button>
 
