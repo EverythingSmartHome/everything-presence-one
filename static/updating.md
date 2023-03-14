@@ -33,8 +33,16 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
   </label>
 </div>
 
-<esp-web-install-button></esp-web-install-button>
+<p class="button-row" align="left">
+  <esp-web-install-button></esp-web-install-button>
+</p>
 
+<div class="hidden info esp32-generic">
+  <h3>Generic ESP32</h3>
+    <p>
+      Installs the correct software on your Everything Presence One for [Home Assistant](https://home-assistant.io). Once installed and connected to WiFi, follow the Home Assistant section to connect the EP1 to your Home Assistant server.
+    </p>
+</div>
 
 ## Next Steps
 
