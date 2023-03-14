@@ -40,7 +40,14 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
 <div class="hidden info everything-presence-one">
   <h3>Home Assistant</h3>
     <p>
-      Installs the correct software on your Everything Presence One for [Home Assistant](https://home-assistant.io). Once installed and connected to WiFi, follow the Home Assistant section to connect the EP1 to your Home Assistant server.
+      Installs the correct software on your Everything Presence One for <a href="https://home-assistant.io">Home Assistant</a>. Once installed and connected to WiFi, follow the Home Assistant section to connect the EP1 to your Home Assistant server.
+    </p>
+</div>
+
+<div class="hidden info everything-presence-one-st">
+  <h3>Smartthings</h3>
+    <p>
+      Installs the correct software on your Everything Presence One for Samsung Smartthings. Please note, this is Beta currently. Once installed and connected to WiFi, follow the Smartthings section to connect the EP1 to your Smartthings Hub.
     </p>
 </div>
 
