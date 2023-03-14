@@ -56,6 +56,7 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
 With the EP1 fully updated and connected to WiFi, the final step is to connect it to Home Assistant or Samsung Smartthings (Beta)!
 
 [Connecting to Home Assistant](http://everythingsmarthome.github.io/everything-presence-one/connecting-home-assistant.html){: .btn .btn-blue }
+[Connecting to SmartThings](http://everythingsmarthome.github.io/everything-presence-one/connecting-smartthings.html){: .btn .btn-blue }
 
 <script
   type="module"
