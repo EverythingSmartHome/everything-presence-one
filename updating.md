@@ -13,16 +13,14 @@ This page will help you to flash and update your Everything Presence One to the 
 
 ## Everything Presence One ESPHome Firmware Install
 
-Here you can install the latest [ESPHome](https://esphome.io) firmware on the Everything Presence One board for direct integration with [Home Assistant](https://home-assistant.io).
+Here you can install the latest [ESPHome](https://esphome.io) firmware on the Everything Presence One board for direct integration with [Home Assistant](https://home-assistant.io) or Samsung Smartthings (Beta).
 
-Hit the connect button to install the latest ESPHome firmware on you're
-Everything Presence One board. No programming or other software
-required.
+First, make sure you have the EP1 connected you a USB port on your computer and select the platform you would like to install below. Hit the connect button, select the USB port from the list and then hit the install button to begin installing the latest software on your Everything Presence One.
+
+Once the install has completed, you can then connect the EP1 to your WiFi easily and securely.
 
 {: .warning-title }
 If you do not see a "Connect" button below, use a supported web browser like Google Chrome.
-
-After flashing has completed, you can connect the EP1 to your Wi-Fi and integrate directly with Home Assistant.
 
 <div class="radios">
   <label>
@@ -40,7 +38,7 @@ After flashing has completed, you can connect the EP1 to your Wi-Fi and integrat
 
 ## Next Steps
 
-With the EP1 fully updated and connected to WiFi, the final step is to connect it to Home Assistant!
+With the EP1 fully updated and connected to WiFi, the final step is to connect it to Home Assistant or Samsung Smartthings (Beta)!
 
 [Connecting to Home Assistant](http://everythingsmarthome.github.io/everything-presence-one/connecting-home-assistant.html){: .btn .btn-blue }
 
