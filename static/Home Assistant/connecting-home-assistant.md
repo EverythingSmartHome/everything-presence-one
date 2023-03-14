@@ -1,7 +1,15 @@
 ---
 layout: default
 title: Connecting Home Assistant
-nav_order: 6
+nav_order: 1
+parent: Home Assistant
+---
+
+---
+layout: default
+title: Editing ESPHome Code
+parent: Advanced Features
+nav_order: 2
 ---
 
 # Connecting Home Assistant
