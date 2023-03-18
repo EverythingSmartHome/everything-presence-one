@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Troubleshooting
-nav_order: 8
+nav_order: 10
 ---
 
 # FAQ
@@ -18,10 +18,9 @@ Lets cover off some of the commonly asked questions.
 
 ## Everything Presence One
 
-**Will the EP1 detect moving animals or objects?** Yes the EP1 will detect any moving thing; a pet, fan or even even moving objects such as blinds. 
+**Will the EP1 detect moving animals or objects?** Yes the EP1 will detect any moving thing; a pet, fan or even even moving objects such as blinds.
 
-**Will the schematic be released?** 
-It's not something that we plan to release at this time. 
+**Help, my sensor is giving false detections!** The vast majority of the time, the sensor is detecting movement accurately, but users aren't aware of how tiny a movement it is able to detect. Make sure to check out the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for tweaking the settings to get the best results!
 
 **Can the sensor detect the direction of motion or zones?** 
 No, it will only show a detected or not detected status. 
