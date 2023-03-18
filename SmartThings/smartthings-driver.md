@@ -16,7 +16,7 @@ Next, we need to add the Samsung SmartThings Edge Driver
 
 The Samsung SmartThings Edge driver is in Beta currently which means we need to add it to our SmartThings account.
 
-First, [click this link](https://bestow-regional.api.smartthings.com/invite/gpjG8X5wv9M4) to accept the invitation to the Everything Presence One driver.
+First, [click this link](https://bestow-regional.api.smartthings.com/invite/adMKdn651029) to accept the invitation to the Everything Presence One driver.
 
 Make sure you are logged into your Samsung account.
 
