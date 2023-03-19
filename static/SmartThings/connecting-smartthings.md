@@ -42,4 +42,4 @@ Go back to the devices menu and you'll see your new EP1 device is added, tap it 
 
 EP1 is now fully connected to Samsung SmartThings! Next you can take a look at the sensors and settings that are available:
 
-[SmartThings Sensors and Settings](http://everythingsmarthome.github.io/everything-presence-one/smartthings-sensors.html){: .btn .btn-blue }
+[SmartThings Sensors and Settings](https://everythingsmarthome.github.io/everything-presence-one/SmartThings/smartthings-sensors.html){: .btn .btn-blue }
