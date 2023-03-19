@@ -58,17 +58,19 @@ The mmWave sensor has an adjustable timeout period inside of Home Assistant usin
 
 ![Home Assistant mmWave Offset Entity](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-mmwave-offset.jpg)
 
+On Latency configures a delay of how long motion must be detected for before the sensor will change to "detected". It's also really useful for filtering out detections from unwanted objects - see the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for more information.
+
 The PIR and Occupancy sensor off-time needs to be configured with ESPHome code due to ESPHome not supporting dynamic values for these in code. See the Advanced page for how to edit the ESPHome code.
 
 ### Distance and Sensitivity
 
 The mmWave sensor has a configurable Sensitivity and Distance control inside of Home Assistant.
 
-Sensitivity allows you to adjust how sensitive the mmWave sensor reacts to movement - this can be useful to configure in rooms where slight movements by something not Human triggers the device (this cannot filter out non Human objects like fans or pets):
+Sensitivity allows you to adjust how sensitive the mmWave sensor reacts to movement - this can be useful to configure in rooms where slight movements by something not Human triggers the device (this cannot filter out non Human objects like fans or pets) - see the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for more information:
 
 ![Home Assistant mmWave sensitivity Entity](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-mmwave-sensitivity.jpg)
 
-Distance allows you to adjust the max range of the sensor, up to a maximum of 8m. Please note that 8m is the max range, but doesn't nessecarily mean the sensor is capable of detecting the tiniest of movements at 8m - placement is still important for the best results:
+Distance allows you to adjust the max range of the sensor, up to a maximum of 8m. Please note that 8m is the max range, but doesn't nessecarily mean the sensor is capable of detecting the tiniest of movements at 8m - placement is still important for the best results - see the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for more information:
 
 ![Home Assistant mmWave distance Entity](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-mmwave-distance.jpg)
 
