@@ -38,7 +38,7 @@ The sensor called "Presence Sensor" is a combination of the mmWave and PIR senso
 
 Click the three dots in the top right corner of the sensor from within the SmartThings app and select Settings:
 
-![SmartThings Settings]](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-sensors-settings.jpg)
+![SmartThings Settings](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-sensors-settings.jpg)
 
 ### Offsets for mmWave
 
