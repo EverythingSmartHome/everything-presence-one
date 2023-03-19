@@ -17,35 +17,29 @@ Next, we can connect the Everything Presence One to SmartThings!
 {: .note }
 This page is a work in progress, the rough steps are outlined below.
 
-1. Open the Smartthings app on your mobile device
-2. Tap the Devices menu
-3. Tap the + to start adding a new device
-4. Tap the Add device in the popup menu
-5. Tap the Scan button in the “Scan for nearby devices” section
-The driver will create a new SmartThings EP1 device called “Presence
-Sensor n”, where n is the next available number.
-You may Tap the Edit link to : change the name and/or assign the device to a
-different room.
-Tap the < to take you back to the add device screen
-Tap < to take you back to the devices screen
-You will then see the dashboard view of the new EP1 device.
-4. Configuring a Presence Device
-1. Tap on the device your newly created device.
- The device detail view screen is displayed.
- You will see the values of the sensors are unpopulated and the status
- of the device is "Update device IP Address setting"
-2. Tap the 3dots in the top right hand corner of the screen
-3. Tap Settings from the pop up menu. The device settings screen is
-displayed.
-4. Tap the Device IP Address Setting (default xxx.xxx.xxx.xxx)
+First open up the SmartThings app, head over to the devices menu and hit the plus button to add a new device:
 
-5. Change the Sensor Prefix setting to the appropriate value for EP1
-device and Tap save
-6. Change the Device IP Address setting to the IP address of your EP1
-device and Tap save.
-7. Tap the < to take you back to the detail View of the device.
- Sensors values are now be displayed.
- The status of the is “Device Online”.
+![SmartThings Connecting EP1](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-connect-ep1-1.jpg)
 
- If the status is “Device Offline” then check you have entered the
- correct IP address in step 5. 
+Next hit Scan for Nearby Devices:
+
+![SmartThings Connecting EP1](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-connect-ep1-2.jpg)
+
+After a few seconds, the SmartThings app will automagically detect the EP1 on the network and add it to your hub. This uses mDNS, which should work by default on most networks, unless you have disabled it or have a more advanced network setup - read on if it isn't auto discovered:
+
+![SmartThings Connecting EP1](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-connect-ep1-3.jpg)
+
+If you want to rename the device to a more suitable name, hit the rename button and change the name:
+
+![SmartThings Connecting EP1](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-connect-ep1-4.jpg)
+
+Go back to the devices menu and you'll see your new EP1 device is added, tap it to view its sensors and settings:
+
+![SmartThings Connecting EP1](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-connect-ep1-5.jpg)
+![SmartThings Connecting EP1](https://everythingsmarthome.github.io/everything-presence-one/images/smartthings-connect-ep1-6.jpg)
+
+## Next Steps
+
+EP1 is now fully connected to Samsung SmartThings! Next you can take a look at the sensors and settings that are available:
+
+[SmartThings Sensors and Settings](http://everythingsmarthome.github.io/everything-presence-one/smartthings-sensors.html){: .btn .btn-blue }
