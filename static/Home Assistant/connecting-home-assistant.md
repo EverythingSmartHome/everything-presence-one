@@ -49,7 +49,7 @@ Setup is now finished and you can go ahead and get automating the Everything Pre
 
 If you would like a bit more information about what each entity does inside of Home Assistant, check out the Entities Explained page.
 
-[Entities Explained](http://everythingsmarthome.github.io/everything-presence-one/home-assistant-entities.html){: .btn .btn-blue }
+[Entities Explained](https://everythingsmarthome.github.io/everything-presence-one/Home%20Assistant/home-assistant-entities.html){: .btn .btn-blue }
 
 <script>
 const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
