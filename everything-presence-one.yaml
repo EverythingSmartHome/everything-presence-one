@@ -73,6 +73,7 @@ sensor:
     name: "${room} Illuminance"
     address: 0x23
     update_interval: ${illuminance_update_interval}
+    id: illuminance_sensor
 
 binary_sensor:
   - platform: gpio
@@ -97,6 +98,8 @@ binary_sensor:
     device_class: occupancy
     filters:
       - delayed_off: ${occupancy_delay_off}
+    on_state:
+      - lambda: 'id(illuminance_sensor).update();'
     lambda: |-
       if ( id(mmwave).state or id(pir_motion_sensor).state) {
         return true;
