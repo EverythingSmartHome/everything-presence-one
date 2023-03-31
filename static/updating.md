@@ -22,6 +22,9 @@ Once the install has completed, you can then connect the EP1 to your WiFi easily
 {: .warning-title }
 If you do not see a "Connect" button below, use a supported web browser like Google Chrome.
 
+{: .warning-title }
+After clicking the "Connect" button, if the browser does not propose you "USB Serial ..." or you are having this error `Failed to execute 'open' on 'SerialPort': Failed to open serial port.`: please install the CH340 driver. The installer will propose you driver install links after trying to reconnect and not selecting a serial port.
+
 <div class="radios">
   <label>
     <input type="radio" name="type" value="everything-presence-one" checked/>
