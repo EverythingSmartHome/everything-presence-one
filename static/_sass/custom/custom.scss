@@ -1,3 +1,23 @@
 .hidden {
     display: none;
-  }
+}
+
+/* Remove that for solution 2: same container, smaller text size */
+@media (min-width: 50rem) {
+    .site-header {
+        min-height: 100px;
+    }
+}
+
+/* Remove that for solution 1: bigger container, same text size */
+@media (min-width: 31.25rem) {
+    .site-title {
+        font-size: 22px !important;
+    }
+}
+
+@media (min-width: 50rem) {
+    .site-nav {
+        padding-top: 1rem;
+    }
+}
