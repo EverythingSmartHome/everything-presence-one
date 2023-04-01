@@ -13,7 +13,7 @@ nav_order: 2
 
 If you want to make some more advanced changes to the EP1, you first need to add the ESPHome code to your dashboard.
 
-First make sure that the EP1 has been added to Home Assistant, see [Connecting Home Assistant](https://everythingsmarthome.github.io/everything-presence-one/connecting-home-assistant.html) if you have not already done that.
+First make sure that the EP1 has been added to Home Assistant, see [Connecting Home Assistant](https://everythingsmarthome.github.io/everything-presence-one/Home%20Assistant/connecting-home-assistant.html) if you have not already done that.
 
 Then, make sure that the ESPHome Add-on [is installed](https://esphome.io/guides/getting_started_hassio.html)
 
