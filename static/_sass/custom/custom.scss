@@ -9,13 +9,6 @@
     }
 }
 
-/* Remove that for solution 1: bigger container, same text size */
-@media (min-width: 31.25rem) {
-    .site-title {
-        font-size: 22px !important;
-    }
-}
-
 @media (min-width: 50rem) {
     .site-nav {
         padding-top: 1rem;
