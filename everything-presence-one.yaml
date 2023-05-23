@@ -114,13 +114,7 @@ uart:
   tx_pin: GPIO13
   rx_pin: GPIO14
   baud_rate: 115200
-  debug:
-    direction: BOTH
-    dummy_receiver: true
-    after:
-      delimiter: "\n"
-    sequence:
-      - lambda: UARTDebug::log_string(direction, bytes);
+
 
 switch:
   - platform: template
