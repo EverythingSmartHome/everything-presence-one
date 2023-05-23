@@ -12,7 +12,7 @@ substitutions:
   occupancy_delay_off: "15s"
   hidden_ssid: "false"
   factory_reset_disabled: "true"
-  uart_target_output_disabled: "true"
+  uart_target_output_disabled: "false"
   uart_presence_output_disabled: "true"
 
 esphome:
@@ -191,6 +191,7 @@ switch:
     optimistic: true
     restore_state: true
     assumed_state: false
+    restore_mode: ALWAYS_ON
     turn_on_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
