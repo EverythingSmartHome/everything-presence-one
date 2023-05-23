@@ -91,7 +91,10 @@ const int max_line_length = 40;
                 } 
             }
             
-
+            ESP_LOGD("custom","%f, %f, %f, %f, %f, %f, %f, %f, %f",t_snr[1],t_snr[2],t_snr[3],t_snr[4],t_snr[5],t_snr[6],t_snr[7],t_snr[8],t_snr[9]);
+            ESP_LOGD("custom","%f, %f, %f, %f, %f, %f, %f, %f, %f",t_distance[1],t_distance[2],t_distance[3],t_distance[4],t_distance[5],t_distance[6],t_distance[7],t_distance[8],t_distance[9]);            
+            ESP_LOGD("custom","Distance: %f",max_distance);
+            ESP_LOGD("custom","SNR: %f",t_snr[max_index]);
             ESP_LOGD("custom","Distance: %f",max_distance);
             ESP_LOGD("custom","idx: %d",max_index);
           }
