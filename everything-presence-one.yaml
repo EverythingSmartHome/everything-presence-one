@@ -105,7 +105,6 @@ binary_sensor:
     name: mmWave
     id: mmwave
     device_class: occupancy
-    entity_category: diagnostic
     pin:
       number: GPIO15
       mode: INPUT_PULLDOWN
@@ -116,7 +115,6 @@ binary_sensor:
     name: PIR
     id: pir_motion_sensor
     device_class: motion
-    entity_category: diagnostic
     filters:
       - delayed_off: ${pir_delay_off}
   - platform: template
