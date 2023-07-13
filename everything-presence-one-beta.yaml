@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-one"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.1.4"
+  project_version: "1.2.0b"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -11,7 +11,7 @@ substitutions:
   occupancy_delay_off: "15s"
   hidden_ssid: "false"
   factory_reset_disabled: "true"
-  uart_target_output_disabled: "true"
+  uart_target_output_disabled: "false"
   uart_presence_output_disabled: "true"
 
 esphome:
@@ -19,8 +19,10 @@ esphome:
   friendly_name: ${friendly_name}
   name_add_mac_suffix: true
   project:
-    name: ${project_name}
-    version: ${project_version}
+    name: "${project_name}"
+    version: "${project_version}"
+  includes:
+    - SEN0395_distance.h
 
 esp32:
   board: esp32dev
@@ -99,6 +101,10 @@ sensor:
     name: Illuminance
     address: 0x23
     update_interval: ${illuminance_update_interval}
+  - platform: template
+    name: Target Distance m
+    id: target_distance_m # do not change
+    accuracy_decimals: 5
 
 binary_sensor:
   - platform: gpio
@@ -138,13 +144,7 @@ uart:
   tx_pin: GPIO13
   rx_pin: GPIO14
   baud_rate: 115200
-  debug:
-    direction: BOTH
-    dummy_receiver: true
-    after:
-      delimiter: "\n"
-    sequence:
-      - lambda: UARTDebug::log_string(direction, bytes);
+
 
 switch:
   - platform: template
@@ -193,6 +193,7 @@ switch:
     optimistic: true
     restore_state: true
     assumed_state: false
+    restore_mode: ALWAYS_ON
     turn_on_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -342,3 +343,8 @@ button:
       - uart.write: "resetCfg"
       - delay: 3s
       - switch.turn_on: mmwave_sensor
+
+custom_component:
+- lambda: |-
+    auto my_custom = new Sen0395Distance(id(uart_bus));
+    return {my_custom};
