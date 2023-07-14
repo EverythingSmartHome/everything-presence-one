@@ -36,7 +36,7 @@ After clicking the "Connect" button, if you do not see a "USB Serial" port liste
   </label>
   <label class="beta">
           <input type="radio" name="type" value="everything-presence-one-ha-beta" />
-          <img src="images/everything-presence-one-ha.png" alt="Everything Presence One Home Assistant Beta" />
+          <img src="images/everything-presence-one-ha.png" alt="Everything Presence One Home Assistant Beta" width="200" height="250"/>
         </label>
 </div>
 
