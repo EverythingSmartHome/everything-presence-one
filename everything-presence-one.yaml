@@ -101,6 +101,8 @@ sensor:
     update_interval: ${illuminance_update_interval}
 
 binary_sensor:
+  - platform: status
+    name: Status
   - platform: gpio
     name: mmWave
     id: mmwave
