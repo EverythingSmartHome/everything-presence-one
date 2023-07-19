@@ -153,7 +153,7 @@ switch:
     disabled_by_default: True
     entity_category: config
     optimistic: true
-    restore_state: true
+    restore_mode: RESTORE_DEFAULT_ON
     turn_on_action:
       - uart.write: "sensorStart"
       - delay: 1s
@@ -167,7 +167,6 @@ switch:
     entity_category: config
     internal: ${uart_presence_output_disabled}
     optimistic: true
-    restore_state: true
     turn_on_action:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
@@ -191,7 +190,6 @@ switch:
     entity_category: config
     internal: ${uart_target_output_disabled}
     optimistic: true
-    restore_state: true
     assumed_state: false
     restore_mode: ALWAYS_ON
     turn_on_action:
