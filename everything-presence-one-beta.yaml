@@ -45,7 +45,7 @@ esp32_improv:
   authorizer: none
 
 dashboard_import:
-  package_import_url: github://everythingsmarthome/presence-one/everything-presence-one.yaml@main
+  package_import_url: github://everythingsmarthome/presence-one/everything-presence-one-beta.yaml@main
   import_full_config: false
 
 light:
