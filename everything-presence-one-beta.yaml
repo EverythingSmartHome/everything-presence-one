@@ -102,8 +102,9 @@ sensor:
     address: 0x23
     update_interval: ${illuminance_update_interval}
   - platform: template
-    name: Target Distance m
-    id: target_distance_m # do not change
+    # do not change name or id
+    name: Target Distance m 
+    id: target_distance_m
     accuracy_decimals: 5
 
 binary_sensor:
