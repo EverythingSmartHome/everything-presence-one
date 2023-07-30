@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-beta"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.2.1b"
+  project_version: "1.2.2b"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -214,28 +214,116 @@ switch:
 
 number:
   - platform: template
-    id: mmwave_distance
-    name: mmWave distance
-    icon: mdi:arrow-left-right
-    entity_category: config
+    id: mmwave_zone_1_start
+    name: mmWave Zone 1 Start
     min_value: 0
     max_value: 800
-    initial_value: 315
-    optimistic: true
     step: 15
-    restore_value: true
-    unit_of_measurement: cm
+    initial_value: 0
     mode: slider
-    set_action:
-      - switch.turn_off: mmwave_sensor
-      - delay: 1s
-      - uart.write: !lambda int cm = (int)ceil(x / 15.0);
-          std::string cms = "detRangeCfg -1 0 " + to_string(cm);
-          return std::vector<unsigned char>(cms.begin(), cms.end());
-      - delay: 1s
-      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
-      - delay: 1s
-      - switch.turn_on: mmwave_sensor
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: False
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_1_end
+    name: mmWave Zone 1 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 315
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: False
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_2_start
+    name: mmWave Zone 2 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+    
+  - platform: template
+    id: mmwave_zone_2_end
+    name: mmWave Zone 2 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+    
+  - platform: template
+    id: mmwave_zone_3_start
+    name: mmWave Zone 3 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_3_end
+    name: mmWave Zone 3 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_4_start
+    name: mmWave Zone 4 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_4_end
+    name: mmWave Zone 4 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
 
   - platform: template
     name: mmWave off latency
@@ -392,6 +480,51 @@ button:
       - delay: 1s
       - uart.write: "resetCfg"
       - delay: 3s
+      - switch.turn_on: mmwave_sensor
+  - platform: template
+    name: mmWave Set Distance
+    id: mmwave_set_distance
+    icon: "mdi:arrow-left-right"
+    entity_category: config
+    on_press:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda
+          int s1 = (int)ceil(id(mmwave_zone_1_start).state / 15.0);
+          int e1 = (int)ceil(id(mmwave_zone_1_end).state / 15.0);
+          int s2 = (int)ceil(id(mmwave_zone_2_start).state / 15.0);
+          int e2 = (int)ceil(id(mmwave_zone_2_end).state / 15.0);
+          int s3 = (int)ceil(id(mmwave_zone_3_start).state / 15.0);
+          int e3 = (int)ceil(id(mmwave_zone_3_end).state / 15.0);
+          int s4 = (int)ceil(id(mmwave_zone_4_start).state / 15.0);
+          int e4 = (int)ceil(id(mmwave_zone_4_end).state / 15.0);
+
+          std::string cmd = "detRangeCfg -1";
+
+          if(s1 < e1) {
+            cmd += " " + to_string(s1) + " " + to_string(e1);
+          }
+          if(s2 > e1 && s2 < e2) {
+            cmd += " " + to_string(s2) + " " + to_string(e2);
+          }
+          if(s3 > e2 && s3 < e3) {
+            cmd += " " + to_string(s3) + " " + to_string(e3);
+          }
+          if(s4 > e3 && s4 < e4) {
+            cmd += " " + to_string(s4) + " " + to_string(e4);
+          }
+          
+          if(cmd != "detRangeCfg -1") {
+            std::vector<unsigned char> cmd_vec(cmd.begin(), cmd.end());
+            ESP_LOGI("set_mmwave_distance", "Sending command to sensor %s", cmd.c_str());
+            return cmd_vec;
+          } else {
+            ESP_LOGE("set_mmwave_distance", "No valid segments configured. Please adjust the sliders.");
+            return std::vector<unsigned char>();
+          }
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
       - switch.turn_on: mmwave_sensor
 
 custom_component:
