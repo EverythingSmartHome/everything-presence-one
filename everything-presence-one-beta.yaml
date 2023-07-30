@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-beta"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.2.0b"
+  project_version: "1.2.1b"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -37,15 +37,10 @@ wifi:
   fast_connect: ${hidden_ssid}
   ap: {}
 
-captive_portal:
-
 improv_serial:
 
-esp32_improv:
-  authorizer: none
-
 dashboard_import:
-  package_import_url: github://everythingsmarthome/presence-one/everything-presence-one-beta.yaml@main
+  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta.yaml@main
   import_full_config: false
 
 light:
@@ -87,20 +82,28 @@ i2c:
 
 sensor:
   - platform: shtcx
+    id: "shtc3_sensor"
     temperature:
       name: Temperature
+      id: temperature_sensor
       filters:
-        offset: ${temperature_offset}
+        - offset: ${temperature_offset}
+        - lambda: "return x + id(temperature_offset_ui).state;"
     humidity:
       name: Humidity
+      id: humidity_sensor
       filters:
-        offset: ${humidity_offset}
+        - offset: ${humidity_offset}
+        - lambda: "return x + id(humidity_offset_ui).state;"
     address: 0x70
     update_interval: ${temperature_update_interval}
   - platform: bh1750
     name: Illuminance
+    id: illuminance_sensor
     address: 0x23
     update_interval: ${illuminance_update_interval}
+    filters:
+      - lambda: "return x + id(illuminance_offset_ui).state;"
   - platform: template
     name: Target Distance m
     id: target_distance_m # do not change
@@ -303,6 +306,55 @@ number:
       - uart.write: "saveConfig"
       - delay: 1s
       - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: "Temperature Offset"
+    id: temperature_offset_ui
+    unit_of_measurement: "°C"
+    min_value: -20
+    max_value: 20
+    step: 0.1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:thermometer"
+    entity_category: config
+    on_value:
+      - lambda: 'id(shtc3_sensor).update();'
+  - platform: template
+    name: "Humidity Offset"
+    id: humidity_offset_ui
+    unit_of_measurement: "%"
+    min_value: -50
+    max_value: 50
+    step: 0.1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:water-percent"
+    entity_category: config
+    on_value:
+      - lambda: 'id(shtc3_sensor).update();'
+  - platform: template
+    name: "Illuminance Offset"
+    id: illuminance_offset_ui
+    unit_of_measurement: "lx"
+    min_value: -50
+    max_value: 50
+    step: 1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:brightness-5"
+    entity_category: config
+    on_value:
+      - lambda: 'id(illuminance_sensor).update();'
 
 button:
   - platform: restart
