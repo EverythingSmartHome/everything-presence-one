@@ -558,15 +558,22 @@ button:
           if(cmd != "detRangeCfg -1") {
             std::vector<unsigned char> cmd_vec(cmd.begin(), cmd.end());
             ESP_LOGI("set_mmwave_distance", "Sending command to sensor %s", cmd.c_str());
+            id(distance_zone_status).publish_state("Successfully sent to sensor! " + cmd.substr(14));
             return cmd_vec;
           } else {
             ESP_LOGE("set_mmwave_distance", "No valid segments configured. Please adjust the sliders.");
+            id(distance_zone_status).publish_state("No valid segments configured. Please adjust the sliders.");
             return std::vector<unsigned char>();
           }
       - delay: 1s
       - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
       - delay: 1s
       - switch.turn_on: mmwave_sensor
+
+text_sensor:
+  - platform: template
+    name: "Distance Zones Status"
+    id: "distance_zone_status"
 
 custom_component:
 - lambda: |-
