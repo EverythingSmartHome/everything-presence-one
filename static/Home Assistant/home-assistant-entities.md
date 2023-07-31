@@ -102,7 +102,7 @@ To reveal entities that are disabled by default:
 
 Click the entity you want to enable, then click the settings icon in the right hand corner of the popup. Then enable the entity:
 
-![Home Assistant Enabling Entities](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-distance-entities-not-shown.png)
+![Home Assistant Enabling Entities](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-enabling-toggle.png)
 
 Wait 30 seconds, refresh the page and the entity is now enabled. Repeat this for each entity you want to enable (start and end zone for example).
 
