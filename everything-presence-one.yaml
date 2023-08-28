@@ -233,7 +233,7 @@ number:
     id: mmwave_off_latency
     entity_category: config
     min_value: 1
-    max_value: 60
+    max_value: 300
     initial_value: 15
     optimistic: true
     step: 1
