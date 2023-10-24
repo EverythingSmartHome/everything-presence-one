@@ -147,6 +147,44 @@ binary_sensor:
     pin:
       number: GPIO15
       mode: INPUT_PULLDOWN
+    on_release: 
+      then:
+        - binary_sensor.template.publish:
+            id: target_1_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_2_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_3_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_4_active
+            state: off
+        - sensor.template.publish:
+            id: target_distance_1_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_2_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_3_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_4_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_1_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_2_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_3_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_4_snr
+            state: 0
   - platform: gpio
     pin:
       number: 33
