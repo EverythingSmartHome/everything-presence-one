@@ -196,13 +196,13 @@ binary_sensor:
     id: pir_motion_sensor
     device_class: motion
     filters:
-      - delayed_off: ${pir_delay_off}
+      - delayed_off:  !lambda 'return id(pir_off_latency).state * 1000.0;'
   - platform: template
     name: Occupancy
     id: occupancy
     device_class: occupancy
     filters:
-      - delayed_off: ${occupancy_delay_off}
+      - delayed_off: !lambda 'return id(occupancy_off_latency).state * 1000.0;'
     lambda: |-
       if ( id(mmwave).state or id(pir_motion_sensor).state) {
         return true;
@@ -556,6 +556,34 @@ number:
       - uart.write: "saveConfig"
       - delay: 1s
       - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: Occupancy off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: occupancy_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 15
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
+    name: PIR off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: pir_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 10
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
 
   - platform: template
     name: "Temperature Offset"
