@@ -21,8 +21,6 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
-  includes:
-    - SEN0395_distance.h
 
 esp32:
   board: esp32dev
@@ -127,15 +125,19 @@ sensor:
   - platform: template
     name: "Target 1 SNR" # Don't change
     disabled_by_default: True
+    id: target_1_snr
   - platform: template
     name: "Target 2 SNR" # Don't change
     disabled_by_default: True
+    id: target_2_snr
   - platform: template
     name: "Target 3 SNR" # Don't change
     disabled_by_default: True
+    id: target_3_snr
   - platform: template
     name: "Target 4 SNR" # Don't change
     disabled_by_default: True
+    id: target_4_snr
 
 binary_sensor:
   - platform: gpio
@@ -173,15 +175,19 @@ binary_sensor:
   - platform: template
     name: "Target 1 Active" # Don't change
     disabled_by_default: False
+    id: target_1_active
   - platform: template
     name: "Target 2 Active" # Don't change
     disabled_by_default: True
+    id: target_2_active
   - platform: template
     name: "Target 3 Active" # Don't change
     disabled_by_default: True
+    id: target_3_active
   - platform: template
     name: "Target 4 Active" # Don't change
     disabled_by_default: True
+    id: target_4_active
 globals:
   - id: last_target_count
     type: int
