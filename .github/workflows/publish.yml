@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '**.yaml'
 
 jobs:
   publish-everything-presence-one:
