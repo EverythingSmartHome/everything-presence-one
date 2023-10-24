@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-beta"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.2.3b"
+  project_version: "1.3.0b"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -21,11 +21,11 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
-  includes:
-    - SEN0395_distance.h
 
 esp32:
   board: esp32dev
+  framework:
+    type: esp-idf
 
 logger:
 
@@ -38,6 +38,9 @@ wifi:
   ap: {}
 
 improv_serial:
+
+esp32_improv:
+  authorizer: none
 
 dashboard_import:
   package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta.yaml@main
@@ -127,20 +130,24 @@ sensor:
   - platform: template
     name: "Target 1 SNR" # Don't change
     disabled_by_default: True
+    id: target_1_snr
   - platform: template
     name: "Target 2 SNR" # Don't change
     disabled_by_default: True
+    id: target_2_snr
   - platform: template
     name: "Target 3 SNR" # Don't change
     disabled_by_default: True
+    id: target_3_snr
   - platform: template
     name: "Target 4 SNR" # Don't change
     disabled_by_default: True
+    id: target_4_snr
   - platform: absolute_humidity
     name: "Absolute Humidity"
     temperature: temperature_sensor
     humidity: humidity_sensor
-    
+
 binary_sensor:
   - platform: gpio
     name: mmWave
@@ -149,6 +156,44 @@ binary_sensor:
     pin:
       number: GPIO15
       mode: INPUT_PULLDOWN
+    on_release: 
+      then:
+        - binary_sensor.template.publish:
+            id: target_1_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_2_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_3_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_4_active
+            state: off
+        - sensor.template.publish:
+            id: target_distance_1_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_2_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_3_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_4_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_1_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_2_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_3_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_4_snr
+            state: 0
   - platform: gpio
     pin:
       number: 33
@@ -157,13 +202,13 @@ binary_sensor:
     id: pir_motion_sensor
     device_class: motion
     filters:
-      - delayed_off: ${pir_delay_off}
+      - delayed_off:  !lambda 'return id(pir_off_latency).state * 1000.0;'
   - platform: template
     name: Occupancy
     id: occupancy
     device_class: occupancy
     filters:
-      - delayed_off: ${occupancy_delay_off}
+      - delayed_off: !lambda 'return id(occupancy_off_latency).state * 1000.0;'
     lambda: |-
       if ( id(mmwave).state or id(pir_motion_sensor).state) {
         return true;
@@ -177,22 +222,100 @@ binary_sensor:
   - platform: template
     name: "Target 1 Active" # Don't change
     disabled_by_default: False
+    id: target_1_active
   - platform: template
     name: "Target 2 Active" # Don't change
     disabled_by_default: True
+    id: target_2_active
   - platform: template
     name: "Target 3 Active" # Don't change
     disabled_by_default: True
+    id: target_3_active
   - platform: template
     name: "Target 4 Active" # Don't change
     disabled_by_default: True
+    id: target_4_active
+globals:
+  - id: last_target_count
+    type: int
+    restore_value: no
+    initial_value: '0'
 
 uart:
   id: uart_bus
   tx_pin: GPIO13
   rx_pin: GPIO14
   baud_rate: 115200
+  debug:
+    direction: BOTH
+    dummy_receiver: True
+    after:
+      delimiter: "*\r\n"
+    sequence:
+        - lambda: |-
+            UARTDebug::log_string(direction, bytes);
 
+            const int max_targets = 4;
+            static float t_distance[max_targets] = {0.0};
+            static float t_snr[max_targets] = {0.0};
+            static bool t_active[max_targets] = {false};
+
+            std::string line(bytes.begin(), bytes.end());
+
+            if (line.substr(0, 6) == "$JYRPO") {
+                size_t pos = 0;
+                std::vector<std::string> v;
+                std::string token;
+                std::string s = line.substr(7);
+
+                while ((pos = s.find(",")) != std::string::npos) {
+                    token = s.substr(0, pos);
+                    v.push_back(token);
+                    s.erase(0, pos + 1);
+                }
+                v.push_back(s);
+
+                int target_count = atoi(v[0].c_str());
+                int target_index = atoi(v[1].c_str()) - 1;
+                float target_distance_val = atof(v[2].c_str());
+                float target_snr_val = atof(v[4].c_str());
+
+                ESP_LOGD("UART", "Target Count: %d, Target Index: %d", target_count, target_index);
+
+                if (id(last_target_count) != target_count) {
+                    // Reset all targets to inactive
+                    for (int i = 0; i < max_targets; i++) {
+                        t_active[i] = false;
+                        t_distance[i] = 0.0;
+                        t_snr[i] = 0.0;
+                    }
+                    id(last_target_count) = target_count;
+                }
+
+                if (target_index < max_targets) {
+                    t_distance[target_index] = target_distance_val;
+                    t_snr[target_index] = target_snr_val;
+                    t_active[target_index] = true;
+                }
+
+                if (target_index == target_count - 1) {
+                    id(target_distance_1_m).publish_state(t_distance[0]);
+                    id(target_1_snr).publish_state(t_snr[0]);
+                    id(target_1_active).publish_state(t_active[0]);
+
+                    id(target_distance_2_m).publish_state(t_distance[1]);
+                    id(target_2_snr).publish_state(t_snr[1]);
+                    id(target_2_active).publish_state(t_active[1]);
+
+                    id(target_distance_3_m).publish_state(t_distance[2]);
+                    id(target_3_snr).publish_state(t_snr[2]);
+                    id(target_3_active).publish_state(t_active[2]);
+
+                    id(target_distance_4_m).publish_state(t_distance[3]);
+                    id(target_4_snr).publish_state(t_snr[3]);
+                    id(target_4_active).publish_state(t_active[3]);
+                }
+            }
 
 switch:
   - platform: template
@@ -441,6 +564,34 @@ number:
       - switch.turn_on: mmwave_sensor
 
   - platform: template
+    name: Occupancy off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: occupancy_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 15
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
+    name: PIR off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: pir_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 10
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
     name: "Temperature Offset"
     id: temperature_offset_ui
     unit_of_measurement: "°C"
@@ -578,8 +729,3 @@ text_sensor:
   - platform: template
     name: "Distance Zones Status"
     id: "distance_zone_status"
-
-custom_component:
-- lambda: |-
-    auto my_custom = new Sen0395Distance(id(uart_bus));
-    return {my_custom};
