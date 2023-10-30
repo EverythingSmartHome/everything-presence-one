@@ -103,7 +103,6 @@ sensor:
     id: illuminance_sensor
     address: 0x23
     update_interval: ${illuminance_update_interval}
-    id: illuminance_sensor
     filters:
       - lambda: "return x + id(illuminance_offset_ui).state;"
 
