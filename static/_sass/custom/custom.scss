@@ -1,3 +1,16 @@
 .hidden {
     display: none;
-  }
+}
+
+/* Remove that for solution 2: same container, smaller text size */
+@media (min-width: 50rem) {
+    .site-header {
+        min-height: 100px;
+    }
+}
+
+@media (min-width: 50rem) {
+    .site-nav {
+        padding-top: 1rem;
+    }
+}

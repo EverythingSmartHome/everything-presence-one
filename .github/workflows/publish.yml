@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '**.yaml'
 
 jobs:
   publish-everything-presence-one:
@@ -23,5 +25,14 @@ jobs:
       files: everything-presence-one-st.yaml
       name: Everything Presence One SmartThings
       manifest_filename: everything-presence-one-st-manifest.json
+      clean: false
+      esphome_version: latest
+  publish-everything-presence-one-ha-beta:
+    name: Publish Everything Presence One Home Assistant Beta
+    uses: esphome/workflows/.github/workflows/publish.yml@main
+    with:
+      files: everything-presence-one-beta.yaml
+      name: Everything Presence One HA Beta
+      manifest_filename: everything-presence-one-ha-beta-manifest.json
       clean: false
       esphome_version: latest

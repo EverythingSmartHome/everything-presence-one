@@ -22,6 +22,9 @@ Once the install has completed, you can then connect the EP1 to your WiFi easily
 {: .warning-title }
 If you do not see a "Connect" button below, use a supported web browser like Google Chrome.
 
+{: .warning-title }
+After clicking the "Connect" button, if you do not see a "USB Serial" port listed, or you get the error "Failed to open serial port.", you may need to install the CH340 driver. The installer should give you links to the latest driver.
+
 <div class="radios">
   <label>
     <input type="radio" name="type" value="everything-presence-one" checked/>
@@ -31,6 +34,10 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
     <input type="radio" name="type" value="everything-presence-one-st" />
     <img src="images/everything-presence-one-st.png" alt="Everything Presence One Smartthings Beta" width="200" height="250"/>
   </label>
+  <label class="beta">
+          <input type="radio" name="type" value="everything-presence-one-ha-beta" />
+          <img src="images/everything-presence-one-ha.png" alt="Everything Presence One Home Assistant Beta" width="200" height="250"/>
+        </label>
 </div>
 
 <p class="button-row" align="left">
@@ -48,6 +55,13 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
   <h3>Smartthings</h3>
     <p>
       Installs the correct software on your Everything Presence One for Samsung Smartthings. Please note, this is Beta currently. Once installed and connected to WiFi, follow the Smartthings section to connect the EP1 to your Smartthings Hub.
+    </p>
+</div>
+
+<div class="hidden info everything-presence-one-ha-beta">
+  <h3>Home Assistant (Beta)</h3>
+    <p>
+      Beta firmware for the EP1 with Home Assistant. Do not use unless you are comfortable with troubleshooting and reporting bugs.
     </p>
 </div>
 
@@ -94,7 +108,7 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
   document
     .querySelector('input[name="type"]:checked')
     .dispatchEvent(new Event("change"));
-  if (new URLSearchParams(document.location.search).has("diy")) {
-    document.body.classList.add("show-diy");
+  if (new URLSearchParams(document.location.search).has("beta")) {
+    document.body.classList.add("show-beta");
   }
 </script>

@@ -1,0 +1,727 @@
+substitutions:
+  name: "everything-presence-beta"
+  friendly_name: "Everything Presence One"
+  project_name: "Everything Smart Technology.Everything Presence One"
+  project_version: "1.3.0b"
+  temperature_offset: "-3"
+  humidity_offset: "5"
+  temperature_update_interval: "60s"
+  illuminance_update_interval: "30s"
+  pir_delay_off: "10s"
+  occupancy_delay_off: "15s"
+  hidden_ssid: "false"
+  factory_reset_disabled: "true"
+  uart_target_output_disabled: "false"
+  uart_presence_output_disabled: "true"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: true
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+
+ota:
+
+wifi:
+  fast_connect: ${hidden_ssid}
+  ap: {}
+
+improv_serial:
+
+esp32_improv:
+  authorizer: none
+
+dashboard_import:
+  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta.yaml@main
+  import_full_config: false
+
+light:
+  - platform: status_led
+    name: ESP32 status LED
+    pin: GPIO32
+    entity_category: config
+    disabled_by_default: True
+  - platform: binary
+    name: mmWave LED
+    restore_mode: RESTORE_DEFAULT_OFF
+    output: mmwave_led_output
+    entity_category: config
+    disabled_by_default: True
+
+output:
+  - platform: template
+    id: mmwave_led_output
+    type: binary
+    write_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - if:
+          condition:
+            lambda: !lambda return state;
+          then:
+            - uart.write: "setLedMode 1 0"
+          else:
+            - uart.write: "setLedMode 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+i2c:
+  sda: 26
+  scl: 25
+  scan: true
+
+sensor:
+  - platform: shtcx
+    id: "shtc3_sensor"
+    temperature:
+      name: Temperature
+      id: temperature_sensor
+      filters:
+        - offset: ${temperature_offset}
+        - lambda: "return x + id(temperature_offset_ui).state;"
+    humidity:
+      name: Humidity
+      id: humidity_sensor
+      filters:
+        - offset: ${humidity_offset}
+        - lambda: "return x + id(humidity_offset_ui).state;"
+    address: 0x70
+    update_interval: ${temperature_update_interval}
+  - platform: bh1750
+    name: Illuminance
+    id: illuminance_sensor
+    address: 0x23
+    update_interval: ${illuminance_update_interval}
+    filters:
+      - lambda: "return x + id(illuminance_offset_ui).state;"
+  - platform: template
+    name: Target 1 Distance # Don't change
+    id: target_distance_1_m
+    accuracy_decimals: 2
+    disabled_by_default: false
+  - platform: template
+    name: Target 2 Distance # Don't change
+    id: target_distance_2_m
+    accuracy_decimals: 2
+    disabled_by_default: True
+  - platform: template
+    name: Target 3 Distance # Don't change
+    id: target_distance_3_m
+    accuracy_decimals: 2
+    disabled_by_default: True
+  - platform: template
+    name: Target 4 Distance # Don't change
+    id: target_distance_4_m
+    accuracy_decimals: 2
+    disabled_by_default: True
+  - platform: template
+    name: "Target 1 SNR" # Don't change
+    disabled_by_default: True
+    id: target_1_snr
+  - platform: template
+    name: "Target 2 SNR" # Don't change
+    disabled_by_default: True
+    id: target_2_snr
+  - platform: template
+    name: "Target 3 SNR" # Don't change
+    disabled_by_default: True
+    id: target_3_snr
+  - platform: template
+    name: "Target 4 SNR" # Don't change
+    disabled_by_default: True
+    id: target_4_snr
+
+binary_sensor:
+  - platform: gpio
+    name: mmWave
+    id: mmwave
+    device_class: occupancy
+    pin:
+      number: GPIO15
+      mode: INPUT_PULLDOWN
+    on_release: 
+      then:
+        - binary_sensor.template.publish:
+            id: target_1_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_2_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_3_active
+            state: off
+        - binary_sensor.template.publish:
+            id: target_4_active
+            state: off
+        - sensor.template.publish:
+            id: target_distance_1_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_2_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_3_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_distance_4_m
+            state: 0.00
+        - sensor.template.publish:
+            id: target_1_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_2_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_3_snr
+            state: 0
+        - sensor.template.publish:
+            id: target_4_snr
+            state: 0
+  - platform: gpio
+    pin:
+      number: 33
+      mode: INPUT_PULLDOWN
+    name: PIR
+    id: pir_motion_sensor
+    device_class: motion
+    filters:
+      - delayed_off:  !lambda 'return id(pir_off_latency).state * 1000.0;'
+  - platform: template
+    name: Occupancy
+    id: occupancy
+    device_class: occupancy
+    filters:
+      - delayed_off: !lambda 'return id(occupancy_off_latency).state * 1000.0;'
+    lambda: |-
+      if ( id(mmwave).state or id(pir_motion_sensor).state) {
+        return true;
+      } 
+      else if (id(mmwave).state == 0 and id(pir_motion_sensor).state == 0) {
+        return false;
+      } 
+      else {
+        return id(occupancy).state;
+      }
+  - platform: template
+    name: "Target 1 Active" # Don't change
+    disabled_by_default: False
+    id: target_1_active
+  - platform: template
+    name: "Target 2 Active" # Don't change
+    disabled_by_default: True
+    id: target_2_active
+  - platform: template
+    name: "Target 3 Active" # Don't change
+    disabled_by_default: True
+    id: target_3_active
+  - platform: template
+    name: "Target 4 Active" # Don't change
+    disabled_by_default: True
+    id: target_4_active
+globals:
+  - id: last_target_count
+    type: int
+    restore_value: no
+    initial_value: '0'
+
+uart:
+  id: uart_bus
+  tx_pin: GPIO13
+  rx_pin: GPIO14
+  baud_rate: 115200
+  debug:
+    direction: BOTH
+    dummy_receiver: True
+    after:
+      delimiter: "*\r\n"
+    sequence:
+        - lambda: |-
+            UARTDebug::log_string(direction, bytes);
+
+            const int max_targets = 4;
+            static float t_distance[max_targets] = {0.0};
+            static float t_snr[max_targets] = {0.0};
+            static bool t_active[max_targets] = {false};
+
+            std::string line(bytes.begin(), bytes.end());
+
+            if (line.substr(0, 6) == "$JYRPO") {
+                size_t pos = 0;
+                std::vector<std::string> v;
+                std::string token;
+                std::string s = line.substr(7);
+
+                while ((pos = s.find(",")) != std::string::npos) {
+                    token = s.substr(0, pos);
+                    v.push_back(token);
+                    s.erase(0, pos + 1);
+                }
+                v.push_back(s);
+
+                int target_count = atoi(v[0].c_str());
+                int target_index = atoi(v[1].c_str()) - 1;
+                float target_distance_val = atof(v[2].c_str());
+                float target_snr_val = atof(v[4].c_str());
+
+                ESP_LOGD("UART", "Target Count: %d, Target Index: %d", target_count, target_index);
+
+                if (id(last_target_count) != target_count) {
+                    // Reset all targets to inactive
+                    for (int i = 0; i < max_targets; i++) {
+                        t_active[i] = false;
+                        t_distance[i] = 0.0;
+                        t_snr[i] = 0.0;
+                    }
+                    id(last_target_count) = target_count;
+                }
+
+                if (target_index < max_targets) {
+                    t_distance[target_index] = target_distance_val;
+                    t_snr[target_index] = target_snr_val;
+                    t_active[target_index] = true;
+                }
+
+                if (target_index == target_count - 1) {
+                    id(target_distance_1_m).publish_state(t_distance[0]);
+                    id(target_1_snr).publish_state(t_snr[0]);
+                    id(target_1_active).publish_state(t_active[0]);
+
+                    id(target_distance_2_m).publish_state(t_distance[1]);
+                    id(target_2_snr).publish_state(t_snr[1]);
+                    id(target_2_active).publish_state(t_active[1]);
+
+                    id(target_distance_3_m).publish_state(t_distance[2]);
+                    id(target_3_snr).publish_state(t_snr[2]);
+                    id(target_3_active).publish_state(t_active[2]);
+
+                    id(target_distance_4_m).publish_state(t_distance[3]);
+                    id(target_4_snr).publish_state(t_snr[3]);
+                    id(target_4_active).publish_state(t_active[3]);
+                }
+            }
+
+switch:
+  - platform: template
+    name: mmWave sensor
+    id: mmwave_sensor
+    disabled_by_default: True
+    entity_category: config
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    turn_on_action:
+      - uart.write: "sensorStart"
+      - delay: 1s
+    turn_off_action:
+      - uart.write: "sensorStop"
+      - delay: 1s
+
+  - platform: template
+    name: UART presence output
+    id: uart_presence_output
+    entity_category: config
+    internal: ${uart_presence_output_disabled}
+    optimistic: true
+    turn_on_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+    turn_off_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 1 0"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: UART target output
+    id: uart_target_output
+    entity_category: config
+    internal: ${uart_target_output_disabled}
+    optimistic: true
+    assumed_state: false
+    restore_mode: ALWAYS_ON
+    turn_on_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 2 1 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+    turn_off_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 2 0"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+number:
+  - platform: template
+    id: mmwave_zone_1_start
+    name: mmWave Zone 1 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: False
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_1_end
+    name: mmWave Zone 1 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 315
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: False
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_2_start
+    name: mmWave Zone 2 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+    
+  - platform: template
+    id: mmwave_zone_2_end
+    name: mmWave Zone 2 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+    
+  - platform: template
+    id: mmwave_zone_3_start
+    name: mmWave Zone 3 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_3_end
+    name: mmWave Zone 3 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_4_start
+    name: mmWave Zone 4 Start
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    id: mmwave_zone_4_end
+    name: mmWave Zone 4 End
+    min_value: 0
+    max_value: 800
+    step: 15
+    initial_value: 0
+    mode: slider
+    unit_of_measurement: cm
+    optimistic: true
+    entity_category: config
+    disabled_by_default: True
+    icon: "mdi:arrow-left-right"
+
+  - platform: template
+    name: mmWave off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: mmwave_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 15
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda |-
+          std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave on latency
+    icon: mdi:clock-start
+    id: mmwave_on_latency
+    entity_category: config
+    min_value: 0
+    max_value: 60
+    initial_value: 0
+    optimistic: true
+    step: 0.5
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda |-
+          std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave sensitivity
+    icon: mdi:target-variant
+    id: mmwave_sensitivity
+    entity_category: config
+    min_value: 0
+    max_value: 9
+    initial_value: 7
+    optimistic: true
+    step: 1
+    restore_value: true
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write:
+          !lambda std::string mss = "setSensitivity " + to_string((int)x);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: Occupancy off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: occupancy_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 15
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
+    name: PIR off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: pir_off_latency
+    min_value: 1
+    max_value: 60
+    initial_value: 10
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
+    name: "Temperature Offset"
+    id: temperature_offset_ui
+    unit_of_measurement: "°C"
+    min_value: -20
+    max_value: 20
+    step: 0.1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:thermometer"
+    entity_category: config
+    on_value:
+      - lambda: 'id(shtc3_sensor).update();'
+  - platform: template
+    name: "Humidity Offset"
+    id: humidity_offset_ui
+    unit_of_measurement: "%"
+    min_value: -50
+    max_value: 50
+    step: 0.1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:water-percent"
+    entity_category: config
+    on_value:
+      - lambda: 'id(shtc3_sensor).update();'
+  - platform: template
+    name: "Illuminance Offset"
+    id: illuminance_offset_ui
+    unit_of_measurement: "lx"
+    min_value: -50
+    max_value: 50
+    step: 1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:brightness-5"
+    entity_category: config
+    on_value:
+      - lambda: 'id(illuminance_sensor).update();'
+
+button:
+  - platform: restart
+    id: restart_internal
+    entity_category: config
+    internal: true
+  - platform: template
+    name: Restart mmWave sensor
+    id: restart_mmwave
+    entity_category: config
+    internal: true
+    on_press:
+      - uart.write: "resetSystem"
+  - platform: template
+    name: Restart
+    icon: mdi:restart
+    entity_category: config
+    disabled_by_default: True
+    on_press:
+      - button.press: restart_mmwave
+      - button.press: restart_internal
+  - platform: safe_mode
+    internal: false
+    name: Safe mode
+    entity_category: config
+    disabled_by_default: True
+  - platform: template
+    name: Factory reset mmWave
+    icon: mdi:cog-counterclockwise
+    id: factory_reset_mmwave
+    internal: ${factory_reset_disabled}
+    entity_category: config
+    on_press:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "resetCfg"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+  - platform: template
+    name: mmWave Set Distance
+    id: mmwave_set_distance
+    icon: "mdi:arrow-left-right"
+    entity_category: config
+    on_press:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda
+          int s1 = (int)ceil(id(mmwave_zone_1_start).state / 15.0);
+          int e1 = (int)ceil(id(mmwave_zone_1_end).state / 15.0);
+          int s2 = (int)ceil(id(mmwave_zone_2_start).state / 15.0);
+          int e2 = (int)ceil(id(mmwave_zone_2_end).state / 15.0);
+          int s3 = (int)ceil(id(mmwave_zone_3_start).state / 15.0);
+          int e3 = (int)ceil(id(mmwave_zone_3_end).state / 15.0);
+          int s4 = (int)ceil(id(mmwave_zone_4_start).state / 15.0);
+          int e4 = (int)ceil(id(mmwave_zone_4_end).state / 15.0);
+
+          std::string cmd = "detRangeCfg -1";
+
+          if(s1 < e1) {
+            cmd += " " + to_string(s1) + " " + to_string(e1);
+          }
+          if(s2 > e1 && s2 < e2) {
+            cmd += " " + to_string(s2) + " " + to_string(e2);
+          }
+          if(s3 > e2 && s3 < e3) {
+            cmd += " " + to_string(s3) + " " + to_string(e3);
+          }
+          if(s4 > e3 && s4 < e4) {
+            cmd += " " + to_string(s4) + " " + to_string(e4);
+          }
+          
+          if(cmd != "detRangeCfg -1") {
+            std::vector<unsigned char> cmd_vec(cmd.begin(), cmd.end());
+            ESP_LOGI("set_mmwave_distance", "Sending command to sensor %s", cmd.c_str());
+            id(distance_zone_status).publish_state("Successfully sent to sensor! " + cmd.substr(14));
+            return cmd_vec;
+          } else {
+            ESP_LOGE("set_mmwave_distance", "No valid segments configured. Please adjust the sliders.");
+            id(distance_zone_status).publish_state("No valid segments configured. Please adjust the sliders.");
+            return std::vector<unsigned char>();
+          }
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+text_sensor:
+  - platform: template
+    name: "Distance Zones Status"
+    id: "distance_zone_status"
