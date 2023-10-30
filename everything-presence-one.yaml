@@ -132,7 +132,6 @@ binary_sensor:
       - delayed_off: !lambda 'return id(occupancy_off_latency).state * 1000.0;'
     on_state:
       - lambda: 'id(illuminance_sensor).update();'
-      
     lambda: |-
       if ( id(mmwave).state or id(pir_motion_sensor).state) {
         return true;
