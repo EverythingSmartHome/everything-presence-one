@@ -112,21 +112,29 @@ sensor:
     id: target_distance_1_m
     accuracy_decimals: 2
     disabled_by_default: false
+    device_class: distance
+    unit_of_measurement: "m"
   - platform: template
     name: Target 2 Distance # Don't change
     id: target_distance_2_m
     accuracy_decimals: 2
     disabled_by_default: True
+    device_class: distance
+    unit_of_measurement: "m"
   - platform: template
     name: Target 3 Distance # Don't change
     id: target_distance_3_m
     accuracy_decimals: 2
     disabled_by_default: True
+    device_class: distance
+    unit_of_measurement: "m"
   - platform: template
     name: Target 4 Distance # Don't change
     id: target_distance_4_m
     accuracy_decimals: 2
     disabled_by_default: True
+    device_class: distance
+    unit_of_measurement: "m"
   - platform: template
     name: "Target 1 SNR" # Don't change
     disabled_by_default: True
