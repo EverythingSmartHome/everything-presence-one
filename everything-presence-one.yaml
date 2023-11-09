@@ -248,10 +248,10 @@ number:
     entity_category: config
     id: mmwave_off_latency
     min_value: 1
-    max_value: 60
+    max_value: 600
     initial_value: 15
     optimistic: true
-    step: 1
+    step: 5
     restore_value: true
     unit_of_measurement: seconds
     mode: slider
@@ -318,10 +318,10 @@ number:
     entity_category: config
     id: occupancy_off_latency
     min_value: 1
-    max_value: 60
+    max_value: 600
     initial_value: 15
     optimistic: true
-    step: 1
+    step: 5
     restore_value: true
     unit_of_measurement: seconds
     mode: slider
@@ -332,7 +332,7 @@ number:
     entity_category: config
     id: pir_off_latency
     min_value: 1
-    max_value: 60
+    max_value: 120
     initial_value: 10
     optimistic: true
     step: 1
