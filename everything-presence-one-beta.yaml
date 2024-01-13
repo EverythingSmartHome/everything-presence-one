@@ -56,13 +56,13 @@ light:
     name: ESP32 status LED
     pin: GPIO32
     entity_category: config
-    disabled_by_default: True
+    disabled_by_default: False
   - platform: binary
     name: mmWave LED
     restore_mode: RESTORE_DEFAULT_OFF
     output: mmwave_led_output
     entity_category: config
-    disabled_by_default: True
+    disabled_by_default: False
 
 output:
   - platform: template
