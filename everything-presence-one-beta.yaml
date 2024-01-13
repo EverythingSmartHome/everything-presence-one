@@ -35,6 +35,11 @@ ota:
 
 wifi:
   fast_connect: ${hidden_ssid}
+  on_connect:
+    - delay: 5s
+    - ble.disable:
+  on_disconnect:
+    - ble.enable:
   ap: {}
 
 improv_serial:
