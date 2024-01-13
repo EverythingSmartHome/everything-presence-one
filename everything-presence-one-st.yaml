@@ -363,3 +363,5 @@ button:
       - uart.write: "resetCfg"
       - delay: 3s
       - switch.turn_on: mmwave_sensor
+  - platform: factory_reset
+    name: Factory reset
