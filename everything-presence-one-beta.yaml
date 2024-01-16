@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-beta"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.3.1b"
+  project_version: "1.3.2b"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
