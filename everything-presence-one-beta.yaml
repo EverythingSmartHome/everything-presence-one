@@ -149,6 +149,8 @@ sensor:
             - 79.8 -> 197.1
             - 84.3 -> 205.7 
       - lambda: "return x + id(illuminance_offset_ui).state;"
+      - clamp:
+          min_value: 0
 
   - platform: template
     name: Target 1 Distance # Don't change
