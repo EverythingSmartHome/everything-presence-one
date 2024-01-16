@@ -107,6 +107,9 @@ sensor:
             - 71.5 -> 176.9
             - 79.8 -> 197.1
             - 84.3 -> 205.7
+      - clamp:
+          min_value: 0
+
 
 binary_sensor:
   - platform: gpio
