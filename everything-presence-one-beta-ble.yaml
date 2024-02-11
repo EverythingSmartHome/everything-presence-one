@@ -14,9 +14,10 @@ substitutions:
   log_level: "ERROR"
 
 dashboard_import:
-  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta.yaml@main
+  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta-ble.yaml@main
   import_full_config: false
 
 packages:
   device_base: !include common/everything-presence-one-base.yaml
   device_version: !include common/everything-presence-one-sen0395-beta.yaml
+  bluetooth_base: !include common/bluetooth-base.yaml
