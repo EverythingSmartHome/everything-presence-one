@@ -10,33 +10,53 @@ on:
       - '**.yaml'
 
 jobs:
-  publish-everything-presence-one:
-    name: Publish Everything Presence One
+  publish-everything-presence-one-no-ble-stable:
+    name: Publish Everything Presence One - HA - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
       files: everything-presence-one.yaml
-      name: Everything Presence One
+      name: Everything Presence One - HA - Stable
       manifest_filename: everything-presence-one-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-esp32
+  publish-everything-presence-one-ble-stable:
+    name: Publish Everything Presence One - HA - BLE - Stable
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble.yaml
+      name: Everything Presence One - HA - BLE - Stable
+      manifest_filename: everything-presence-one-ble-manifest.json
+      clean: false
+      esphome_version: latest
+      directory_name: everything-presence-one-ble-esp32
   publish-everything-presence-one-smartthings:
-    name: Publish Everything Presence One Smartthings
+    name: Publish Everything Presence One - SmartThings
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
       files: everything-presence-one-st.yaml
-      name: Everything Presence One SmartThings
+      name: Everything Presence One - SmartThings
       manifest_filename: everything-presence-one-st-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-st-esp32
   publish-everything-presence-one-ha-beta:
-    name: Publish Everything Presence One Home Assistant Beta
+    name: Publish Everything Presence One - HA - Beta
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
       files: everything-presence-one-beta.yaml
-      name: Everything Presence One HA Beta
+      name: Everything Presence One - HA - Beta
       manifest_filename: everything-presence-one-ha-beta-manifest.json
       clean: false
       esphome_version: latest
-      directory_name: everything-presence-beta-esp32
+      directory_name: everything-presence-one-beta-esp32
+  publish-everything-presence-one-ha-ble-beta:
+    name: Publish Everything Presence One - HA - BLE - Beta
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-beta.yaml
+      name: Everything Presence One - HA - BLE - Beta
+      manifest_filename: everything-presence-one-ha-ble-beta-manifest.json
+      clean: false
+      esphome_version: latest
+      directory_name: everything-presence-one-ble-beta-esp32
