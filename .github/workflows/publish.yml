@@ -10,28 +10,31 @@ on:
 jobs:
   publish-everything-presence-one:
     name: Publish Everything Presence One
-    uses: esphome/workflows/.github/workflows/publish.yml@main
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
       files: everything-presence-one.yaml
       name: Everything Presence One
       manifest_filename: everything-presence-one-manifest.json
       clean: false
       esphome_version: latest
+      directory_name: everything-presence-one-esp32
   publish-everything-presence-one-smartthings:
     name: Publish Everything Presence One Smartthings
-    uses: esphome/workflows/.github/workflows/publish.yml@main
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
       files: everything-presence-one-st.yaml
       name: Everything Presence One SmartThings
       manifest_filename: everything-presence-one-st-manifest.json
       clean: false
       esphome_version: latest
+      directory_name: everything-presence-st-esp32
   publish-everything-presence-one-ha-beta:
     name: Publish Everything Presence One Home Assistant Beta
-    uses: esphome/workflows/.github/workflows/publish.yml@main
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
       files: everything-presence-one-beta.yaml
       name: Everything Presence One HA Beta
       manifest_filename: everything-presence-one-ha-beta-manifest.json
       clean: false
       esphome_version: latest
+      directory_name: everything-presence-beta-esp32
