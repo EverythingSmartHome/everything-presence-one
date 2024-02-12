@@ -2,6 +2,119 @@
     display: none;
 }
 
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1, .question-prompt {
+    text-align: left;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+.types label {
+    display: block;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+.types label:hover {
+    background: #f0f0f0;
+}
+.types input {
+    margin-right: 10px;
+}
+.description {
+    font-size: 0.9em;
+}
+
+.option-content {
+    display: flex;
+    align-items: center;
+}
+
+.option-image {
+    width: auto;
+    height: 125px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 1.2em; /* Larger font size */
+    font-weight: bold; /* Bolder font weight */
+    margin-bottom: 5px;
+}
+
+.types label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.types input[type="radio"] {
+    display: none;
+}
+
+.types label:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.selected-option {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Example of highlight with shadow */
+    opacity: 1; /* Override the hover effect opacity */
+}
+
+.types label {
+    /* existing styles */
+    transition: box-shadow 0.3s ease, opacity 0.3s ease; /* Smooth transition for the shadow and opacity */
+}
+
+.advanced-sensors-divider {
+    text-align: center;
+    color: #007bff; /* Example color, adjust to fit your design */
+    padding: 10px 0;
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 1em;
+    user-select: none; /* Prevent text selection */
+}
+
+.advanced-sensors-divider:hover {
+    color: #0056b3; /* Darker shade for hover effect */
+    text-decoration: underline; /* Add underline on hover for better interactivity indication */
+}
+
+.selected-options {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.purchase-link {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #007bff; /* Change this to match your site's color scheme */
+    text-decoration: none; /* Optional: if you prefer links without underlines */
+}
+
+.purchase-link:hover {
+    text-decoration: underline; /* Optional: if you want to highlight on hover */
+}
+
 /* Remove that for solution 2: same container, smaller text size */
 @media (min-width: 50rem) {
     .site-header {
