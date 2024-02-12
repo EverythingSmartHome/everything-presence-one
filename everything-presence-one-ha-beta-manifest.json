@@ -1,5 +1,5 @@
 {
-  "name": "Everything Presence One HA Beta",
+  "name": "Everything Presence One - HA - Beta",
   "version": "",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "parts": [
         {
-          "path": "everything-presence-beta-esp32/everything-presence-one-esp32.bin",
+          "path": "everything-presence-one-beta-esp32/everything-presence-one-esp32.bin",
           "offset": 0
         }
       ]
