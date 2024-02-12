@@ -173,16 +173,6 @@ switch:
       - delay: 3s
       - switch.turn_on: mmwave_sensor
 
-    turn_off_action:
-      - logger.log: "UART Presence Output Off"
-      - switch.turn_off: mmwave_sensor
-      - delay: 1s
-      - uart.write: "setUartOutput 2 0"
-      - delay: 1s
-      - uart.write: "saveConfig"
-      - delay: 3s
-      - switch.turn_on: mmwave_sensor
-
 number:
   - platform: template
     name: mmWave off latency
