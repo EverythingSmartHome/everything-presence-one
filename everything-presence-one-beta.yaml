@@ -200,6 +200,10 @@ sensor:
     name: "Target 4 SNR" # Don't change
     disabled_by_default: True
     id: target_4_snr
+  - platform: absolute_humidity
+    name: "Absolute Humidity"
+    temperature: temperature_sensor
+    humidity: humidity_sensor
 
 binary_sensor:
   - platform: gpio
