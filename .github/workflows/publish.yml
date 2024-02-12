@@ -54,7 +54,7 @@ jobs:
     name: Publish Everything Presence One - HA - BLE - Beta
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
-      files: everything-presence-one-ble-beta.yaml
+      files: everything-presence-one-beta-ble.yaml
       name: Everything Presence One - HA - BLE - Beta
       manifest_filename: everything-presence-one-ha-ble-beta-manifest.json
       clean: false
