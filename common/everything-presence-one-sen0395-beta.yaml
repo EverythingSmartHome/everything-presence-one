@@ -74,6 +74,13 @@ uart:
                 }
             }
 
+light:
+  - platform: binary
+    name: mmWave LED
+    output: mmwave_led_output
+    entity_category: config
+    disabled_by_default: True
+
 number:
   - platform: template
     id: mmwave_zone_1_start
