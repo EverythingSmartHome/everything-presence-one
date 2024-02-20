@@ -25,44 +25,84 @@ If you do not see a "Connect" button below, use a supported web browser like Goo
 {: .warning-title }
 After clicking the "Connect" button, if you do not see a "USB Serial" port listed, or you get the error "Failed to open serial port.", you may need to install the CH340 driver. The installer should give you links to the latest driver.
 
-<div class="radios">
-  <label>
-    <input type="radio" name="type" value="everything-presence-one" checked/>
-    <img src="images/everything-presence-one-ha.png" alt="Everything Presence One Home Assistant" width="200" height="250"/>
-  </label>
-  <label>
-    <input type="radio" name="type" value="everything-presence-one-st" />
-    <img src="images/everything-presence-one-st.png" alt="Everything Presence One Smartthings Beta" width="200" height="250"/>
-  </label>
-  <label class="beta">
-          <input type="radio" name="type" value="everything-presence-one-ha-beta" />
-          <img src="images/everything-presence-one-ha.png" alt="Everything Presence One Home Assistant Beta" width="200" height="250"/>
+<div class="container">
+    <div class="question-prompt">Select Smart Home Platform:</div>
+    <div class="types">
+        <label>
+            <input type="radio" name="platform" value="Home Assistant" />
+            <div class="option-content">
+                <img src="images/home-assistant-logo.png" alt="Home Assistant" class="option-image">
+                <div>
+                    <div class="title">Home Assistant</div>
+                    <div class="description">Choose this for Home Assistant integration, with additional options for Bluetooth.</div>
+                </div>
+            </div>
         </label>
-</div>
+        <label>
+            <input type="radio" name="platform" value="Smartthings" />
+            <div class="option-content">
+                <img src="images/everything-presence-one-st.png" alt="Samsung SmartThings" class="option-image">
+                <div>
+                    <div class="title">SmartThings</div>
+                    <div class="description">Choose this option to integrate with SmartThings</div>
+                </div>
+            </div>
+        </label>
+    </div>
 
-<p class="button-row" align="left">
-  <esp-web-install-button></esp-web-install-button>
-</p>
+    <!-- Firmware Type Selection for Home Assistant -->
+    <div id="homeAssistantOptions" class="hidden">
+        <div class="question-prompt">Select Firmware Type:</div>
+        <div class="types">
+            <label>
+                <input type="radio" name="haOption" value="Bluetooth" />
+                <img src="images/ble_logo.png" alt="BLE Logo" class="option-image">
+                <div>
+                    <div class="title">Bluetooth Proxy</div>
+                    <div class="description">Enable Bluetooth Proxy and Improv. May affect WiFi connectivity.</div>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="haOption" value="No-Bluetooth" />
+                <img src="images/no_ble_logo.png" alt="BLE Logo" class="option-image">
+                <div>
+                    <div class="title">No Bluetooth</div>
+                    <div class="description">Choose this option to disable Bluetooth Proxy and Improv, which can improve stability of the WiFi connection and/or you don't need Bluetooth Proxy.</div>
+                </div>
+            </label>
+        </div>
+    </div>
 
-<div class="hidden info everything-presence-one">
-  <h3>Home Assistant</h3>
-    <p>
-      Installs the correct software on your Everything Presence One for <a href="https://home-assistant.io">Home Assistant</a>. Once installed and connected to WiFi, follow the Home Assistant section to connect the EP1 to your Home Assistant server.
-    </p>
-</div>
+    <!-- Firmware Version Selection for Home Assistant -->
+    <div id="firmwareVersionOptions" class="hidden">
+        <div class="question-prompt">Select Firmware Version:</div>
+        <div class="types">
+            <label>
+                <input type="radio" name="firmwareVersion" value="Stable" />
+                <img src="images/stable-logo.png" alt="BLE Logo" class="option-image">
+                <div>
+                    <div class="title">Stable</div>
+                    <div class="description">Choose this for a stable version of the firmware.</div>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="firmwareVersion" value="Beta" />
+                <img src="images/beta-logo.png" alt="BLE Logo" class="option-image">
+                <div>
+                    <div class="title">Beta</div>
+                    <div class="description">The Beta release includes target tracking and distance zones. Do not use unless you are comfortable with troubleshooting and reporting bugs.</div>
+                </div>
+            </label>
+        </div>
+    </div>
 
-<div class="hidden info everything-presence-one-st">
-  <h3>Smartthings</h3>
-    <p>
-      Installs the correct software on your Everything Presence One for Samsung Smartthings. Please note, this is Beta currently. Once installed and connected to WiFi, follow the Smartthings section to connect the EP1 to your Smartthings Hub.
-    </p>
-</div>
-
-<div class="hidden info everything-presence-one-ha-beta">
-  <h3>Home Assistant (Beta)</h3>
-    <p>
-      Beta firmware for the EP1 with Home Assistant. Do not use unless you are comfortable with troubleshooting and reporting bugs.
-    </p>
+    <div id="summary" class="summary hidden">
+        <h3>You are flashing:</h3>
+        <p id="summaryPlatform"></p>
+        <p id="summarySensor"></p>
+        <p id="summaryOption"></p>
+    </div>
+    <esp-web-install-button class="hidden"></esp-web-install-button>
 </div>
 
 ## Next Steps
@@ -92,23 +132,93 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
 </script>
 
 <script>
-  document.querySelectorAll('input[name="type"]').forEach((radio) =>
-    radio.addEventListener("change", () => {
-      const button = document.querySelector("esp-web-install-button");
-      button.manifest = `./${radio.value}-manifest.json`;
+document.addEventListener("DOMContentLoaded", function() {
 
-      document.querySelectorAll(".info").forEach((info) => {
-        info.classList.add("hidden");
-      });
-      document
-        .querySelector(`.info.${radio.value}`)
-        .classList.remove("hidden");
-    })
-  );
-  document
-    .querySelector('input[name="type"]:checked')
-    .dispatchEvent(new Event("change"));
-  if (new URLSearchParams(document.location.search).has("beta")) {
-    document.body.classList.add("show-beta");
-  }
+  function clearSelectedOption(groupSelector) {
+        document.querySelectorAll(groupSelector + ' label').forEach(label => {
+            label.classList.remove('selected-option');
+        });
+    }
+
+    function handleRadioButtonChange(event, groupSelector) {
+        clearSelectedOption(groupSelector);
+        event.target.closest('label').classList.add('selected-option');
+    }
+
+    const homeAssistantOptions = document.getElementById("homeAssistantOptions");
+    const firmwareVersionOptions = document.getElementById("firmwareVersionOptions");
+    const summary = document.getElementById("summary");
+    const installButton = document.querySelector("esp-web-install-button");
+
+    function clearAndHideOptions() {
+        homeAssistantOptions.classList.add("hidden");
+        firmwareVersionOptions.classList.add("hidden");
+        summary.classList.add("hidden");
+        installButton.classList.add("hidden");
+    }
+
+    
+    document.querySelectorAll('input[name="platform"]').forEach(radio => {
+        radio.addEventListener("change", function() {
+          handleRadioButtonChange(event, '.types');
+            clearAndHideOptions();
+            const selectedPlatform = this.value;
+            if (selectedPlatform === "Home Assistant") {
+                homeAssistantOptions.classList.remove("hidden");
+            } else if (selectedPlatform === "Smartthings") {
+                updateSummary("Smartthings", "Stable");
+            }
+        });
+    });
+
+    
+    document.querySelectorAll('input[name="haOption"]').forEach(radio => {
+        radio.addEventListener("change", function() {
+            firmwareVersionOptions.classList.remove("hidden");
+            handleRadioButtonChange(event, '#homeAssistantOptions .types');
+        });
+    });
+
+    
+    document.querySelectorAll('input[name="firmwareVersion"]').forEach(radio => {
+        radio.addEventListener("change", function() {
+          handleRadioButtonChange(event, '#firmwareVersionOptions .types');
+            const selectedVersion = this.value;
+            const selectedOption = document.querySelector('input[name="haOption"]:checked').value;
+            updateSummary("Home Assistant", `${selectedOption} - ${selectedVersion}`);
+        });
+    });
+    
+    function updateSummary(platform, firmware) {
+        document.getElementById("summaryPlatform").textContent = "Platform: " + platform;
+        document.getElementById("summarySensor").textContent = "";
+        document.getElementById("summaryOption").textContent = "Firmware: " + firmware;
+        summary.classList.remove("hidden");
+
+        installButton.classList.remove("hidden");
+        
+        
+        let manifestUrl = "";
+        if (platform === "Home Assistant") {
+            if (firmware == "Bluetooth - Stable") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ble-manifest.json";
+            } else if (firmware == "Bluetooth - Beta") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-ble-beta-manifest.json";
+            } else if (firmware == "No-Bluetooth - Stable") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-manifest.json";
+            } else if (firmware == "No-Bluetooth - Beta") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-beta-manifest.json";
+            }
+        } else if (platform === "Smartthings") {
+            
+            manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-manifest.json";
+        }
+        installButton.setAttribute("manifest", manifestUrl);
+    }
+});
+
+document.getElementById("advancedSensorsDivider").addEventListener("click", function() {
+    var advancedSensors = document.getElementById("advancedSensors");
+    advancedSensors.classList.toggle("hidden");
+});
 </script>
