@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-one"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.3.5b"
+  project_version: "1.3.6b"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -21,3 +21,4 @@ packages:
   device_base: !include common/everything-presence-one-base.yaml
   device_version: !include common/everything-presence-one-sen0395-beta.yaml
   bluetooth_base: !include common/bluetooth-base.yaml
+  sen0395_base: !include common/sen0395-common.yaml

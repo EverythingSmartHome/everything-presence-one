@@ -1,0 +1,168 @@
+button:
+  - platform: template
+    name: Restart mmWave sensor
+    id: restart_mmwave
+    entity_category: config
+    internal: true
+    on_press:
+      - uart.write: "resetSystem"
+  - platform: template
+    name: Restart
+    icon: mdi:restart
+    entity_category: config
+    disabled_by_default: True
+    on_press:
+      - button.press: restart_mmwave
+      - button.press: restart_internal
+  - platform: template
+    name: Factory reset mmWave
+    icon: mdi:cog-counterclockwise
+    id: factory_reset_mmwave
+    internal: ${factory_reset_disabled}
+    entity_category: config
+    on_press:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "resetCfg"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+light:
+  - platform: binary
+    name: mmWave LED
+    output: mmwave_led_output
+    entity_category: config
+    disabled_by_default: False
+
+output:
+  - platform: template
+    id: mmwave_led_output
+    type: binary
+    write_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - if:
+          condition:
+            lambda: !lambda return state;
+          then:
+            - uart.write: "setLedMode 1 0"
+          else:
+            - uart.write: "setLedMode 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+
+number:
+  - platform: template
+    name: mmWave off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: mmwave_off_latency
+    min_value: 1
+    max_value: 600
+    initial_value: 15
+    optimistic: true
+    step: 5
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+    set_action:
+      - logger.log: "Off latency set"
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda |-
+          std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave on latency
+    icon: mdi:clock-start
+    id: mmwave_on_latency
+    entity_category: config
+    min_value: 0
+    max_value: 2
+    initial_value: 0
+    optimistic: true
+    step: 0.25
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+    set_action:
+      - logger.log: "On latency set"
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda |-
+          std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: mmWave sensitivity
+    icon: mdi:target-variant
+    id: mmwave_sensitivity
+    entity_category: config
+    min_value: 0
+    max_value: 9
+    initial_value: 7
+    optimistic: true
+    step: 1
+    restore_value: true
+    set_action:
+      - logger.log: "Sensitivity set"
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write:
+          !lambda std::string mss = "setSensitivity " + to_string((int)x);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+switch:
+  - platform: template
+    name: mmWave sensor
+    id: mmwave_sensor
+    disabled_by_default: True
+    entity_category: config
+    optimistic: true
+    restore_mode: DISABLED
+    turn_on_action:
+      - uart.write: "sensorStart"
+      - delay: 1s
+    turn_off_action:
+      - uart.write: "sensorStop"
+      - delay: 1s
+
+  - platform: template
+    name: UART presence output
+    id: uart_presence_output
+    entity_category: config
+    internal: ${uart_presence_output_disabled}
+    optimistic: true
+    turn_on_action:
+      - logger.log: "UART Presence Output On"
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
+    turn_off_action:
+      - logger.log: "UART Presence Output Off"
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "setUartOutput 1 0"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 3s
+      - switch.turn_on: mmwave_sensor
