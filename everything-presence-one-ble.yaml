@@ -21,3 +21,4 @@ packages:
   device_base: !include common/everything-presence-one-base.yaml
   device_version: !include common/everything-presence-one-sen0395-stable.yaml
   bluetooth_base: !include common/bluetooth-base.yaml
+  sen0395_base: !include common/sen0395-common.yaml
