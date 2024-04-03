@@ -50,7 +50,32 @@ After clicking the "Connect" button, if you do not see a "USB Serial" port liste
         </label>
     </div>
 
-    <!-- Firmware Type Selection for Home Assistant -->
+    <div id="sensorModelOptions" class="hidden">
+        <div class="question-prompt">Select Your mmWave Sensor Model:</div>
+        <div class="types">
+            <label>
+                <input type="radio" name="sensorModel" value="DFRobot SEN0395" />
+                <div class="option-content">
+                    <img src="images/sen0395.png" alt="DFRobot SEN0395" class="option-image">
+                    <div>
+                        <div class="title">DFRobot SEN0395</div>
+                        <div class="description">Select this option if you are using the DFRobot SEN0395 sensor (6 Pin).</div>
+                    </div>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="sensorModel" value="DFRobot SEN0609" />
+                <div class="option-content">
+                    <img src="images/sen0609.png" alt="DFRobot SEN0609" class="option-image">
+                    <div>
+                        <div class="title">DFRobot SEN0609</div>
+                        <div class="description">Select this option if you are using the DFRobot SEN0609 sensor (5 Pin).</div>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+
     <div id="homeAssistantOptions" class="hidden">
         <div class="question-prompt">Select Firmware Type:</div>
         <div class="types">
@@ -73,13 +98,12 @@ After clicking the "Connect" button, if you do not see a "USB Serial" port liste
         </div>
     </div>
 
-    <!-- Firmware Version Selection for Home Assistant -->
     <div id="firmwareVersionOptions" class="hidden">
         <div class="question-prompt">Select Firmware Version:</div>
         <div class="types">
             <label>
                 <input type="radio" name="firmwareVersion" value="Stable" />
-                <img src="images/stable-logo.png" alt="BLE Logo" class="option-image">
+                <img src="images/stable-logo.png" alt="Stable Logo" class="option-image">
                 <div>
                     <div class="title">Stable</div>
                     <div class="description">Choose this for a stable version of the firmware.</div>
@@ -87,7 +111,7 @@ After clicking the "Connect" button, if you do not see a "USB Serial" port liste
             </label>
             <label>
                 <input type="radio" name="firmwareVersion" value="Beta" />
-                <img src="images/beta-logo.png" alt="BLE Logo" class="option-image">
+                <img src="images/beta-logo.png" alt="Beta Logo" class="option-image">
                 <div>
                     <div class="title">Beta</div>
                     <div class="description">The Beta release includes target tracking and distance zones. Do not use unless you are comfortable with troubleshooting and reporting bugs.</div>
@@ -114,111 +138,109 @@ With the EP1 fully updated and connected to WiFi, the final step is to connect i
 
 <script
   type="module"
-  src="https://unpkg.com/esp-web-tools@9.0.3/dist/web/install-button.js?module"
+  src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
 ></script>
 
 <script>
-const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-
-jtd.addEvent(toggleDarkMode, 'click', function(){
-  if (jtd.getTheme() === 'dark') {
-    jtd.setTheme('light');
-    toggleDarkMode.textContent = 'Preview dark color scheme';
-  } else {
-    jtd.setTheme('dark');
-    toggleDarkMode.textContent = 'Return to the light side';
-  }
-});
-</script>
-
-<script>
 document.addEventListener("DOMContentLoaded", function() {
-
-  function clearSelectedOption(groupSelector) {
-        document.querySelectorAll(groupSelector + ' label').forEach(label => {
-            label.classList.remove('selected-option');
-        });
-    }
-
-    function handleRadioButtonChange(event, groupSelector) {
-        clearSelectedOption(groupSelector);
-        event.target.closest('label').classList.add('selected-option');
-    }
-
     const homeAssistantOptions = document.getElementById("homeAssistantOptions");
+    const sensorModelOptions = document.getElementById("sensorModelOptions");
     const firmwareVersionOptions = document.getElementById("firmwareVersionOptions");
     const summary = document.getElementById("summary");
     const installButton = document.querySelector("esp-web-install-button");
 
     function clearAndHideOptions() {
         homeAssistantOptions.classList.add("hidden");
+        sensorModelOptions.classList.add("hidden");
         firmwareVersionOptions.classList.add("hidden");
         summary.classList.add("hidden");
         installButton.classList.add("hidden");
     }
 
-    
+    function handleRadioButtonChange(event, groupSelector) {
+        document.querySelectorAll(groupSelector + ' label').forEach(label => {
+            label.classList.remove('selected-option');
+        });
+        event.target.closest('label').classList.add('selected-option');
+    }
+
     document.querySelectorAll('input[name="platform"]').forEach(radio => {
         radio.addEventListener("change", function() {
-          handleRadioButtonChange(event, '.types');
+            handleRadioButtonChange(event, '.types');
             clearAndHideOptions();
-            const selectedPlatform = this.value;
-            if (selectedPlatform === "Home Assistant") {
-                homeAssistantOptions.classList.remove("hidden");
-            } else if (selectedPlatform === "Smartthings") {
-                updateSummary("Smartthings", "Stable");
+            if (this.value === "Home Assistant") {
+                sensorModelOptions.classList.remove("hidden");
+            } else if (this.value === "Smartthings") {
+                updateSummary("Smartthings", "", "Stable");
             }
         });
     });
 
-    
-    document.querySelectorAll('input[name="haOption"]').forEach(radio => {
+    document.querySelectorAll('input[name="sensorModel"]').forEach(radio => {
         radio.addEventListener("change", function() {
-            firmwareVersionOptions.classList.remove("hidden");
-            handleRadioButtonChange(event, '#homeAssistantOptions .types');
+            handleRadioButtonChange(event, '#sensorModelOptions .types');
+            homeAssistantOptions.classList.remove("hidden");
         });
     });
 
-    
-    document.querySelectorAll('input[name="firmwareVersion"]').forEach(radio => {
+    document.querySelectorAll('input[name="haOption"]').forEach(radio => {
         radio.addEventListener("change", function() {
-          handleRadioButtonChange(event, '#firmwareVersionOptions .types');
-            const selectedVersion = this.value;
-            const selectedOption = document.querySelector('input[name="haOption"]:checked').value;
-            updateSummary("Home Assistant", `${selectedOption} - ${selectedVersion}`);
+            handleRadioButtonChange(event, '#homeAssistantOptions .types');
+            firmwareVersionOptions.classList.remove("hidden");
         });
     });
-    
-    function updateSummary(platform, firmware) {
+
+    document.querySelectorAll('input[name="firmwareVersion"]').forEach(radio => {
+        radio.addEventListener("change", function() {
+            handleRadioButtonChange(event, '#firmwareVersionOptions .types');
+            const selectedVersion = this.value;
+            const selectedOption = document.querySelector('input[name="haOption"]:checked').value;
+            const selectedSensorModel = document.querySelector('input[name="sensorModel"]:checked').value;
+            updateSummary("Home Assistant", selectedSensorModel, `${selectedOption} - ${selectedVersion}`);
+        });
+    });
+
+    function updateSummary(platform, sensorModel, firmware) {
         document.getElementById("summaryPlatform").textContent = "Platform: " + platform;
-        document.getElementById("summarySensor").textContent = "";
+        document.getElementById("summarySensor").textContent = "Sensor Model: " + sensorModel;
         document.getElementById("summaryOption").textContent = "Firmware: " + firmware;
         summary.classList.remove("hidden");
 
         installButton.classList.remove("hidden");
-        
-        
-        let manifestUrl = "";
-        if (platform === "Home Assistant") {
-            if (firmware == "Bluetooth - Stable") {
-                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ble-manifest.json";
-            } else if (firmware == "Bluetooth - Beta") {
-                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-ble-beta-manifest.json";
-            } else if (firmware == "No-Bluetooth - Stable") {
-                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-manifest.json";
-            } else if (firmware == "No-Bluetooth - Beta") {
-                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-beta-manifest.json";
-            }
-        } else if (platform === "Smartthings") {
-            
-            manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-manifest.json";
-        }
+
+        let manifestUrl = determineManifestUrl(platform, sensorModel, firmware);
         installButton.setAttribute("manifest", manifestUrl);
     }
-});
 
-document.getElementById("advancedSensorsDivider").addEventListener("click", function() {
-    var advancedSensors = document.getElementById("advancedSensors");
-    advancedSensors.classList.toggle("hidden");
+    function determineManifestUrl(platform, sensorModel, firmware) {
+    let manifestUrl = "";
+    if (platform === "Home Assistant") {
+        if (sensorModel === "DFRobot SEN0395") {
+            if (firmware === "Bluetooth - Stable") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ble-manifest.json";
+            } else if (firmware === "Bluetooth - Beta") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-ble-beta-manifest.json";
+            } else if (firmware === "No-Bluetooth - Stable") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-manifest.json";
+            } else if (firmware === "No-Bluetooth - Beta") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-beta-manifest.json";
+            }
+        } else if (sensorModel === "DFRobot SEN0609") {
+            if (firmware === "Bluetooth - Stable") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-ble-manifest.json";
+            } else if (firmware === "No-Bluetooth - Stable") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-manifest.json";
+            } else if (firmware === "Bluetooth - Beta") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-ble-manifest.json";
+            } else if (firmware === "No-Bluetooth - Beta") {
+                manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-manifest.json";
+            }
+        }
+    } else if (platform === "Smartthings") {
+        manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-manifest.json";
+    }
+    return manifestUrl;
+}
+
 });
 </script>
