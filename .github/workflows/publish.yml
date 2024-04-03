@@ -60,3 +60,23 @@ jobs:
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-ble-beta-esp32
+  publish-everything-presence-one-sen0609-no-ble-stable:
+    name: Publish Everything Presence One - SEN0609 - HA - Stable
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609.yaml
+      name: Everything Presence One - SEN0609 - HA - Stable
+      manifest_filename: everything-presence-one-sen0609-manifest.json
+      clean: false
+      esphome_version: latest
+      directory_name: everything-presence-one-sen0609-esp32
+  publish-everything-presence-one-sen0609-ble-stable:
+    name: Publish Everything Presence One - SEN0609 - HA - BLE - Stable
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-ble.yaml
+      name: Everything Presence One - SEN0609 - HA - BLE - Stable
+      manifest_filename: everything-presence-one-sen0609-ble-manifest.json
+      clean: false
+      esphome_version: latest
+      directory_name: everything-presence-one-sen0609-ble-esp32
