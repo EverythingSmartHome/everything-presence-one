@@ -44,7 +44,7 @@ jobs:
     name: Publish Everything Presence One - SEN0609 - SmartThings
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
-      files: everything-presence-one-st.yaml
+      files: everything-presence-one-st-sen0609.yaml
       name: Everything Presence One - SEN0609 - SmartThings
       manifest_filename: everything-presence-one-sen0609-st-manifest.json
       clean: false
