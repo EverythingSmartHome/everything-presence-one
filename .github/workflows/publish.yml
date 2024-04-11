@@ -40,6 +40,16 @@ jobs:
       clean: false
       esphome_version: latest
       directory_name: everything-presence-st-esp32
+  publish-everything-presence-one-sen0609-smartthings:
+    name: Publish Everything Presence One - SEN0609 - SmartThings
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-st-sen0609.yaml
+      name: Everything Presence One - SEN0609 - SmartThings
+      manifest_filename: everything-presence-one-sen0609-st-manifest.json
+      clean: false
+      esphome_version: latest
+      directory_name: everything-presence-sen0609-st-esp32
   publish-everything-presence-one-ha-beta:
     name: Publish Everything Presence One - HA - Beta
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
