@@ -25,7 +25,7 @@ Each of the main components is labelled directly on the board itself to help wit
 * ESP32-WROOM-32E - 4MB flash version
 * BH1750 Light Illuminance sensor
 * SHTC3 Temperature and Humidity Sensor
-* Header Slot for DFRobot SEN0395 mmWave Sensor
+* Header Slot for DFRobot SEN0395 and SEN0609 mmWave Sensor
 * Socket for Panasonic EKMC1603111/2/3 PIR Sensor
 * USB-C for power and programming
 * 5v Header input for optional power
@@ -65,7 +65,7 @@ Locking Ring:
 
 The mmWave comes included as part of the Everything Presence One Full Kit - if you purchased the board only then you will need to supply your own mmWave sensor.
 
-The DFRobot mmWave Sensor SEN0395 is the **only** compatible and validated sensor currently - please do not try to use a different sensor as you may cause damage.
+The DFRobot mmWave Sensor SEN0395 and SEN0609 (for newer Rev 1.5 EP1 boards) are the **only** compatible and validated sensor currently - please do not try to use a different sensor as you may cause damage.
 
 ## Motion Sensor PIR
 

@@ -48,16 +48,37 @@ The the EP1 board and press it into the back of the case - each corner should cl
 
 ![Inserting the EP1 Board](images/assembly-insert-ep1-board-2.jpg)
 
-Next, take the mmWave sensor and insert it into one of the two slots.
+Next, take the mmWave sensor and identify which sensor you have - either the SEN0395 (6 Pin) or the SEN0609 (5 Pin).
 
+### Double slot board
+
+If your EP1 board has 2 x 6 pin slots (one horizontal and one vertical), this board is only compatible with the 6 pin SEN0395.
+
+![Rev 1.3/1.4 EP1 Board](images/hardware-overview-ep1-board-rev-1.4.jpg)
+
+Insert the SEN0395 into one of the two slots:
 ![Inserting the mmWave Sensor](images/assembly-insert-mmwave-top-slot.jpg)
 
 ![Inserting the mmWave Sensor](images/assembly-insert-mmwave-side-slot.jpg)
 
 Slot 1 at the top of the board gives you a wider horizontal field of view with a narrower vertical field of view. Slot 2 at the side of the board gives you a wider vertical field of view with a narrower horizontal field of view. Slot 1 is the recommendation for most people.
 
+### Single 8 Pin slot
+
+If your board has the newer 8 pin slot, this is compatible with **both the SEN0395 and SEN0609.**
+
+![Rev 1.5 EP1 Board](images/hardware-overview-ep1-board-rev-1.5.jpg)
+
+If you have the SEN0395 sensor (6 pin), it goes to the far left position. The "V" pin on the mmWave should line up with the 5v on the board:
+
+![Rev 1.5 EP1 with SEN0395](images/hardware-overview-ep1-board-rev-1.5-SEN0395.jpg)
+
+If you have the SEN0609 (5 pin), it goes to the far right position. The "VIN" pin on the mmWave should line up with the 5v on the board:
+
+![Rev 1.5 EP1 with SEN0609](images/hardware-overview-ep1-board-rev-1.5-SEN0609.jpg)
+
 {: .warning }
-Making sure to line up the 5v pin on the sensor with the 5v pin on the board.
+Making sure to line up the 5v pin on the sensor with the correct 5v pin on the board, damage could occur to the sensor from plugging it in to the wrong socket.
 
 {: .warning }
 Please take extra care with the mmWave sensor when it's inserted into the slot since the pins will bend easily and could cause damage. Remove the sensor whenever moving or working on it.
