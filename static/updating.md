@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function() {
             manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-manifest.json";
         } else if (sensorModel === "DFRobot SEN0609") {
             manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-st-manifest.json";
+        }
     }
     return manifestUrl;
 }
