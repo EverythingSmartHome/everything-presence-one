@@ -120,6 +120,33 @@ After clicking the "Connect" button, if you do not see a "USB Serial" port liste
         </div>
     </div>
 
+    <div id="smartThingsSensorOptions" class="hidden">
+        <div class="question-prompt">Select Your mmWave Sensor Model for SmartThings:</div>
+        <div class="types">
+            <label>
+                <input type="radio" name="stSensorModel" value="DFRobot SEN0395" />
+                <div class="option-content">
+                    <img src="images/sen0395.png" alt="DFRobot SEN0395" class="option-image">
+                    <div>
+                        <div class="title">DFRobot SEN0395</div>
+                        <div class="description">Select this option if you are using the DFRobot SEN0395 sensor for SmartThings.</div>
+                    </div>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="stSensorModel" value="DFRobot SEN0609" />
+                <div class="option-content">
+                    <img src="images/sen0609.png" alt="DFRobot SEN0609" class="option-image">
+                    <div>
+                        <div class="title">DFRobot SEN0609</div>
+                        <div class="description">Select this option if you are using the DFRobot SEN0609 sensor for SmartThings.</div>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
     <div id="summary" class="summary hidden">
         <h3>You are flashing:</h3>
         <p id="summaryPlatform"></p>
@@ -145,6 +172,7 @@ With the EP1 fully updated and connected to WiFi, the final step is to connect i
 document.addEventListener("DOMContentLoaded", function() {
     const homeAssistantOptions = document.getElementById("homeAssistantOptions");
     const sensorModelOptions = document.getElementById("sensorModelOptions");
+    const smartThingsSensorOptions = document.getElementById("smartThingsSensorOptions");
     const firmwareVersionOptions = document.getElementById("firmwareVersionOptions");
     const summary = document.getElementById("summary");
     const installButton = document.querySelector("esp-web-install-button");
@@ -152,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function clearAndHideOptions() {
         homeAssistantOptions.classList.add("hidden");
         sensorModelOptions.classList.add("hidden");
+        smartThingsSensorOptions.classList.add("hidden");
         firmwareVersionOptions.classList.add("hidden");
         summary.classList.add("hidden");
         installButton.classList.add("hidden");
@@ -171,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.value === "Home Assistant") {
                 sensorModelOptions.classList.remove("hidden");
             } else if (this.value === "Smartthings") {
-                updateSummary("Smartthings", "", "Stable");
+                smartThingsSensorOptions.classList.remove("hidden");
             }
         });
     });
@@ -180,6 +209,13 @@ document.addEventListener("DOMContentLoaded", function() {
         radio.addEventListener("change", function() {
             handleRadioButtonChange(event, '#sensorModelOptions .types');
             homeAssistantOptions.classList.remove("hidden");
+        });
+    });
+
+    document.querySelectorAll('input[name="stSensorModel"]').forEach(radio => {
+        radio.addEventListener("change", function() {
+            handleRadioButtonChange(event, '#smartThingsSensorOptions .types');
+            updateSummary("Smartthings", this.value, "Stable");
         });
     });
 
@@ -205,7 +241,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("summarySensor").textContent = "Sensor Model: " + sensorModel;
         document.getElementById("summaryOption").textContent = "Firmware: " + firmware;
         summary.classList.remove("hidden");
-
         installButton.classList.remove("hidden");
 
         let manifestUrl = determineManifestUrl(platform, sensorModel, firmware);
@@ -237,7 +272,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     } else if (platform === "Smartthings") {
-        manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-manifest.json";
+        if (sensorModel === "DFRobot SEN0395") {
+            manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-manifest.json";
+        } else if (sensorModel === "DFRobot SEN0609") {
+            manifestUrl = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-st-manifest.json";
     }
     return manifestUrl;
 }
