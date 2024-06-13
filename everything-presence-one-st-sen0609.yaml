@@ -42,9 +42,6 @@ wifi:
 captive_portal:
 
 improv_serial:
-
-esp32_improv:
-  authorizer: none
   
 light:
   - platform: status_led
