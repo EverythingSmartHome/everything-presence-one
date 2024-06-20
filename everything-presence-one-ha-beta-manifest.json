@@ -6,9 +6,13 @@
   "builds": [
     {
       "chipFamily": "ESP32",
+      "ota": {
+        "path": "everything-presence-one-beta-esp32/everything-presence-one-esp32.ota.bin",
+        "md5": "94010ba0d20a5620889164f078b581ec"
+      },
       "parts": [
         {
-          "path": "everything-presence-one-beta-esp32/everything-presence-one-esp32.bin",
+          "path": "everything-presence-one-beta-esp32/everything-presence-one-esp32.factory.bin",
           "offset": 0
         }
       ]
