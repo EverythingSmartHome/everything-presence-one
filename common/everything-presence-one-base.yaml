@@ -23,6 +23,11 @@ api:
 
 ota:
   - platform: esphome
+    id: ota_esphome
+  - platform: http_request
+    id: ota_http_request
+
+http_request:
 
 wifi:
   fast_connect: ${hidden_ssid}
