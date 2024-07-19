@@ -66,9 +66,9 @@ On Latency configures a delay of how long motion must be detected for before the
 
 The PIR and Occupancy sensor off-time needs to be configured with ESPHome code due to ESPHome not supporting dynamic values for these in code. See the Advanced page for how to edit the ESPHome code.
 
-### Distance and Sensitivity
+### Distance and Sensitivity (SEN0395)
 
-The mmWave sensor has a configurable Sensitivity and Distance control inside of Home Assistant.
+The SEN0395 mmWave sensor has a configurable Sensitivity and Distance control inside of Home Assistant.
 
 Sensitivity allows you to adjust how sensitive the mmWave sensor reacts to movement - this can be useful to configure in rooms where slight movements by something not Human triggers the device (this cannot filter out non Human objects like fans or pets) - see the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for more information:
 
@@ -78,7 +78,41 @@ Distance allows you to adjust the max range of the sensor, up to a maximum of 8m
 
 ![Home Assistant mmWave distance Entity](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-mmwave-distance.jpg)
 
-### Distance (Beta)
+### Distance and Sensitivity (SEN0609)
+
+The newer SEN0609 mmWave sensor has 2 individual controls for sensitivity and 3 individual controls for distance inside of Home Assistant.
+
+Sensitivity allows you to adjust how sensitive the mmWave sensor reacts to movement - this can be useful to configure in rooms where slight movements by something not Human triggers the device (this cannot filter out non Human objects like fans or pets) - see the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for more information.
+
+The SEN0609 has 2 controls for sensitivity - Sustained Sensitivity and Trigger Sensitivity:
+
+![Home Assistant mmWave sensitivity Entity](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-sen0609-mmwave-sensitivity.png)
+
+Trigger Sensitivity allows you to configure the sensitivity level to do the initial trigger of the sensor (to make it go from clear to detected). This is on a scale of 1-9, where 1 is the lowest sensitivity and 9 is the highest.
+
+Sustained Sensitivity allows you to configure the sensitivity level AFTER the initial trigger, and is the sensitivity level to keep the sensor detecting. This is on a scale of 1-9, where 1 is the lowest sensitivity and 9 is the highest.
+
+One scenario this can be useful, would be to prevent a small movement triggering the sensor (say a curtain moving in the wind) when the room is unoccupied, but allowing enough sensitivty to trigger when someone enters the room and then keep detecting them sitting down or sleeping with very little movement.
+
+{: .important }
+You MUST press the "Set Sensitivity" button in order to send the senstivity settings to the sensor after changing the sliders. No change will take effect without pressing this.
+
+Distance allows you to adjust the max range of the sensor, up to a maximum of 25m. Please note that 25m is the max range, but doesn't nessecarily mean the sensor is capable of detecting the tiniest of movements at 25m - placement is still important for the best results - see the [tuning guide](https://everythingsmarthome.github.io/everything-presence-one/tuning.html) for more information.
+
+The SEN0609 has 3 controls for distance too - minimum Distance, maximum distance and range reduced:
+
+![Home Assistant mmWave distance Entity](https://everythingsmarthome.github.io/everything-presence-one/images/home-assistant-entities-sen0609-mmwave-distance.png)
+
+Minimum and maximum are pretty self explanatory - they allow you to set the operating distance for the mmwave sensor, so that only movement that is within these two values will be considered occupied. For example, if you have the minimum value as 3m, and the maximum value as 6m, then only movement that occurs between 3m and 6m will cause the sensor to trigger.
+
+Range reduced is a new addition that let's you set a smaller distance that will be used only for triggering the sensor. The value is subtracted from the maximum distance. For example, if you have a maximum distance of 10m and a range reduced of 1m, the sensor will only trigger when a target is within 0-9m (10m - 1m = 9m). Once a target is detected, it will continued to be detected until they go over the 10m mark at which point the sensor will go back to unoccupied.
+
+This can be useful for setting a smaller trigger range to help with false positives that might occur at the edge of the sensors detection range.
+
+{: .important }
+You MUST press the "Set Distance" button in order to send the senstivity settings to the sensor after changing the sliders. No change will take effect without pressing this.
+
+### Distance (Beta - SEN0395 only)
 
 If you have updated to the beta firmware 1.23b, you have access to target tracking and distance zones.
 
