@@ -18,7 +18,6 @@ update:
     id: update_http_request
     name: Firmware
     source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-manifest.json
-    timeout: 4s
 
 dashboard_import:
   package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-sen0609.yaml@main
