@@ -2,7 +2,7 @@ substitutions:
   name: "everything-presence-one"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
-  project_version: "1.2.4"
+  project_version: "1.2.5"
   temperature_offset: "-3"
   humidity_offset: "5"
   temperature_update_interval: "60s"
@@ -18,6 +18,7 @@ update:
     id: update_http_request
     name: Firmware
     source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-sen0609-ble-manifest.json
+    timeout: 4s
 
 dashboard_import:
   package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-sen0609-ble.yaml@main
