@@ -31,7 +31,7 @@ You will need the ESPHome add-on installed in Home Assistant and the code for yo
 
 Once you have your config showing up in the ESPHome dashboard, hit edit on the config.
 
-Then at the bottom of the config, add the following lines. These will differ depending on your board revision.
+Then at the bottom of the config, add the following lines. These will differ depending on your Everything Presence One board revision. The board revision number is marked in the bottom left hand corner of the Everything Presence One board.
 
 **If you have revision 1.3 or 1.4:**
 
