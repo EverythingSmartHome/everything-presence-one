@@ -31,7 +31,34 @@ You will need the ESPHome add-on installed in Home Assistant and the code for yo
 
 Once you have your config showing up in the ESPHome dashboard, hit edit on the config.
 
-Then at the bottom of the config, add the following lines:
+Then at the bottom of the config, add the following lines. These will differ depending on your board revision.
+
+**If you have revision 1.3 or 1.4:**
+
+```
+i2c:
+  - id: bus_a
+    sda: GPIO26
+    scl: GPIO25
+    scan: True
+  - id: bus_b
+    sda: GPIO18
+    scl: GPIO19
+    scan: true
+
+
+sensor:
+  - id: !extend illuminance_sensor
+    i2c_id: bus_a
+  - id: !extend shtc3_sensor
+    i2c_id: bus_a
+  - platform: scd4x
+    i2c_id: bus_b
+    co2:
+      name: "CO2"
+```
+
+**If you have revision 1.5:**
 
 ```
 i2c:
