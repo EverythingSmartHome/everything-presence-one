@@ -16,8 +16,9 @@ substitutions:
 update:
   - platform: http_request
     id: update_http_request
-    name: Firmware
+    name: Everything Presence One Firmware
     source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-ble-beta-manifest.json
+    disabled_by_default: true
 
 dashboard_import:
   package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta-ble.yaml@main
