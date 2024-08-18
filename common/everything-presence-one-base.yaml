@@ -8,7 +8,7 @@ esphome:
   on_boot:
     priority: -100
     then:
-      - uart.write: "sensorStart"
+      - switch.turn_on: mmwave_sensor
 
 esp32:
   board: esp32dev
@@ -32,6 +32,8 @@ http_request:
 
 wifi:
   fast_connect: ${hidden_ssid}
+  on_connect:
+    - switch.turn_on: mmwave_sensor
 
 improv_serial:
 
