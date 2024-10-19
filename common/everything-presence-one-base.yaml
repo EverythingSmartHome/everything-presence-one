@@ -37,9 +37,10 @@ wifi:
 improv_serial:
 
 i2c:
-  sda: 26
-  scl: 25
-  scan: true
+  - id: bus_a
+    sda: 26
+    scl: 25
+    scan: true
 
 light:
   - platform: status_led
@@ -51,6 +52,7 @@ light:
 sensor:
   - platform: shtcx
     id: "shtc3_sensor"
+    i2c_id: bus_a
     temperature:
       name: Temperature
       id: temperature_sensor
@@ -68,6 +70,7 @@ sensor:
   - platform: bh1750
     name: Illuminance
     id: illuminance_sensor
+    i2c_id: bus_a
     address: 0x23
     update_interval: ${illuminance_update_interval}
     filters:
