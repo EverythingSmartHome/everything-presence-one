@@ -27,63 +27,9 @@ Grab your CO2 module and push it onto the pins, making sure to line up the 3.3v 
 
 ## Software
 
-You will need the ESPHome add-on installed in Home Assistant and the code for your Everything Presence One adopted (you should be automatically prompted to do this if you haven't already done so).
+You will need to install the CO2 version of the firmware by heading over to the [update page](https://everythingsmarthome.github.io/everything-presence-one/updating.html), selecting Home Assistant, select your mmwave sensor, select CO2, select board revision and then choose between the Bluetooth or Non-Bluetooth versions of the firmware. Finally hit the Connect button and follow the instructions.
 
-Once you have your config showing up in the ESPHome dashboard, hit edit on the config.
-
-Then at the bottom of the config, add the following lines. These will differ depending on your Everything Presence One board revision. The board revision number is marked in the bottom left hand corner of the Everything Presence One board.
-
-**If you have revision 1.3 or 1.4:**
-
-```
-i2c:
-  - id: bus_a
-    sda: GPIO26
-    scl: GPIO25
-    scan: True
-  - id: bus_b
-    sda: GPIO18
-    scl: GPIO19
-    scan: true
-
-
-sensor:
-  - id: !extend illuminance_sensor
-    i2c_id: bus_a
-  - id: !extend shtc3_sensor
-    i2c_id: bus_a
-  - platform: scd4x
-    i2c_id: bus_b
-    co2:
-      name: "CO2"
-```
-
-**If you have revision 1.5:**
-
-```
-i2c:
-  - id: bus_a
-    sda: GPIO26
-    scl: GPIO25
-    scan: True
-  - id: bus_b
-    sda: GPIO18
-    scl: GPIO22
-    scan: true
-
-
-sensor:
-  - id: !extend illuminance_sensor
-    i2c_id: bus_a
-  - id: !extend shtc3_sensor
-    i2c_id: bus_a
-  - platform: scd4x
-    i2c_id: bus_b
-    co2:
-      name: "CO2"
-```
-
-Then hit save and install to complete.
+Once installed, the CO2 sensor should automatically show up in Home Assistant, nice!
 
 {: .note }
 If your ESPHome config produces an error when trying to install, try hitting the "clean build files" button on the config to clear your cache, then try again.
