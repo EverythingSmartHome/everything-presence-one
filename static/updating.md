@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 baseName += "-beta";
             }
 
-            if (firmware === "Bluetooth") {
+            if (firmware.includes("Bluetooth")) {
                 baseName += "-ble";
             }
 
