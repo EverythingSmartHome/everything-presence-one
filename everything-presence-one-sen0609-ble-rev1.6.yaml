@@ -35,7 +35,4 @@ binary_sensor:
       number: 33
       mode: INPUT
     name: PIR
-    id: pir_motion_sensor
-    device_class: motion
-    filters:
-      - delayed_off:  !lambda 'return id(pir_off_latency).state * 1000.0;'
+    id: !extend pir_motion_sensor
