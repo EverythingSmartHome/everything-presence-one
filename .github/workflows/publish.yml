@@ -37,7 +37,7 @@ jobs:
     name: Publish Everything Presence One - HA - BLE - 1.6 - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
-      files: everything-presence-one-ble-rev1-6.yaml
+      files: everything-presence-one-ble-sen0609-rev1-6.yaml
       name: Everything Presence One - HA - BLE - Stable
       manifest_filename: everything-presence-one-ble-1-6-manifest.json
       clean: false
