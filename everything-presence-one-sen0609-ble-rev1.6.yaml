@@ -5,7 +5,7 @@ substitutions:
   project_version: "1.2.7"
   temperature_offset: "-3"
   humidity_offset: "5"
-  temperature_update_interval: "60s"
+  temperature_update_interval: "5s"
   illuminance_update_interval: "2s"
   hidden_ssid: "false"
   factory_reset_disabled: "true"
