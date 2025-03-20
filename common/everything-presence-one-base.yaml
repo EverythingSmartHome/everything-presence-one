@@ -21,12 +21,6 @@ logger:
 
 api:
 
-external_components:
-  - source: github://pr#7547
-    components:
-      - api
-    refresh: 0s
-
 ota:
   - platform: esphome
     id: ota_esphome
