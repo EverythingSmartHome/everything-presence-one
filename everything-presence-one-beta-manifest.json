@@ -7,16 +7,15 @@
     {
       "chipFamily": "ESP32",
       "ota": {
-        "path": "everything-presence-one-esp32.ota.bin",
-        "md5": "9317db2edb7e1435cc1a5d28efc83c88"
+        "path": "everything-presence-one-beta-esp32/everything-presence-one-esp32.ota.bin",
+        "md5": "fa9a9b9c71bf54a971a704624758ce5e"
       },
       "parts": [
         {
-          "path": "everything-presence-one-esp32.factory.bin",
+          "path": "everything-presence-one-beta-esp32/everything-presence-one-esp32.factory.bin",
           "offset": 0
         }
-      ],
-      "path": "everything-presence-one-beta-esp32/null"
+      ]
     }
   ]
 }
