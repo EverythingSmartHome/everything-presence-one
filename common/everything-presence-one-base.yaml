@@ -45,6 +45,7 @@ i2c:
 light:
   - platform: status_led
     name: ESP32 status LED
+    id: esp32_led
     pin: GPIO32
     entity_category: config
     disabled_by_default: False
@@ -143,6 +144,25 @@ binary_sensor:
       else {
         return id(occupancy).state;
       }
+  - platform: gpio
+    pin:
+      number: 0
+      inverted: true
+    id: flash_button
+    internal: True
+    on_multi_click:
+      - timing:
+        - ON for at least 10s
+        then:
+          - repeat: 
+              count: 5
+              then:
+                - light.turn_on: esp32_led
+                - delay: 150ms
+                - light.turn_off: esp32_led
+                - delay: 150ms
+          - light.turn_on: esp32_led
+          - button.press: factory_reset_button
 
 number:
   - platform: template
@@ -232,3 +252,6 @@ button:
     name: Safe mode
     entity_category: config
     disabled_by_default: True
+  - platform: factory_reset
+    id: "factory_reset_button"
+    internal: True
