@@ -45,6 +45,7 @@ i2c:
 light:
   - platform: status_led
     name: ESP32 status LED
+    id: esp32_led
     pin: GPIO32
     entity_category: config
     disabled_by_default: False
