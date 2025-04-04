@@ -244,7 +244,7 @@ w
       directory_name: everything-presence-one-sen0609-co2-esp32
 
   # SEN0609 - Stable Firmware - No Bluetooth - CO2 Module - Rev 1.6
-  publish-everything-presence-one-sen0609-co2-rev1-3-stable:
+  publish-everything-presence-one-sen0609-co2-rev1-6-stable:
     name: Publish Everything Presence One - SEN0609 - HA - CO2 Rev1.6 - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
@@ -254,18 +254,6 @@ w
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-co2-rev1.6-esp32
-
-  # SEN0609 - Stable Firmware - No Bluetooth - CO2 Module - Rev 1.3/1.4
-  publish-everything-presence-one-sen0609-co2-rev1-3-stable:
-    name: Publish Everything Presence One - SEN0609 - HA - CO2 Rev1.3 - Stable
-    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
-    with:
-      files: everything-presence-one-sen0609-co2-rev1.3.yaml
-      name: Everything Presence One - SEN0609 - HA - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-ha-sen0609-co2-noble-rev1-3-stable-manifest.json
-      clean: false
-      esphome_version: latest
-      directory_name: everything-presence-one-sen0609-co2-rev1.3-esp32
 
   # SEN0609 - Stable Firmware - Bluetooth - CO2 Module - Rev 1.5
   publish-everything-presence-one-sen0609-ble-co2-stable:
@@ -278,30 +266,6 @@ w
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-ble-co2-esp32
-
-  # SEN0609 - Stable Firmware - Bluetooth - CO2 Module - Rev 1.3/1.4
-  publish-everything-presence-one-sen0609-ble-co2-rev1-3-stable:
-    name: Publish Everything Presence One - SEN0609 - HA - BLE - CO2 Rev1.3 - Stable
-    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
-    with:
-      files: everything-presence-one-sen0609-ble-co2-rev1.3.yaml
-      name: Everything Presence One - SEN0609 - HA - BLE - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-ha-sen0609-co2-ble-rev1-3-stable-manifest.json
-      clean: false
-      esphome_version: latest
-      directory_name: everything-presence-one-sen0609-ble-co2-rev1.3-esp32
-
-  # SEN0609 - Stable Firmware - Bluetooth - CO2 Module - Rev 1.3/1.4
-  publish-everything-presence-one-sen0609-ble-co2-rev1-3-stable:
-    name: Publish Everything Presence One - SEN0609 - HA - BLE - CO2 Rev1.3 - Stable
-    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
-    with:
-      files: everything-presence-one-sen0609-ble-co2-rev1.3.yaml
-      name: Everything Presence One - SEN0609 - HA - BLE - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-ha-sen0609-co2-ble-rev1-3-stable-manifest.json
-      clean: false
-      esphome_version: latest
-      directory_name: everything-presence-one-sen0609-ble-co2-rev1.3-esp32
 
   # New SEN0395 Rev 1.3 Jobs without CO2 Module
   publish-everything-presence-one-rev1-3-stable:
@@ -438,7 +402,7 @@ w
       directory_name: everything-presence-one-beta-ble-co2-rev1.6-esp32
 
   # New SEN0609 Rev 1.6 CO2 Jobs
-  publish-everything-presence-one-sen0609-co2-rev1-6-stable:
+  publish-everything-presence-one-sen0609-co2-rev1-6-stable2:
     name: Publish Everything Presence One - SEN0609 - HA - CO2 - Rev1.6 - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
