@@ -26,5 +26,14 @@ dashboard_import:
 
 packages:
   device_base: !include common/everything-presence-one-base.yaml
+  device_version: !include common/everything-presence-one-sen0395-stable.yaml
   sen0395_base: !include common/sen0395-common.yaml
-  co2_base: !include common/modules/co2-rev1.5.yaml 
+  co2_base: !include common/modules/co2-rev1.5.yaml
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 33
+      mode: INPUT
+    name: PIR
+    id: !extend pir_motion_sensor 

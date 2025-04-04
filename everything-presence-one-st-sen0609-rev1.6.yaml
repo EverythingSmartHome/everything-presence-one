@@ -15,13 +15,6 @@ substitutions:
   uart_target_output_disabled: "true"
   uart_presence_output_disabled: "true"
 
-update:
-  - platform: http_request
-    id: update_http_request
-    name: Everything Presence One Firmware
-    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-sen0609-nomodule-ble-rev1-6-stable-manifest.json
-    disabled_by_default: true
-
 esphome:
   name: "${name}"
   name_add_mac_suffix: true
@@ -37,9 +30,6 @@ esp32:
   board: esp32dev
 
 logger:
-
-ota:
-  - platform: esphome
 
 web_server:
 
@@ -134,8 +124,8 @@ binary_sensor:
   - platform: gpio
     pin:
       number: 33
-      mode: INPUT_PULLDOWN
-    name: ${room} PIR
+      mode: INPUT
+    name: PIR
     id: pir_motion_sensor
     device_class: motion
     filters:
