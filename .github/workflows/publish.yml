@@ -17,7 +17,7 @@ jobs:
     with:
       files: everything-presence-one.yaml
       name: Everything Presence One - HA - Stable
-      manifest_filename: everything-presence-one-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-noble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-esp32
@@ -28,7 +28,7 @@ jobs:
     with:
       files: everything-presence-one-ble.yaml
       name: Everything Presence One - HA - BLE - Stable
-      manifest_filename: everything-presence-one-ble-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-ble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-ble-esp32
@@ -39,7 +39,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609-ble-rev1.6.yaml
       name: Everything Presence One - HA - BLE - 1.6 - Stable
-      manifest_filename: everything-presence-one-sen0609-ble-1-6-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-ble-rev1-6-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-ble-rev1-6-esp32
@@ -50,7 +50,7 @@ jobs:
     with:
       files: everything-presence-one-st.yaml
       name: Everything Presence One - SmartThings
-      manifest_filename: everything-presence-one-st-manifest.json
+      manifest_filename: everything-presence-one-st-sen0395-nomodule-ble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-st-esp32
@@ -61,7 +61,7 @@ jobs:
     with:
       files: everything-presence-one-st-sen0609.yaml
       name: Everything Presence One - SEN0609 - SmartThings
-      manifest_filename: everything-presence-one-st-sen0609-manifest.json
+      manifest_filename: everything-presence-one-st-sen0609-nomodule-ble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-st-esp32
@@ -72,7 +72,7 @@ jobs:
     with:
       files: everything-presence-one-beta.yaml
       name: Everything Presence One - HA - Beta
-      manifest_filename: everything-presence-one-beta-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-noble-rev1-5-beta-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-beta-esp32
@@ -83,7 +83,7 @@ jobs:
     with:
       files: everything-presence-one-beta-ble.yaml
       name: Everything Presence One - HA - BLE - Beta
-      manifest_filename: everything-presence-one-beta-ble-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-ble-rev1-5-beta-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-beta-ble-esp32
@@ -94,7 +94,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609.yaml
       name: Everything Presence One - SEN0609 - HA - Stable
-      manifest_filename: everything-presence-one-sen0609-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-noble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-esp32
@@ -105,7 +105,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609-ble.yaml
       name: Everything Presence One - SEN0609 - HA - BLE - Stable
-      manifest_filename: everything-presence-one-sen0609-ble-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-ble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-ble-esp32
@@ -119,7 +119,7 @@ jobs:
     with:
       files: everything-presence-one-co2.yaml
       name: Everything Presence One - HA - CO2 - Stable
-      manifest_filename: everything-presence-one-co2-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-co2-esp32
@@ -131,7 +131,7 @@ jobs:
     with:
       files: everything-presence-one-co2-rev1.3.yaml
       name: Everything Presence One - HA - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-co2-rev1.3-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-3-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-co2-rev1.3-esp32
@@ -143,7 +143,7 @@ jobs:
     with:
       files: everything-presence-one-ble-co2.yaml
       name: Everything Presence One - HA - BLE - CO2 - Stable
-      manifest_filename: everything-presence-one-ble-co2-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-ble-co2-esp32
@@ -155,7 +155,7 @@ jobs:
     with:
       files: everything-presence-one-ble-co2-rev1.3.yaml
       name: Everything Presence One - HA - BLE - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-ble-co2-rev1.3-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-3-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-ble-co2-rev1.3-esp32
@@ -167,7 +167,7 @@ jobs:
     with:
       files: everything-presence-one-beta-co2.yaml
       name: Everything Presence One - HA - Beta - CO2
-      manifest_filename: everything-presence-one-beta-co2-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-5-beta-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-beta-co2-esp32
@@ -179,7 +179,7 @@ jobs:
     with:
       files: everything-presence-one-beta-co2-rev1.3.yaml
       name: Everything Presence One - HA - Beta - CO2 Rev1.3
-      manifest_filename: everything-presence-one-beta-co2-rev1.3-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-3-beta-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-beta-co2-rev1.3-esp32
@@ -191,7 +191,7 @@ jobs:
     with:
       files: everything-presence-one-beta-ble-co2.yaml
       name: Everything Presence One - HA - Beta - BLE - CO2
-      manifest_filename: everything-presence-one-beta-ble-co2-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-5-beta-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-beta-ble-co2-esp32
@@ -203,7 +203,7 @@ jobs:
     with:
       files: everything-presence-one-beta-ble-co2-rev1.3.yaml
       name: Everything Presence One - HA - Beta - BLE - CO2 Rev1.3
-      manifest_filename: everything-presence-one-beta-ble-co2-rev1.3-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-3-beta-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-beta-ble-co2-rev1.3-esp32
@@ -215,7 +215,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609-co2.yaml
       name: Everything Presence One - SEN0609 - HA - CO2 - Stable
-      manifest_filename: everything-presence-one-sen0609-co2-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-co2-noble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-co2-esp32
@@ -227,7 +227,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609-co2-rev1.3.yaml
       name: Everything Presence One - SEN0609 - HA - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-sen0609-co2-rev1.3-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-co2-noble-rev1-3-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-co2-rev1.3-esp32
@@ -239,7 +239,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609-ble-co2.yaml
       name: Everything Presence One - SEN0609 - HA - BLE - CO2 - Stable
-      manifest_filename: everything-presence-one-sen0609-ble-co2-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-co2-ble-rev1-5-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-ble-co2-esp32
@@ -251,7 +251,7 @@ jobs:
     with:
       files: everything-presence-one-sen0609-ble-co2-rev1.3.yaml
       name: Everything Presence One - SEN0609 - HA - BLE - CO2 Rev1.3 - Stable
-      manifest_filename: everything-presence-one-sen0609-ble-co2-rev1.3-manifest.json
+      manifest_filename: everything-presence-one-ha-sen0609-co2-ble-rev1-3-stable-manifest.json
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-sen0609-ble-co2-rev1.3-esp32

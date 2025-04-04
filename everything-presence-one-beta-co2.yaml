@@ -17,7 +17,7 @@ update:
   - platform: http_request
     id: update_http_request
     name: Everything Presence One Firmware
-    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-beta-co2-manifest.json
+    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-sen0395-co2-noble-rev1-5-beta-manifest.json
     disabled_by_default: true
 
 dashboard_import:
