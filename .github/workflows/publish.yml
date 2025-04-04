@@ -21,7 +21,7 @@ jobs:
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-esp32
-w
+
   publish-everything-presence-one-ble-stable:
     name: Publish Everything Presence One - HA - BLE - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
