@@ -1,0 +1,31 @@
+substitutions:
+  name: "everything-presence-one"
+  friendly_name: "Everything Presence One"
+  project_name: "Everything Smart Technology.Everything Presence One"
+  project_version: "1.3.12b"
+  temperature_offset: "-3"
+  humidity_offset: "5"
+  temperature_update_interval: "60s"
+  illuminance_update_interval: "2s"
+  hidden_ssid: "false"
+  factory_reset_disabled: "true"
+  uart_target_output_disabled: "true"
+  uart_presence_output_disabled: "true"
+  log_level: "ERROR"
+
+update:
+  - platform: http_request
+    id: update_http_request
+    name: Everything Presence One Firmware
+    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-sen0395-nomodule-ble-rev1-6-beta-manifest.json
+    disabled_by_default: true
+
+dashboard_import:
+  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-beta-ble-rev1.6.yaml@main
+  import_full_config: false
+
+packages:
+  device_base: !include common/everything-presence-one-base.yaml
+  device_version: !include common/everything-presence-one-sen0395-beta.yaml
+  bluetooth_base: !include common/bluetooth-base.yaml
+  sen0395_base: !include common/sen0395-common.yaml 
