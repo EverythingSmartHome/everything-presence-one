@@ -368,17 +368,6 @@ jobs:
       esphome_version: latest
       directory_name: everything-presence-one-co2-rev1.6-esp32
 
-  publish-everything-presence-one-ble-co2-rev1-6-stable:
-    name: Publish Everything Presence One - HA - BLE - CO2 - Rev1.6 - Stable
-    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
-    with:
-      files: everything-presence-one-ble-co2-rev1.6.yaml
-      name: Everything Presence One - HA - BLE - CO2 - Rev1.6 - Stable
-      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-6-stable-manifest.json
-      clean: false
-      esphome_version: latest
-      directory_name: everything-presence-one-ble-co2-rev1.6-esp32
-
   publish-everything-presence-one-beta-co2-rev1-6:
     name: Publish Everything Presence One - HA - Beta - CO2 - Rev1.6
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
@@ -401,18 +390,7 @@ jobs:
       esphome_version: latest
       directory_name: everything-presence-one-beta-ble-co2-rev1.6-esp32
 
-  # New SEN0609 Rev 1.6 CO2 Jobs
-  publish-everything-presence-one-sen0609-co2-rev1-6-stable2:
-    name: Publish Everything Presence One - SEN0609 - HA - CO2 - Rev1.6 - Stable
-    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
-    with:
-      files: everything-presence-one-sen0609-co2-rev1.6.yaml
-      name: Everything Presence One - SEN0609 - HA - CO2 - Rev1.6 - Stable
-      manifest_filename: everything-presence-one-ha-sen0609-co2-noble-rev1-6-stable-manifest.json
-      clean: false
-      esphome_version: latest
-      directory_name: everything-presence-one-sen0609-co2-rev1.6-esp32
-
+  # SEN0609 Rev 1.6 CO2 Jobs
   publish-everything-presence-one-sen0609-ble-co2-rev1-6-stable:
     name: Publish Everything Presence One - SEN0609 - HA - BLE - CO2 - Rev1.6 - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
