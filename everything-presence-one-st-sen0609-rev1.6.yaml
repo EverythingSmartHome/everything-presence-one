@@ -22,6 +22,8 @@ update:
     source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-sen0609-nomodule-ble-rev1-6-stable-manifest.json
     disabled_by_default: true
 
+http_request:
+
 esphome:
   name: "${name}"
   name_add_mac_suffix: true
