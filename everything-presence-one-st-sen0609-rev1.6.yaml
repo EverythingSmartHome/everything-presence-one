@@ -136,7 +136,7 @@ binary_sensor:
       number: 33
       mode: INPUT
     name: PIR
-    id: !extend pir_motion_sensor
+    id: pir_motion_sensor
     device_class: motion
     filters:
       - delayed_off: ${pir_delay_off}
@@ -252,8 +252,3 @@ switch:
       - uart.write: "saveConfig"
       - delay: 3s
       - switch.turn_on: mmwave_sensor 
-
-packages:
-  device_base: !include common/everything-presence-one-base.yaml
-  sen0609_base: !include common/sen0609-common.yaml
-  smartthings_base: !include common/smartthings-base.yaml 
