@@ -1,0 +1,21 @@
+{
+  "name": "Everything Presence One - SEN0609 - SmartThings",
+  "version": "1.2.8s",
+  "home_assistant_domain": "esphome",
+  "new_install_skip_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "ota": {
+        "path": "everything-presence-one-sen0609-st-esp32/everything-presence-st-esp32.ota.bin",
+        "md5": "a70ba389390972d06138d6493bb67950"
+      },
+      "parts": [
+        {
+          "path": "everything-presence-one-sen0609-st-esp32/everything-presence-st-esp32.factory.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
