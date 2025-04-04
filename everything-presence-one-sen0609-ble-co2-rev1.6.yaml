@@ -1,4 +1,4 @@
-substitutions:
+﻿substitutions:
   name: "everything-presence-one"
   friendly_name: "Everything Presence One"
   project_name: "Everything Smart Technology.Everything Presence One"
@@ -27,7 +27,7 @@ dashboard_import:
 packages:
   device_base: !include common/everything-presence-one-base.yaml
   bluetooth_base: !include common/bluetooth-base.yaml
-  sen0395_base: !include common/sen0609-common.yaml
+  sen0609_base: !include common/sen0609-common.yaml
   co2_base: !include common/modules/co2-rev1.5.yaml
 
 binary_sensor:

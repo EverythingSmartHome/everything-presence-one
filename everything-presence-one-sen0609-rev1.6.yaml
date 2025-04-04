@@ -17,17 +17,16 @@ update:
   - platform: http_request
     id: update_http_request
     name: Everything Presence One Firmware
-    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-sen0609-nomodule-ble-rev1-6-stable-manifest.json
+    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-sen0609-nomodule-noble-rev1-6-stable-manifest.json
     disabled_by_default: true
 
 dashboard_import:
-  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-sen0609-ble-rev1.6.yaml@main
+  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-sen0609-rev1.6.yaml@main
   import_full_config: false
 
 packages:
   device_base: !include common/everything-presence-one-base.yaml
-  bluetooth_base: !include common/bluetooth-base.yaml
-  sen0395_base: !include common/sen0609-common.yaml
+  sen0609_base: !include common/sen0609-common.yaml
 
 binary_sensor:
   - platform: gpio

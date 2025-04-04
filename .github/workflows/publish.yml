@@ -42,18 +42,18 @@ jobs:
       manifest_filename: everything-presence-one-ha-sen0609-nomodule-ble-rev1-6-stable-manifest.json
       clean: false
       esphome_version: latest
-      directory_name: everything-presence-one-sen0609-ble-rev1-6-esp32
+      directory_name: everything-presence-one-sen0609-ble-rev1.6-esp32
   
   publish-everything-presence-one-sen0609-rev1-6-stable:
     name: Publish Everything Presence One - HA - No BLE - 1.6 - Stable
     uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
     with:
-      files: everything-presence-one-sen0609-noble-rev1.6.yaml
+      files: everything-presence-one-sen0609-rev1.6.yaml
       name: Everything Presence One - HA - No BLE - 1.6 - Stable
       manifest_filename: everything-presence-one-ha-sen0609-nomodule-noble-rev1-6-stable-manifest.json
       clean: false
       esphome_version: latest
-      directory_name: everything-presence-one-sen0609-ble-rev1-6-esp32
+      directory_name: everything-presence-one-sen0609-ble-rev1.6-esp32
 
   publish-everything-presence-one-smartthings:
     name: Publish Everything Presence One - SmartThings

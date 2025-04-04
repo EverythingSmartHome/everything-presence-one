@@ -39,7 +39,7 @@ esp32:
 logger:
 
 ota:
-  - platform: esphome
+  - platform: http_request
 
 web_server:
 
@@ -134,9 +134,9 @@ binary_sensor:
   - platform: gpio
     pin:
       number: 33
-      mode: INPUT_PULLDOWN
-    name: ${room} PIR
-    id: pir_motion_sensor
+      mode: INPUT
+    name: PIR
+    id: !extend pir_motion_sensor
     device_class: motion
     filters:
       - delayed_off: ${pir_delay_off}
@@ -252,3 +252,8 @@ switch:
       - uart.write: "saveConfig"
       - delay: 3s
       - switch.turn_on: mmwave_sensor 
+
+packages:
+  device_base: !include common/everything-presence-one-base.yaml
+  sen0609_base: !include common/sen0609-common.yaml
+  smartthings_base: !include common/smartthings-base.yaml 
