@@ -1,21 +1,21 @@
 {
-  "name": "Everything Presence One - SEN0609 - HA - Stable",
-  "version": "1.2.8",
-  "home_assistant_domain": "esphome",
-  "new_install_skip_erase": false,
-  "builds": [
-    {
-      "chipFamily": "ESP32",
-      "ota": {
-        "path": "everything-presence-one-sen0609-esp32/everything-presence-one-esp32.ota.bin",
-        "md5": "d9a996c0e4feabb2ac9290f5b6abfbb6"
-      },
-      "parts": [
-        {
-          "path": "everything-presence-one-sen0609-esp32/everything-presence-one-esp32.factory.bin",
-          "offset": 0
-        }
-      ]
-    }
-  ]
+    "name":  "Everything Presence One - SEN0609 - HA - Stable",
+    "version":  "1.2.8",
+    "home_assistant_domain":  "esphome",
+    "new_install_skip_erase":  false,
+    "builds":  [
+                   {
+                       "chipFamily":  "ESP32",
+                       "ota":  {
+                                   "path":  "everything-presence-one-sen0609-esp32/everything-presence-one-esp32.ota.bin",
+                                   "md5":  "af414c63b8d90b92e76ba57efa32dc6d"
+                               },
+                       "parts":  [
+                                     {
+                                         "path":  "everything-presence-one-sen0609-esp32/everything-presence-one-esp32.factory.bin",
+                                         "offset":  0
+                                     }
+                                 ]
+                   }
+               ]
 }
