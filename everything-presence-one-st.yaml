@@ -371,3 +371,10 @@ button:
       - uart.write: "resetCfg"
       - delay: 3s
       - switch.turn_on: mmwave_sensor
+
+update:
+  - platform: http_request
+    id: update_http_request
+    name: Everything Presence One Firmware
+    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-st-sen0395-nomodule-ble-rev1-5-stable-manifest.json
+    disabled_by_default: true
