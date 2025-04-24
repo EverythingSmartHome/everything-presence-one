@@ -1,6 +1,6 @@
 {
   "name": "Everything Presence One - SEN0609 - HA - BLE - Stable",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
   "builds": [
@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "ota": {
         "path": "everything-presence-one-sen0609-ble-esp32/everything-presence-one-esp32.ota.bin",
-        "md5": "c3bd9d95f386e502be7f6fa050f9d8ea"
+        "md5": "aad3cecd8ea78546fa2acf73235627fd"
       },
       "parts": [
         {
