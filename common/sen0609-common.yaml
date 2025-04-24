@@ -115,9 +115,9 @@ number:
     name: mmWave Minimum Distance
     icon: mdi:arrow-left-right
     entity_category: config
-    min_value: 0
+    min_value: 0.6
     max_value: 25
-    initial_value: 0
+    initial_value: 0.6
     optimistic: true
     step: 0.1
     restore_value: true
@@ -209,6 +209,30 @@ number:
       - switch.turn_on: mmwave_sensor
 
   - platform: template
+    name: mmWave Trigger Distance
+    icon: mdi:radar
+    id: mmwave_trigger_distance
+    entity_category: config
+    min_value: 0
+    max_value: 25
+    initial_value: 6
+    optimistic: true
+    step: 0.1
+    restore_value: true
+    unit_of_measurement: m
+    mode: slider
+    set_action:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: !lambda |-
+          std::string mss = "setTrigRange " + to_string(x);
+          return std::vector<unsigned char>(mss.begin(), mss.end());
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
     name: mmWave Sustain Sensitivity
     icon: mdi:target-variant
     id: mmwave_sensitivity
@@ -260,6 +284,17 @@ button:
           return std::vector<unsigned char>(mss.begin(), mss.end());
       - delay: 1s
       - uart.write: "saveConfig"
+      - delay: 1s
+      - switch.turn_on: mmwave_sensor
+
+  - platform: template
+    name: "Read Trigger Distance"
+    id: read_trigger_distance
+    entity_category: config
+    on_press:
+      - switch.turn_off: mmwave_sensor
+      - delay: 1s
+      - uart.write: "getTrigRange"
       - delay: 1s
       - switch.turn_on: mmwave_sensor
 
