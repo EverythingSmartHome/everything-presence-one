@@ -136,29 +136,6 @@ number:
     restore_value: true
     unit_of_measurement: m
     mode: slider
-  - platform: template
-    id: mmwave_range_reduced
-    name: mmWave Range Reduced
-    icon: mdi:arrow-left-right
-    entity_category: config
-    min_value: 0
-    max_value: 25
-    initial_value: 0.8
-    optimistic: true
-    step: 0.1
-    restore_value: true
-    unit_of_measurement: m
-    mode: slider
-    set_action:
-      - switch.turn_off: mmwave_sensor
-      - delay: 1s
-      - uart.write: !lambda
-          std::string ms = "setRangeReduced " + to_string(x);
-          return std::vector<unsigned char>(ms.begin(), ms.end());
-      - delay: 1s
-      - uart.write: "saveConfig"
-      - delay: 1s
-      - switch.turn_on: mmwave_sensor
 
   - platform: template
     name: mmWave off latency
