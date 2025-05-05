@@ -265,17 +265,6 @@ button:
       - switch.turn_on: mmwave_sensor
 
   - platform: template
-    name: "Read Trigger Distance"
-    id: read_trigger_distance
-    entity_category: config
-    on_press:
-      - switch.turn_off: mmwave_sensor
-      - delay: 1s
-      - uart.write: "getTrigRange"
-      - delay: 1s
-      - switch.turn_on: mmwave_sensor
-
-  - platform: template
     name: Restart mmWave Sensor
     id: restart_mmwave
     entity_category: config
