@@ -1,14 +1,13 @@
 {
-    "chipFamily":  "ESP32",
-    "ota":  {
-                "path":  "everything-presence-st-esp32.ota.bin",
-                "md5":  "36673a2d62820f9c1b733d9405d1c457"
-            },
-    "parts":  [
-                  {
-                      "path":  "everything-presence-st-esp32.factory.bin",
-                      "offset":  0,
-                      "md5":  "651b784fc0e06d8b8e3e05f2d26f6c6c"
-                  }
-              ]
+  "chipFamily": "ESP32",
+  "ota": {
+    "path": "everything-presence-st-esp32.ota.bin",
+    "md5": "2d044e9e9c81f0fcbfd6c7fa530cef26"
+  },
+  "parts": [
+    {
+      "path": "everything-presence-st-esp32.factory.bin",
+      "offset": 0
+    }
+  ]
 }
