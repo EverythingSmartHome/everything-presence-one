@@ -140,8 +140,7 @@ binary_sensor:
       } 
       else if (id(mmwave).state == 0 and id(pir_motion_sensor).state == 0) {
         return false;
-      } 
-      else {
+      } else {
         return id(occupancy).state;
       }
   - platform: gpio
@@ -150,9 +149,15 @@ binary_sensor:
       inverted: true
     id: flash_button
     internal: True
+    filters:
+      - delayed_on: 50ms 
     on_multi_click:
       - timing:
-        - ON for at least 10s
+          - ON for 0.2s to 3s      # First press
+          - OFF for 0.1s to 2s     # First release
+          - ON for 0.2s to 3s      # Second press
+          - OFF for 0.1s to 2s     # Second release
+          - ON for at least 5s     # Third press - hold for 5s
         then:
           - repeat: 
               count: 5
