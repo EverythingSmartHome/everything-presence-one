@@ -153,11 +153,11 @@ binary_sensor:
       - delayed_on: 50ms 
     on_multi_click:
       - timing:
-          - ON for 0.2s to 3s      # First press
-          - OFF for 0.1s to 2s     # First release
-          - ON for 0.2s to 3s      # Second press
-          - OFF for 0.1s to 2s     # Second release
-          - ON for at least 5s     # Third press - hold for 5s
+          - ON for 0.2s to 3s
+          - OFF for 0.1s to 2s
+          - ON for 0.2s to 3s
+          - OFF for 0.1s to 2s
+          - ON for at least 5s 
         then:
           - repeat: 
               count: 5
