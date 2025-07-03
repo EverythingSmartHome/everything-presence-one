@@ -1,3 +1,15 @@
+esphome:
+  on_boot:
+    priority: -200
+    then:
+      - delay: 5s
+      - logger.log: "Enabling UART target output for beta functionality"
+      - uart.write: "setUartOutput 2 1 1 1"
+      - delay: 1s
+      - uart.write: "saveConfig"
+      - delay: 1s
+      - logger.log: "UART target output enabled automatically"
+
 uart:
   id: uart_bus
   tx_pin: GPIO13
