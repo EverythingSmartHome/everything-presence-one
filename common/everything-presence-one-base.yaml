@@ -68,12 +68,14 @@ sensor:
         - lambda: "return x + id(humidity_offset_ui).state;"
     address: 0x70
     update_interval: ${temperature_update_interval}
+    accuracy_decimals: 1
   - platform: bh1750
     name: Illuminance
     id: illuminance_sensor
     i2c_id: bus_a
     address: 0x23
     update_interval: ${illuminance_update_interval}
+    accuracy_decimals: 1
     filters:
       - calibrate_linear:
           method: exact
