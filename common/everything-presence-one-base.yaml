@@ -57,12 +57,14 @@ sensor:
     temperature:
       name: Temperature
       id: temperature_sensor
+      accuracy_decimals: 1
       filters:
         - offset: ${temperature_offset}
         - lambda: "return x + id(temperature_offset_ui).state;"
     humidity:
       name: Humidity
       id: humidity_sensor
+      accuracy_decimals: 1
       filters:
         - offset: ${humidity_offset}
         - lambda: "return x + id(humidity_offset_ui).state;"
@@ -74,6 +76,7 @@ sensor:
     i2c_id: bus_a
     address: 0x23
     update_interval: ${illuminance_update_interval}
+    accuracy_decimals: 1
     filters:
       - calibrate_linear:
           method: exact
