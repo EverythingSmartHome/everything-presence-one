@@ -1,6 +1,6 @@
 {
   "name": "Everything Presence One - SEN0609 - ST - Rev1.6",
-  "version": "1.1.17s",
+  "version": "1.1.18s",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
   "builds": [
@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "ota": {
         "path": "everything-presence-one-st-sen0609-rev1.6-esp32/everything-presence-st-esp32.ota.bin",
-        "md5": "a7ef698df632b0c4e0a9781f34876fe4"
+        "md5": "5b4ac455fea073ea6a3907ce37ed10fa"
       },
       "parts": [
         {
