@@ -1,21 +1,21 @@
 {
-  "name": "Everything Presence One - HA - BLE - Beta",
-  "version": "1.3.15b",
-  "home_assistant_domain": "esphome",
-  "new_install_skip_erase": false,
-  "builds": [
-    {
-      "chipFamily": "ESP32",
-      "ota": {
-        "path": "everything-presence-one-beta-ble-esp32/everything-presence-one-esp32.ota.bin",
-        "md5": "67d1b0a9cfc50e0c00dbd3b688ad1e84"
-      },
-      "parts": [
-        {
-          "path": "everything-presence-one-beta-ble-esp32/everything-presence-one-esp32.factory.bin",
-          "offset": 0
-        }
-      ]
-    }
-  ]
+    "name":  "Everything Presence One - HA - BLE - Beta",
+    "version":  "1.3.15b",
+    "home_assistant_domain":  "esphome",
+    "new_install_skip_erase":  false,
+    "builds":  [
+                   {
+                       "chipFamily":  "ESP32",
+                       "ota":  {
+                                   "path":  "everything-presence-one-beta-ble-esp32/everything-presence-one-esp32.ota.bin",
+                                   "md5":  "67d1b0a9cfc50e0c00dbd3b688ad1e84"
+                               },
+                       "parts":  [
+                                     {
+                                         "path":  "everything-presence-one-beta-ble-esp32/everything-presence-one-esp32.factory.bin",
+                                         "offset":  0
+                                     }
+                                 ]
+                   }
+               ]
 }
