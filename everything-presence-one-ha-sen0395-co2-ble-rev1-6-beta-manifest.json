@@ -1,6 +1,6 @@
 {
   "name": "Everything Presence One - HA - Beta - BLE - CO2 - Rev1.6",
-  "version": "1.3.15b",
+  "version": "1.3.16b",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
   "builds": [
@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "ota": {
         "path": "everything-presence-one-beta-ble-co2-rev1.6-esp32/everything-presence-one-esp32.ota.bin",
-        "md5": "f827c569a47c13ba9b6572a11deca2fb"
+        "md5": "2e9635f85eb239d7b768355da911f0b8"
       },
       "parts": [
         {
