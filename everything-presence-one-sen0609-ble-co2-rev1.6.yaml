@@ -13,6 +13,16 @@
   uart_presence_output_disabled: "true"
   log_level: "DEBUG"
 
+
+  device_config:
+    ethernet_enabled: false
+    co2_enabled: true
+    bluetooth_enabled: true
+    board_revision: "1.6"
+    sensor_variant: "sen0609"
+    firmware_channel: "stable"
+    model: "everything-presence-one"
+
 update:
   - platform: http_request
     id: update_http_request

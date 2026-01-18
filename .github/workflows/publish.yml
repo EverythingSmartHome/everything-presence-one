@@ -413,3 +413,73 @@ jobs:
       clean: false
       esphome_version: latest
       directory_name: everything-presence-one-st-sen0609-rev1.6-esp32
+
+  # Generate firmware index after all builds complete
+  generate-firmware-index:
+    name: Generate Firmware Index
+    runs-on: ubuntu-latest
+    needs:
+      - publish-everything-presence-one-no-ble-stable
+      - publish-everything-presence-one-ble-stable
+      - publish-everything-presence-one-sen0609-ble-rev1-6-stable
+      - publish-everything-presence-one-sen0609-rev1-6-stable
+      - publish-everything-presence-one-smartthings
+      - publish-everything-presence-one-sen0609-smartthings
+      - publish-everything-presence-one-ha-beta
+      - publish-everything-presence-one-ha-ble-beta
+      - publish-everything-presence-one-sen0609-no-ble-stable
+      - publish-everything-presence-one-sen0609-ble-stable
+      - publish-everything-presence-one-co2-stable
+      - publish-everything-presence-one-co2-rev1-3-stable
+      - publish-everything-presence-one-ble-co2-stable
+      - publish-everything-presence-one-ble-co2-rev1-6-stable
+      - publish-everything-presence-one-ble-co2-rev1-3-stable
+      - publish-everything-presence-one-beta-co2
+      - publish-everything-presence-one-beta-co2-rev1-3
+      - publish-everything-presence-one-beta-ble-co2
+      - publish-everything-presence-one-beta-ble-co2-rev1-3
+      - publish-everything-presence-one-sen0609-co2-stable
+      - publish-everything-presence-one-sen0609-co2-rev1-6-stable
+      - publish-everything-presence-one-sen0609-ble-co2-stable
+      - publish-everything-presence-one-rev1-3-stable
+      - publish-everything-presence-one-ble-rev1-3-stable
+      - publish-everything-presence-one-beta-rev1-3
+      - publish-everything-presence-one-beta-ble-rev1-3
+      - publish-everything-presence-one-rev1-6-stable
+      - publish-everything-presence-one-ble-rev1-6-stable
+      - publish-everything-presence-one-beta-rev1-6
+      - publish-everything-presence-one-beta-ble-rev1-6
+      - publish-everything-presence-one-co2-rev1-6-stable
+      - publish-everything-presence-one-beta-co2-rev1-6
+      - publish-everything-presence-one-beta-ble-co2-rev1-6
+      - publish-everything-presence-one-sen0609-ble-co2-rev1-6-stable
+      - publish-everything-presence-one-sen0609-st-rev1-6
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get version from esphome project
+        id: version
+        run: |
+          VERSION=$(grep -m1 'project_version:' common/everything-presence-one-base.yaml | sed 's/.*project_version: *//' | tr -d '"' | tr -d "'")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+
+      - name: Generate firmware index
+        run: |
+          node scripts/generate-firmware-index.js --version "${{ steps.version.outputs.version }}"
+
+      - name: Deploy firmware index to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          target-folder: /
+          clean: false
+          single-commit: false
+          commit-message: "Update firmware-index.json for v${{ steps.version.outputs.version }}"

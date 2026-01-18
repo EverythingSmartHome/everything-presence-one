@@ -13,6 +13,16 @@ substitutions:
   uart_presence_output_disabled: "true"
   log_level: "DEBUG"
 
+
+  device_config:
+    ethernet_enabled: false
+    co2_enabled: false
+    bluetooth_enabled: false
+    board_revision: "1.3"
+    sensor_variant: "sen0395"
+    firmware_channel: "stable"
+    model: "everything-presence-one"
+
 update:
   - platform: http_request
     id: update_http_request

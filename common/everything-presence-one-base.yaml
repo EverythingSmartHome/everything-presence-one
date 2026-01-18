@@ -9,6 +9,18 @@ esphome:
     priority: -100
     then:
       - switch.turn_on: mmwave_sensor
+      - lambda: |-
+          if (std::string("${ device_config.bluetooth_enabled | lower }") == "true") {
+            id(firmware_ble).publish_state("Enabled");
+          } else {
+            id(firmware_ble).publish_state("Disabled");
+          }
+
+          if (std::string("${ device_config.co2_enabled | lower }") == "true") {
+            id(firmware_co2).publish_state("Enabled");
+          } else {
+            id(firmware_co2).publish_state("Disabled");
+          }
 
 esp32:
   board: esp32dev
@@ -20,6 +32,30 @@ logger:
   level: ${log_level}
 
 api:
+  actions:
+    - action: set_update_manifest
+      variables:
+        url: string
+      then:
+        - lambda: |-
+            ESP_LOGI("fw", "Setting update manifest URL: %s", url.c_str());
+            id(update_http_request).set_source_url(url);
+        - component.update: update_http_request
+        - delay: 1s
+        - update.perform:
+            id: update_http_request
+            force_update: true
+    - action: get_build_flags
+      then:
+        - api.respond:
+            data: !lambda |-
+              root["ethernet_enabled"]  = ${ device_config.ethernet_enabled | lower };
+              root["co2_enabled"]       = ${ device_config.co2_enabled | lower };
+              root["bluetooth_enabled"] = ${ device_config.bluetooth_enabled | lower };
+              root["board_revision"]    = "${ device_config.board_revision }";
+              root["sensor_variant"]    = "${ device_config.sensor_variant }";
+              root["firmware_channel"]  = "${ device_config.firmware_channel }";
+              root["model"]             = "${ device_config.model }";
 
 ota:
   - platform: esphome
@@ -267,11 +303,78 @@ number:
     on_value:
       - lambda: 'id(illuminance_sensor).update();'
 
+select:
+  - platform: template
+    id: firmware_ble
+    name: Bluetooth Proxy
+    icon: "mdi:bluetooth"
+    entity_category: diagnostic
+    optimistic: true
+    restore_value: true
+    options:
+      - "Disabled"
+      - "Enabled"
+    initial_option: "Disabled"
+
+  - platform: template
+    id: firmware_co2
+    name: CO2 Sensor
+    icon: "mdi:molecule-co2"
+    entity_category: diagnostic
+    optimistic: true
+    restore_value: true
+    options:
+      - "Disabled"
+      - "Enabled"
+    initial_option: "Disabled"
+
 button:
   - platform: restart
     id: restart_internal
     entity_category: config
     internal: true
+  - platform: template
+    name: "Apply Update"
+    entity_category: diagnostic
+    on_press:
+      - logger.log: "Applying firmware update based on selected configuration"
+      - lambda: |-
+          std::string base_url = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-";
+          base_url += "${device_config.sensor_variant}";
+          base_url += "-";
+
+          if (id(firmware_co2).state == "Enabled") {
+            base_url += "co2";
+          } else {
+            base_url += "nomodule";
+          }
+
+          base_url += "-";
+
+          if (id(firmware_ble).state == "Enabled") {
+            base_url += "ble";
+          } else {
+            base_url += "noble";
+          }
+
+          base_url += "-";
+          std::string revision = "${device_config.board_revision}";
+          std::string revision_tag = "rev";
+          for (auto c : revision) {
+            revision_tag += (c == '.') ? '-' : c;
+          }
+          base_url += revision_tag;
+          base_url += "-";
+          base_url += "${device_config.firmware_channel}";
+          base_url += "-manifest.json";
+
+          ESP_LOGI("firmware", "Switching to manifest: %s", base_url.c_str());
+          id(update_http_request).set_source_url(base_url.c_str());
+      - component.update: update_http_request
+      - delay: 2s
+      - update.perform:
+          id: update_http_request
+          force_update: true
   - platform: safe_mode
     internal: false
     name: Safe mode

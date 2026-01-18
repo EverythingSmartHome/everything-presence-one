@@ -15,6 +15,15 @@ substitutions:
   uart_target_output_disabled: "true"
   uart_presence_output_disabled: "true"
 
+  device_config:
+    ethernet_enabled: false
+    co2_enabled: false
+    bluetooth_enabled: false
+    board_revision: "1.5"
+    sensor_variant: "sen0609"
+    firmware_channel: "smartthings"
+    model: "everything-presence-one"
+
 esphome:
   name: "${name}"
   name_add_mac_suffix: true
