@@ -1,0 +1,33 @@
+api:
+  actions:
+    - action: calibrate_co2_value
+      variables:
+        co2_ppm: int
+      then:
+        - scd4x.perform_forced_calibration:
+            value: !lambda "return co2_ppm;"
+            id: scd40
+
+i2c:
+  - id: bus_b
+    sda: GPIO18
+    scl: GPIO19
+    scan: true
+
+sensor:
+  - platform: scd4x
+    i2c_id: bus_b
+    id: scd40
+    co2:
+      name: "CO2"
+      id: "co2"
+    automatic_self_calibration: false
+
+button:
+    - platform: template
+      name: "Calibrate CO2"
+      id: calibrate_scd40
+      on_press:
+        - scd4x.perform_forced_calibration:
+            value: 419
+            id: scd40

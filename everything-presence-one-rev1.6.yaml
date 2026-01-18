@@ -1,0 +1,48 @@
+substitutions:
+  name: "everything-presence-one"
+  friendly_name: "Everything Presence One"
+  project_name: "Everything Smart Technology.Everything Presence One"
+  project_version: "1.2.12"
+  temperature_offset: "-3"
+  humidity_offset: "5"
+  temperature_update_interval: "60s"
+  illuminance_update_interval: "2s"
+  hidden_ssid: "false"
+  factory_reset_disabled: "true"
+  uart_target_output_disabled: "true"
+  uart_presence_output_disabled: "true"
+  log_level: "DEBUG"
+
+
+  device_config:
+    ethernet_enabled: false
+    co2_enabled: false
+    bluetooth_enabled: false
+    board_revision: "1.6"
+    sensor_variant: "sen0395"
+    firmware_channel: "stable"
+    model: "everything-presence-one"
+
+update:
+  - platform: http_request
+    id: update_http_request
+    name: Everything Presence One Firmware
+    source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-sen0395-nomodule-noble-rev1-6-stable-manifest.json
+    disabled_by_default: true
+
+dashboard_import:
+  package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-rev1.6.yaml@main
+  import_full_config: false
+
+packages:
+  device_base: !include common/everything-presence-one-base.yaml
+  device_version: !include common/everything-presence-one-sen0395-stable.yaml
+  sen0395_base: !include common/sen0395-common.yaml
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 33
+      mode: INPUT
+    name: PIR
+    id: !extend pir_motion_sensor 

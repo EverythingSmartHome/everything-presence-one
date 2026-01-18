@@ -1,0 +1,385 @@
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: true
+  project:
+    name: ${project_name}
+    version: ${project_version} 
+  on_boot:
+    priority: -100
+    then:
+      - switch.turn_on: mmwave_sensor
+      - lambda: |-
+          if (std::string("${ device_config.bluetooth_enabled | lower }") == "true") {
+            id(firmware_ble).publish_state("Enabled");
+          } else {
+            id(firmware_ble).publish_state("Disabled");
+          }
+
+          if (std::string("${ device_config.co2_enabled | lower }") == "true") {
+            id(firmware_co2).publish_state("Enabled");
+          } else {
+            id(firmware_co2).publish_state("Disabled");
+          }
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: ${log_level}
+
+api:
+  actions:
+    - action: set_update_manifest
+      variables:
+        url: string
+      then:
+        - lambda: |-
+            ESP_LOGI("fw", "Setting update manifest URL: %s", url.c_str());
+            id(update_http_request).set_source_url(url);
+        - component.update: update_http_request
+        - delay: 1s
+        - update.perform:
+            id: update_http_request
+            force_update: true
+    - action: get_build_flags
+      then:
+        - api.respond:
+            data: !lambda |-
+              root["ethernet_enabled"]  = ${ device_config.ethernet_enabled | lower };
+              root["co2_enabled"]       = ${ device_config.co2_enabled | lower };
+              root["bluetooth_enabled"] = ${ device_config.bluetooth_enabled | lower };
+              root["board_revision"]    = "${ device_config.board_revision }";
+              root["sensor_variant"]    = "${ device_config.sensor_variant }";
+              root["firmware_channel"]  = "${ device_config.firmware_channel }";
+              root["model"]             = "${ device_config.model }";
+
+ota:
+  - platform: esphome
+    id: ota_esphome
+  - platform: http_request
+    id: ota_http_request
+
+http_request:
+
+wifi:
+  fast_connect: ${hidden_ssid}
+  on_connect:
+    - switch.turn_on: mmwave_sensor
+
+improv_serial:
+
+i2c:
+  - id: bus_a
+    sda: 26
+    scl: 25
+    scan: true
+
+light:
+  - platform: status_led
+    name: ESP32 status LED
+    id: esp32_led
+    pin: GPIO32
+    entity_category: config
+    disabled_by_default: False
+
+sensor:
+  - platform: shtcx
+    id: "shtc3_sensor"
+    i2c_id: bus_a
+    temperature:
+      name: Temperature
+      id: temperature_sensor
+      accuracy_decimals: 1
+      filters:
+        - offset: ${temperature_offset}
+        - lambda: "return x + id(temperature_offset_ui).state;"
+    humidity:
+      name: Humidity
+      id: humidity_sensor
+      accuracy_decimals: 1
+      filters:
+        - offset: ${humidity_offset}
+        - lambda: "return x + id(humidity_offset_ui).state;"
+    address: 0x70
+    update_interval: ${temperature_update_interval}
+  - platform: bh1750
+    name: Illuminance
+    id: illuminance_sensor
+    i2c_id: bus_a
+    address: 0x23
+    update_interval: ${illuminance_update_interval}
+    accuracy_decimals: 1
+    filters:
+      - calibrate_linear:
+          method: exact
+          datapoints:
+            - 0.3 -> 0.3
+            - 0.9 -> 1.7
+            - 1.2 -> 3.6
+            - 3.2 -> 6.9
+            - 5.1 -> 10.2
+            - 6.8 -> 27.1
+            - 7.0 -> 13.5
+            - 7.4 -> 28.2
+            - 8.7 -> 21.7
+            - 8.9 -> 17.1
+            - 10.9 -> 20.4
+            - 12.8 -> 23.5
+            - 14.5 -> 31.2
+            - 14.9 -> 26.7
+            - 16.8 -> 41.1
+            - 16.9 -> 30.2
+            - 18.8 -> 33.4
+            - 19.1 -> 35.8
+            - 20.7 -> 37.0
+            - 24.3 -> 60.3
+            - 26.1 -> 68.6
+            - 26.7 -> 83.8
+            - 30.2 -> 75.9
+            - 32.6 -> 80.3
+            - 34.6 -> 83.2
+            - 40.4 -> 99.9
+            - 48.0 -> 183.7
+            - 48.3 -> 119.2
+            - 55.5 -> 141.3
+            - 55.8 -> 137.9
+            - 63.8 -> 157.6
+            - 71.5 -> 176.9
+            - 79.8 -> 197.1
+            - 84.3 -> 205.7 
+      - lambda: "return x + id(illuminance_offset_ui).state;"
+      - clamp:
+          min_value: 0
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 33
+      mode: INPUT_PULLDOWN
+    name: PIR
+    id: pir_motion_sensor
+    device_class: motion
+    filters:
+      - delayed_on: !lambda 'return id(pir_on_latency).state * 1000.0;'
+      - delayed_off:  !lambda 'return id(pir_off_latency).state * 1000.0;'
+  - platform: template
+    name: Occupancy
+    id: occupancy
+    device_class: occupancy
+    filters:
+      - delayed_off: !lambda 'return id(occupancy_off_latency).state * 1000.0;'
+    on_state:
+      - lambda: 'id(illuminance_sensor).update();'
+    lambda: |-
+      if ( id(mmwave).state or id(pir_motion_sensor).state) {
+        return true;
+      } 
+      else if (id(mmwave).state == 0 and id(pir_motion_sensor).state == 0) {
+        return false;
+      } else {
+        return id(occupancy).state;
+      }
+  - platform: gpio
+    pin:
+      number: 0
+      inverted: true
+      ignore_strapping_warning: True
+    id: flash_button
+    internal: True
+    filters:
+      - delayed_on: 50ms 
+    on_multi_click:
+      - timing:
+          - ON for 0.2s to 3s
+          - OFF for 0.1s to 2s
+          - ON for 0.2s to 3s
+          - OFF for 0.1s to 2s
+          - ON for at least 5s 
+        then:
+          - repeat: 
+              count: 5
+              then:
+                - light.turn_on: esp32_led
+                - delay: 150ms
+                - light.turn_off: esp32_led
+                - delay: 150ms
+          - light.turn_on: esp32_led
+          - button.press: factory_reset_button
+
+number:
+  - platform: template
+    name: Occupancy off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: occupancy_off_latency
+    min_value: 1
+    max_value: 600
+    initial_value: 15
+    optimistic: true
+    step: 5
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
+    name: PIR off latency
+    icon: mdi:clock-end
+    entity_category: config
+    id: pir_off_latency
+    min_value: 1
+    max_value: 120
+    initial_value: 10
+    optimistic: true
+    step: 1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+
+  - platform: template
+    name: PIR on latency
+    icon: mdi:clock-start
+    entity_category: config
+    id: pir_on_latency
+    min_value: 0
+    max_value: 1
+    initial_value: 0
+    optimistic: true
+    step: 0.1
+    restore_value: true
+    unit_of_measurement: seconds
+    mode: slider
+    disabled_by_default: true
+
+  - platform: template
+    name: "Temperature Offset"
+    id: temperature_offset_ui
+    unit_of_measurement: "°C"
+    min_value: -20
+    max_value: 20
+    step: 0.1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:thermometer"
+    entity_category: config
+    on_value:
+      - lambda: 'id(shtc3_sensor).update();'
+  - platform: template
+    name: "Humidity Offset"
+    id: humidity_offset_ui
+    unit_of_measurement: "%"
+    min_value: -50
+    max_value: 50
+    step: 0.1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:water-percent"
+    entity_category: config
+    on_value:
+      - lambda: 'id(shtc3_sensor).update();'
+  - platform: template
+    name: "Illuminance Offset"
+    id: illuminance_offset_ui
+    unit_of_measurement: "lx"
+    min_value: -50
+    max_value: 50
+    step: 1
+    mode: box
+    update_interval: never
+    optimistic: true
+    restore_value: true
+    initial_value: 0
+    icon: "mdi:brightness-5"
+    entity_category: config
+    on_value:
+      - lambda: 'id(illuminance_sensor).update();'
+
+select:
+  - platform: template
+    id: firmware_ble
+    name: Bluetooth Proxy
+    icon: "mdi:bluetooth"
+    entity_category: diagnostic
+    optimistic: true
+    restore_value: true
+    options:
+      - "Disabled"
+      - "Enabled"
+    initial_option: "Disabled"
+
+  - platform: template
+    id: firmware_co2
+    name: CO2 Sensor
+    icon: "mdi:molecule-co2"
+    entity_category: diagnostic
+    optimistic: true
+    restore_value: true
+    options:
+      - "Disabled"
+      - "Enabled"
+    initial_option: "Disabled"
+
+button:
+  - platform: restart
+    id: restart_internal
+    entity_category: config
+    internal: true
+  - platform: template
+    name: "Apply Update"
+    entity_category: diagnostic
+    on_press:
+      - logger.log: "Applying firmware update based on selected configuration"
+      - lambda: |-
+          std::string base_url = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-";
+          base_url += "${device_config.sensor_variant}";
+          base_url += "-";
+
+          if (id(firmware_co2).state == "Enabled") {
+            base_url += "co2";
+          } else {
+            base_url += "nomodule";
+          }
+
+          base_url += "-";
+
+          if (id(firmware_ble).state == "Enabled") {
+            base_url += "ble";
+          } else {
+            base_url += "noble";
+          }
+
+          base_url += "-";
+          std::string revision = "${device_config.board_revision}";
+          std::string revision_tag = "rev";
+          for (auto c : revision) {
+            revision_tag += (c == '.') ? '-' : c;
+          }
+          base_url += revision_tag;
+          base_url += "-";
+          base_url += "${device_config.firmware_channel}";
+          base_url += "-manifest.json";
+
+          ESP_LOGI("firmware", "Switching to manifest: %s", base_url.c_str());
+          id(update_http_request).set_source_url(base_url.c_str());
+      - component.update: update_http_request
+      - delay: 2s
+      - update.perform:
+          id: update_http_request
+          force_update: true
+  - platform: safe_mode
+    internal: false
+    name: Safe mode
+    entity_category: config
+    disabled_by_default: True
+  - platform: factory_reset
+    id: "factory_reset_button"
+    internal: True
