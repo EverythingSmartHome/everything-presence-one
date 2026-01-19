@@ -454,7 +454,7 @@ jobs:
       - publish-everything-presence-one-beta-ble-co2-rev1-6
       - publish-everything-presence-one-sen0609-ble-co2-rev1-6-stable
       - publish-everything-presence-one-sen0609-st-rev1-6
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
