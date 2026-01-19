@@ -467,7 +467,7 @@ jobs:
       - name: Get version from esphome project
         id: version
         run: |
-          VERSION=$(grep -m1 'project_version:' common/everything-presence-one-base.yaml | sed 's/.*project_version: *//' | tr -d '"' | tr -d "'")
+          VERSION=$(grep -m1 'version:' common/everything-presence-one-base.yaml | sed 's/.*version: *//' | tr -d '"' | tr -d "'")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Detected version: $VERSION"
 
