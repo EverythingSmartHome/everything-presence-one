@@ -417,7 +417,7 @@ number:
     icon: mdi:clock-end
     entity_category: config
     id: mmwave_off_latency
-    min_value: 1
+    min_value: 10
     max_value: 600
     initial_value: 15
     optimistic: true
@@ -433,7 +433,9 @@ number:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
             - uart.write: !lambda |-
-                std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+                char buf[64];
+                snprintf(buf, sizeof(buf), "setLatency %.2f %.0f", id(mmwave_on_latency).state, id(mmwave_off_latency).state);
+                std::string mss(buf);
                 return std::vector<unsigned char>(mss.begin(), mss.end());
             - delay: 1s
             - uart.write: "saveConfig"
@@ -461,7 +463,9 @@ number:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
             - uart.write: !lambda |-
-                std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
+                char buf[64];
+                snprintf(buf, sizeof(buf), "setLatency %.2f %.0f", id(mmwave_on_latency).state, id(mmwave_off_latency).state);
+                std::string mss(buf);
                 return std::vector<unsigned char>(mss.begin(), mss.end());
             - delay: 1s
             - uart.write: "saveConfig"
@@ -489,7 +493,9 @@ number:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
             - uart.write: !lambda |-
-                std::string mss = "setTrigRange " + to_string(x);
+                char buf[64];
+                snprintf(buf, sizeof(buf), "setTrigRange %.1f", x);
+                std::string mss(buf);
                 return std::vector<unsigned char>(mss.begin(), mss.end());
             - delay: 1s
             - uart.write: "saveConfig"
@@ -541,7 +547,9 @@ number:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
             - uart.write: !lambda |-
-                std::string mss = "setThrFactor " + to_string((int)x);
+                char buf[64];
+                snprintf(buf, sizeof(buf), "setThrFactor %d", (int)x);
+                std::string mss(buf);
                 return std::vector<unsigned char>(mss.begin(), mss.end());
             - delay: 1s
             - uart.write: "saveConfig"
@@ -558,8 +566,10 @@ button:
     on_press:
       - switch.turn_off: mmwave_sensor
       - delay: 1s
-      - uart.write: !lambda
-          std::string ms = "setRange " + to_string(id(mmwave_distance_min).state) + " " + to_string(id(mmwave_distance_max).state);
+      - uart.write: !lambda |-
+          char buf[64];
+          snprintf(buf, sizeof(buf), "setRange %.1f %.1f", id(mmwave_distance_min).state, id(mmwave_distance_max).state);
+          std::string ms(buf);
           return std::vector<unsigned char>(ms.begin(), ms.end());
       - delay: 1s
       - uart.write: "saveConfig"
@@ -577,8 +587,10 @@ button:
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
-            - uart.write:
-                !lambda std::string mss = "setSensitivity " + to_string(id(mmwave_sensitivity).state) + " " + to_string(id(mmwave_trigger_sensitivity).state);
+            - uart.write: !lambda |-
+                char buf[64];
+                snprintf(buf, sizeof(buf), "setSensitivity %.0f %.0f", id(mmwave_sensitivity).state, id(mmwave_trigger_sensitivity).state);
+                std::string mss(buf);
                 return std::vector<unsigned char>(mss.begin(), mss.end());
             - delay: 1s
             - uart.write: "saveConfig"
