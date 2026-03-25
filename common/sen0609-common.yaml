@@ -245,7 +245,7 @@ select:
             - switch.turn_off: uart_target_output
 
   - platform: template
-    name: "Distance/Speed Update Rate"
+    name: "Distance⁄Speed Update Rate"
     id: mmwave_update_rate
     entity_category: config
     icon: mdi:timer
