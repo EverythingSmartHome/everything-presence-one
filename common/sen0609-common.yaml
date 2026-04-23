@@ -5,7 +5,6 @@ binary_sensor:
     device_class: occupancy
     pin:
       number: GPIO17
-      mode: INPUT_PULLDOWN
 
 uart:
   id: uart_bus
