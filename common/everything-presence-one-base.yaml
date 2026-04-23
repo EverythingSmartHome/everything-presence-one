@@ -69,6 +69,17 @@ wifi:
   fast_connect: ${hidden_ssid}
   on_connect:
     - switch.turn_on: mmwave_sensor
+    # Workaround: ESPHome 2026.4.1+ correctly persists component error flags (PR #15658),
+    # but http_request.update never clears its error after a failed manifest fetch,
+    # leaving the status LED blinking indefinitely.
+    - repeat:
+        count: 12
+        then:
+          - delay: 5s
+          - lambda: |-
+              if (id(update_http_request).status_has_error()) {
+                id(update_http_request).status_clear_error();
+              }
 
 improv_serial:
 
