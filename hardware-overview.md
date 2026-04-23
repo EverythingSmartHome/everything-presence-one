@@ -35,8 +35,7 @@ Each of the main components is labelled directly on the board itself to help wit
 
 ![Everything Presence One Official Case](images/hardware-overview-official-case.jpg)
 
-The Official Case for the EP1 is available for purchase [here](https://shop.everythingsmart.io/products/everything-presence-one-official-case) or if you prefer to print your own, the STL is located on [Printables](https://www.printables.com/model/302846-Everything%20Presence%20One%20-%20Official%20Case)
-
+The Official Case for the EP1 is available for purchase [here](https://shop.everythingsmart.io/products/everything-presence-one-official-case) or if you prefer to print your own, the STL is located on [Printables](https://www.printables.com/model/302846-everything-presence-one-official-case)
 The case has 5 components - Front, Back, Stand, Ball Joint and Locking Ring.
 
 Front:
