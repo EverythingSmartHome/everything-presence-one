@@ -1,6 +1,6 @@
 {
   "name": "Everything Presence One - HA - CO2 - Stable",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
   "builds": [
@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "ota": {
         "path": "everything-presence-one-co2-esp32/everything-presence-one-esp32.ota.bin",
-        "md5": "1edb2c698db4f680a046ad39b2e4948c"
+        "md5": "47d69555776e065fdddb56cf0c7e6bd1"
       },
       "parts": [
         {
