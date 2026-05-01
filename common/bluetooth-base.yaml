@@ -7,3 +7,61 @@ bluetooth_proxy:
 
 esp32_improv:
   authorizer: none
+
+# BLE consumes ~80KB of heap, causing TLS cert verification to fail (MPI alloc
+# error 0x4290) during HTTPS firmware update checks. BLE is delayed on boot so
+# the update check has enough memory, then enabled once the check completes.
+# If no WiFi credentials are configured (first-time setup), BLE is enabled
+# immediately so Bluetooth Improv can be used to configure WiFi.
+esp32_ble:
+  enable_on_boot: false
+
+esphome:
+  on_boot:
+    priority: -100
+    then:
+      - if:
+          condition:
+            lambda: 'return !wifi::global_wifi_component->has_sta();'
+          then:
+            - logger.log: "No WiFi credentials configured, enabling BLE for Improv setup"
+            - ble.enable
+
+wifi:
+  on_connect:
+    - delay: 15s
+    - ble.disable
+    - delay: 5s
+    - component.update: update_http_request
+    - delay: 10s
+    - lambda: |-
+        if (id(update_http_request).status_has_error()) {
+          id(update_http_request).status_clear_error();
+        }
+    - ble.enable
+
+interval:
+  # Clear stuck error flags from externally-triggered update checks (e.g. HA
+  # "check for updates" button) that fail because BLE is running.
+  - interval: 30s
+    then:
+      - lambda: |-
+          if (id(update_http_request).status_has_error()) {
+            id(update_http_request).status_clear_error();
+          }
+  # Periodic update check with BLE disabled for TLS to succeed.
+  - interval: 6h
+    then:
+      - if:
+          condition:
+            wifi.connected:
+          then:
+            - ble.disable
+            - delay: 5s
+            - component.update: update_http_request
+            - delay: 10s
+            - lambda: |-
+                if (id(update_http_request).status_has_error()) {
+                  id(update_http_request).status_clear_error();
+                }
+            - ble.enable
