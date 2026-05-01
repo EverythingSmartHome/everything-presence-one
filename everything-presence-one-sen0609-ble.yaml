@@ -27,6 +27,7 @@ update:
     name: Everything Presence One Firmware
     source: https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-sen0609-nomodule-ble-rev1-5-stable-manifest.json
     disabled_by_default: true
+    update_interval: never
 
 dashboard_import:
   package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one-sen0609-ble.yaml@main
