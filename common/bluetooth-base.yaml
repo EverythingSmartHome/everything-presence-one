@@ -30,8 +30,14 @@ esphome:
 wifi:
   on_connect:
     - delay: 15s
-    - ble.disable
-    - delay: 5s
+    - if:
+        condition:
+          ble.enabled:
+        then:
+          - esp32_ble_tracker.stop_scan:
+          - delay: 5s
+          - ble.disable
+          - delay: 5s
     - component.update: update_http_request
     - delay: 10s
     - lambda: |-
@@ -39,6 +45,9 @@ wifi:
           id(update_http_request).status_clear_error();
         }
     - ble.enable
+    - delay: 5s
+    - esp32_ble_tracker.start_scan:
+        continuous: true
 
 interval:
   # Clear stuck error flags from externally-triggered update checks (e.g. HA
@@ -56,8 +65,14 @@ interval:
           condition:
             wifi.connected:
           then:
-            - ble.disable
-            - delay: 5s
+            - if:
+                condition:
+                  ble.enabled:
+                then:
+                  - esp32_ble_tracker.stop_scan:
+                  - delay: 5s
+                  - ble.disable
+                  - delay: 5s
             - component.update: update_http_request
             - delay: 10s
             - lambda: |-
@@ -65,3 +80,6 @@ interval:
                   id(update_http_request).status_clear_error();
                 }
             - ble.enable
+            - delay: 5s
+            - esp32_ble_tracker.start_scan:
+                continuous: true
