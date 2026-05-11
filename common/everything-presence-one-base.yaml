@@ -4,7 +4,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: "Everything Smart Technology.Everything Presence One"
-    version: "1.2.15"
+    version: "1.2.16"
   on_boot:
     priority: -100
     then:
