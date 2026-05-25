@@ -367,7 +367,7 @@ button:
           base_url += "${device_config.sensor_variant}";
           base_url += "-";
 
-          if (id(firmware_co2).state == "Enabled") {
+          if (id(firmware_co2).current_option() == "Enabled") {
             base_url += "co2";
           } else {
             base_url += "nomodule";
@@ -375,7 +375,7 @@ button:
 
           base_url += "-";
 
-          if (id(firmware_ble).state == "Enabled") {
+          if (id(firmware_ble).current_option() == "Enabled") {
             base_url += "ble";
           } else {
             base_url += "noble";

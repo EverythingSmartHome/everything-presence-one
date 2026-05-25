@@ -283,11 +283,11 @@ uart:
 
               // Get throttle interval from user setting
               uint32_t throttle_interval = 400; // Default 0.4s
-              if (id(mmwave_update_rate).state == "0.3s") {
+              if (id(mmwave_update_rate).current_option() == "0.3s") {
                 throttle_interval = 300;
-              } else if (id(mmwave_update_rate).state == "0.4s") {
+              } else if (id(mmwave_update_rate).current_option() == "0.4s") {
                 throttle_interval = 400;
-              } else if (id(mmwave_update_rate).state == "0.5s") {
+              } else if (id(mmwave_update_rate).current_option() == "0.5s") {
                 throttle_interval = 500;
               }
 
@@ -312,7 +312,7 @@ uart:
                 }
 
                 // Update mmWave binary sensor based on target count when in distance mode
-                if (id(mmwave_mode).state == "Distance and Speed") {
+                if (id(mmwave_mode).current_option() == "Distance and Speed") {
                   id(mmwave).publish_state(target_count > 0);
                 }
 
@@ -446,7 +446,7 @@ switch:
     turn_on_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Distance and Speed";'
+            lambda: 'return id(mmwave_mode).current_option() == "Distance and Speed";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -458,7 +458,7 @@ switch:
     turn_off_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Distance and Speed";'
+            lambda: 'return id(mmwave_mode).current_option() == "Distance and Speed";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -584,7 +584,7 @@ number:
     set_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Presence Detection";'
+            lambda: 'return id(mmwave_mode).current_option() == "Presence Detection";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -611,7 +611,7 @@ number:
     set_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Presence Detection";'
+            lambda: 'return id(mmwave_mode).current_option() == "Presence Detection";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -639,7 +639,7 @@ number:
     set_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Presence Detection";'
+            lambda: 'return id(mmwave_mode).current_option() == "Presence Detection";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -664,7 +664,7 @@ number:
     set_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Presence Detection";'
+            lambda: 'return id(mmwave_mode).current_option() == "Presence Detection";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -690,7 +690,7 @@ number:
     set_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Presence Detection";'
+            lambda: 'return id(mmwave_mode).current_option() == "Presence Detection";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
@@ -717,7 +717,7 @@ number:
     set_action:
       - if:
           condition:
-            lambda: 'return id(mmwave_mode).state == "Distance and Speed";'
+            lambda: 'return id(mmwave_mode).current_option() == "Distance and Speed";'
           then:
             - switch.turn_off: mmwave_sensor
             - delay: 1s
