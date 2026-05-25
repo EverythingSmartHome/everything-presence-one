@@ -605,6 +605,14 @@ button:
     on_press:
       - uart.write: "resetSystem"
   - platform: template
+    name: Restart
+    icon: mdi:restart
+    entity_category: config
+    disabled_by_default: True
+    on_press:
+      - button.press: restart_mmwave
+      - button.press: restart_internal
+  - platform: template
     name: Factory Reset mmWave
     icon: mdi:cog-counterclockwise
     id: factory_reset_mmwave
