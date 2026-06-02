@@ -1,16 +1,16 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-05-25T23:20:52.646Z",
+  "generatedAt": "2026-06-02T17:39:36.845Z",
   "product": {
     "id": "everything-presence-one",
     "displayName": "Everything Presence One",
-    "latestVersion": "1.2.16"
+    "latestVersion": "1.2.17"
   },
   "firmwares": [
     {
-      "version": "1.2.16",
+      "version": "1.2.17",
       "channel": "stable",
-      "releaseDate": "2026-05-25",
+      "releaseDate": "2026-06-02",
       "releaseNotes": "",
       "minPreviousVersion": "1.0.0",
       "variants": [
@@ -277,9 +277,9 @@
       ]
     },
     {
-      "version": "1.2.16",
+      "version": "1.2.17",
       "channel": "beta",
-      "releaseDate": "2026-05-25",
+      "releaseDate": "2026-06-02",
       "releaseNotes": "",
       "minPreviousVersion": "1.0.0",
       "variants": [
