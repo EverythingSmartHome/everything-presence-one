@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-06-02T17:39:36.845Z",
+  "generatedAt": "2026-09-02T09:45:51.643Z",
   "product": {
     "id": "everything-presence-one",
     "displayName": "Everything Presence One",
@@ -10,7 +10,7 @@
     {
       "version": "1.2.17",
       "channel": "stable",
-      "releaseDate": "2026-06-02",
+      "releaseDate": "2026-09-02",
       "releaseNotes": "",
       "minPreviousVersion": "1.0.0",
       "variants": [
@@ -279,7 +279,7 @@
     {
       "version": "1.2.17",
       "channel": "beta",
-      "releaseDate": "2026-06-02",
+      "releaseDate": "2026-09-02",
       "releaseNotes": "",
       "minPreviousVersion": "1.0.0",
       "variants": [
