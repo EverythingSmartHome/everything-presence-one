@@ -47,7 +47,7 @@ api:
               esp32_ble::global_ble->disable();
             }
             #endif
-            id(update_http_request).set_source_url(url);
+            id(update_http_request).set_source_url(url.c_str());
         - delay: 5s
         - component.update: update_http_request
         - delay: 1s
