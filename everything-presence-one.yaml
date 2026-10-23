@@ -35,9 +35,6 @@ logger:
 
 api:
 
-ota:
-  - platform: esphome
-
 # Merged with the wifi config supplied by the device file; re-start the
 # mmWave sensor after (re)connecting in case it was left stopped.
 wifi:
