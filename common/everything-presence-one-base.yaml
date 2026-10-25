@@ -47,7 +47,10 @@ api:
               esp32_ble::global_ble->disable();
             }
             #endif
-            id(update_http_request).set_source_url(url);
+            // ESPHome stores the pointer; keep the URL alive after this lambda returns.
+            static std::string manifest_url;
+            manifest_url = url;
+            id(update_http_request).set_source_url(manifest_url.c_str());
         - delay: 5s
         - component.update: update_http_request
         - delay: 1s
@@ -363,7 +366,9 @@ button:
           #endif
       - delay: 5s
       - lambda: |-
-          std::string base_url = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-";
+          // ESPHome stores the pointer; keep the URL alive after this lambda returns.
+          static std::string base_url;
+          base_url = "https://everythingsmarthome.github.io/everything-presence-one/everything-presence-one-ha-";
           base_url += "${device_config.sensor_variant}";
           base_url += "-";
 
