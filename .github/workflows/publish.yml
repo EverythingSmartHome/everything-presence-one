@@ -519,9 +519,9 @@ jobs:
           merge-multiple: true
           path: output
 
-      - name: Copy website
+      - name: Copy site root pages
         run: |
-          # Site files at the root, as the per-variant publish did before
+          # index.html and 404.html redirect to the docs on docs.everythingsmart.io
           cp -R static/* output/
 
       - name: Generate firmware index
