@@ -5,7 +5,7 @@ esp32_ble_tracker:
 bluetooth_proxy:
   active: true
 
-esp32_improv:
+improv_ble:
   authorizer: none
 
 # BLE consumes ~80KB of heap, causing TLS cert verification to fail (MPI alloc
