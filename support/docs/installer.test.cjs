@@ -3,7 +3,6 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const test = require('node:test');
-const original = fs.readFileSync(__dirname + '/installers.js', 'utf8');
 const source = fs.readFileSync(__dirname + '/installers.js', 'utf8').replace(
   "import('https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module')", 'Promise.resolve()');
 const flush = () => new Promise(resolve => setImmediate(resolve));
