@@ -8,8 +8,24 @@ on:
       - main
     paths:
       - '**.yaml'
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - 'support/docs/**'
 
 jobs:
+  validate-wifi-power-catalog:
+    name: Validate firmware catalog and support installer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-wifi-power.js
+      - run: node scripts/generate-firmware-index.js --version test --output-dir support/docs
+      - run: npm ci --prefix support/docs
+      - run: npm test --prefix support/docs
+
   # Existing Jobs
   publish-everything-presence-one-no-ble-stable:
     name: Publish Everything Presence One - HA - Stable
@@ -449,6 +465,247 @@ jobs:
       publish: false
       directory_name: everything-presence-one-st-sen0609-rev1.6-esp32
 
+  publish-everything-presence-one-no-ble-stable-wifi11:
+    name: Publish Everything Presence One - HA - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-wifi11.yaml
+      name: Everything Presence One - HA - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-noble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-esp32-wifi11
+
+  publish-everything-presence-one-ble-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-wifi11.yaml
+      name: Everything Presence One - HA - BLE - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-ble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-ble-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-ble-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - 1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-ble-rev1.6-wifi11.yaml
+      name: Everything Presence One - HA - BLE - 1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-ble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-ble-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - HA - No BLE - 1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-rev1.6-wifi11.yaml
+      name: Everything Presence One - HA - No BLE - 1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-noble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-no-ble-stable-wifi11:
+    name: Publish Everything Presence One - SEN0609 - HA - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-wifi11.yaml
+      name: Everything Presence One - SEN0609 - HA - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-noble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-ble-stable-wifi11:
+    name: Publish Everything Presence One - SEN0609 - HA - BLE - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-ble-wifi11.yaml
+      name: Everything Presence One - SEN0609 - HA - BLE - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-nomodule-ble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-ble-esp32-wifi11
+
+  publish-everything-presence-one-co2-stable-wifi11:
+    name: Publish Everything Presence One - HA - CO2 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-co2-wifi11.yaml
+      name: Everything Presence One - HA - CO2 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-co2-esp32-wifi11
+
+  publish-everything-presence-one-co2-rev1-3-stable-wifi11:
+    name: Publish Everything Presence One - HA - CO2 Rev1.3 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-co2-rev1.3-wifi11.yaml
+      name: Everything Presence One - HA - CO2 Rev1.3 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-3-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-co2-rev1.3-esp32-wifi11
+
+  publish-everything-presence-one-ble-co2-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - CO2 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-co2-wifi11.yaml
+      name: Everything Presence One - HA - BLE - CO2 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-ble-co2-esp32-wifi11
+
+  publish-everything-presence-one-ble-co2-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - CO2 Rev 1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-co2-rev1.6-wifi11.yaml
+      name: Everything Presence One - HA - BLE - CO2 Rev 1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-ble-co2-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-ble-co2-rev1-3-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - CO2 Rev1.3 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-co2-rev1.3-wifi11.yaml
+      name: Everything Presence One - HA - BLE - CO2 Rev1.3 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-co2-ble-rev1-3-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-ble-co2-rev1.3-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-co2-stable-wifi11:
+    name: Publish Everything Presence One - SEN0609 - HA - CO2 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-co2-wifi11.yaml
+      name: Everything Presence One - SEN0609 - HA - CO2 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-co2-noble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-co2-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-co2-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - SEN0609 - HA - CO2 Rev1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-co2-rev1.6-wifi11.yaml
+      name: Everything Presence One - SEN0609 - HA - CO2 Rev1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-co2-noble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-co2-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-ble-co2-stable-wifi11:
+    name: Publish Everything Presence One - SEN0609 - HA - BLE - CO2 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-ble-co2-wifi11.yaml
+      name: Everything Presence One - SEN0609 - HA - BLE - CO2 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-co2-ble-rev1-5-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-ble-co2-esp32-wifi11
+
+  publish-everything-presence-one-rev1-3-stable-wifi11:
+    name: Publish Everything Presence One - HA - Rev1.3 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-rev1.3-wifi11.yaml
+      name: Everything Presence One - HA - Rev1.3 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-noble-rev1-3-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-rev1.3-esp32-wifi11
+
+  publish-everything-presence-one-ble-rev1-3-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - Rev1.3 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-rev1.3-wifi11.yaml
+      name: Everything Presence One - HA - BLE - Rev1.3 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-ble-rev1-3-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-ble-rev1.3-esp32-wifi11
+
+  publish-everything-presence-one-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - HA - Rev1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-rev1.6-wifi11.yaml
+      name: Everything Presence One - HA - Rev1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-noble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-ble-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - HA - BLE - Rev1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-ble-rev1.6-wifi11.yaml
+      name: Everything Presence One - HA - BLE - Rev1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-nomodule-ble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-ble-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-co2-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - HA - CO2 - Rev1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-co2-rev1.6-wifi11.yaml
+      name: Everything Presence One - HA - CO2 - Rev1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0395-co2-noble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-co2-rev1.6-esp32-wifi11
+
+  publish-everything-presence-one-sen0609-ble-co2-rev1-6-stable-wifi11:
+    name: Publish Everything Presence One - SEN0609 - HA - BLE - CO2 - Rev1.6 - Stable - WiFi 11 dBm
+    uses: EverythingSmartHome/everything-presence-lite/.github/workflows/esphome-build.yml@main
+    with:
+      files: everything-presence-one-sen0609-ble-co2-rev1.6-wifi11.yaml
+      name: Everything Presence One - SEN0609 - HA - BLE - CO2 - Rev1.6 - Stable - WiFi 11 dBm
+      manifest_filename: everything-presence-one-ha-sen0609-co2-ble-rev1-6-stable-wifi11-manifest.json
+      clean: false
+      esphome_version: latest
+      publish: false
+      directory_name: everything-presence-one-sen0609-ble-co2-rev1.6-esp32-wifi11
+
+
   # Collect every variant, then publish to gh-pages in a single push.
   # Variants pushing separately raced each other on gh-pages (same fix as
   # everything-presence-lite #471).
@@ -456,6 +713,27 @@ jobs:
     name: Generate Firmware Index and Publish
     runs-on: ubuntu-latest
     needs:
+      - validate-wifi-power-catalog
+      - publish-everything-presence-one-no-ble-stable-wifi11
+      - publish-everything-presence-one-ble-stable-wifi11
+      - publish-everything-presence-one-sen0609-ble-rev1-6-stable-wifi11
+      - publish-everything-presence-one-sen0609-rev1-6-stable-wifi11
+      - publish-everything-presence-one-sen0609-no-ble-stable-wifi11
+      - publish-everything-presence-one-sen0609-ble-stable-wifi11
+      - publish-everything-presence-one-co2-stable-wifi11
+      - publish-everything-presence-one-co2-rev1-3-stable-wifi11
+      - publish-everything-presence-one-ble-co2-stable-wifi11
+      - publish-everything-presence-one-ble-co2-rev1-6-stable-wifi11
+      - publish-everything-presence-one-ble-co2-rev1-3-stable-wifi11
+      - publish-everything-presence-one-sen0609-co2-stable-wifi11
+      - publish-everything-presence-one-sen0609-co2-rev1-6-stable-wifi11
+      - publish-everything-presence-one-sen0609-ble-co2-stable-wifi11
+      - publish-everything-presence-one-rev1-3-stable-wifi11
+      - publish-everything-presence-one-ble-rev1-3-stable-wifi11
+      - publish-everything-presence-one-rev1-6-stable-wifi11
+      - publish-everything-presence-one-ble-rev1-6-stable-wifi11
+      - publish-everything-presence-one-co2-rev1-6-stable-wifi11
+      - publish-everything-presence-one-sen0609-ble-co2-rev1-6-stable-wifi11
       - publish-everything-presence-one-no-ble-stable
       - publish-everything-presence-one-ble-stable
       - publish-everything-presence-one-sen0609-ble-rev1-6-stable
