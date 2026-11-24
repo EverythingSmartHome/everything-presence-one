@@ -1,0 +1,21 @@
+{
+  "name": "Everything Presence One - HA - BLE - Stable - WiFi 11 dBm",
+  "version": "1.2.17",
+  "home_assistant_domain": "esphome",
+  "new_install_skip_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "ota": {
+        "path": "everything-presence-one-ble-esp32-wifi11/everything-presence-one-esp32.ota.bin",
+        "md5": "b3dd7b195c393d98180fc048d5fd7971"
+      },
+      "parts": [
+        {
+          "path": "everything-presence-one-ble-esp32-wifi11/everything-presence-one-esp32.factory.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}

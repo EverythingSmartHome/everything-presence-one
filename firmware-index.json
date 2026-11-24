@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-11-23T13:41:59.550Z",
+  "generatedAt": "2026-11-24T21:18:09.044Z",
   "product": {
     "id": "everything-presence-one",
     "displayName": "Everything Presence One",
@@ -10,7 +10,7 @@
     {
       "version": "1.2.17",
       "channel": "stable",
-      "releaseDate": "2026-11-23",
+      "releaseDate": "2026-11-24",
       "releaseNotes": "",
       "minPreviousVersion": "1.0.0",
       "variants": [
@@ -24,6 +24,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -37,6 +38,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -50,6 +52,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -63,6 +66,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -76,6 +80,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -89,6 +94,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -102,6 +108,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -115,6 +122,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -128,6 +136,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -141,6 +150,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -154,6 +164,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -167,6 +178,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.6",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -180,6 +192,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.5",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -193,6 +206,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.6",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -206,6 +220,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.5",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -219,6 +234,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.6",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -232,6 +248,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.5",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -245,6 +262,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.6",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -258,6 +276,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.5",
             "sensor_variant": "sen0609",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         },
@@ -271,6 +290,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "stable"
           }
         }
@@ -279,7 +299,7 @@
     {
       "version": "1.2.17",
       "channel": "beta",
-      "releaseDate": "2026-11-23",
+      "releaseDate": "2026-11-24",
       "releaseNotes": "",
       "minPreviousVersion": "1.0.0",
       "variants": [
@@ -293,6 +313,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -306,6 +327,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -319,6 +341,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -332,6 +355,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -345,6 +369,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -358,6 +383,7 @@
             "bluetooth_enabled": true,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -371,6 +397,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -384,6 +411,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -397,6 +425,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -410,6 +439,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.3",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -423,6 +453,7 @@
             "bluetooth_enabled": false,
             "board_revision": "1.6",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
           }
         },
@@ -436,7 +467,297 @@
             "bluetooth_enabled": false,
             "board_revision": "1.5",
             "sensor_variant": "sen0395",
+            "wifi_power_profile": "standard",
             "firmware_channel": "beta"
+          }
+        }
+      ]
+    },
+    {
+      "version": "1.2.17",
+      "channel": "stable-wifi11",
+      "releaseDate": "2026-11-24",
+      "releaseNotes": "Support-only 11 dBm Wi-Fi transmit power profile.",
+      "minPreviousVersion": "1.0.0",
+      "variants": [
+        {
+          "id": "ep1-ble-co2-rev1.3-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-co2-ble-rev1-3-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": true,
+            "board_revision": "1.3",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-ble-co2-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-co2-ble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": true,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-ble-co2-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-co2-ble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": true,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-ble-rev1.3-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-nomodule-ble-rev1-3-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": true,
+            "board_revision": "1.3",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-ble-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-nomodule-ble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": true,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-ble-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-nomodule-ble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": true,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-co2-rev1.3-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-co2-noble-rev1-3-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": false,
+            "board_revision": "1.3",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-co2-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-co2-noble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": false,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-co2-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-co2-noble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": false,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-rev1.3-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-nomodule-noble-rev1-3-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": false,
+            "board_revision": "1.3",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-nomodule-noble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": false,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-ble-co2-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-co2-ble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": true,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-ble-co2-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-co2-ble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": true,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-ble-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-nomodule-ble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": true,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-ble-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-nomodule-ble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": true,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-co2-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-co2-noble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": false,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-co2-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-co2-noble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": true,
+            "bluetooth_enabled": false,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-rev1.6-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-nomodule-noble-rev1-6-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": false,
+            "board_revision": "1.6",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-sen0609-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0609-nomodule-noble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": false,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0609",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
+          }
+        },
+        {
+          "id": "ep1-wifi11",
+          "manifestUrl": "everything-presence-one-ha-sen0395-nomodule-noble-rev1-5-stable-wifi11-manifest.json",
+          "requirements": {
+            "model": "everything-presence-one",
+            "ethernet_enabled": false,
+            "co2_enabled": false,
+            "bluetooth_enabled": false,
+            "board_revision": "1.5",
+            "sensor_variant": "sen0395",
+            "wifi_power_profile": "wifi11",
+            "firmware_channel": "stable-wifi11"
           }
         }
       ]
