@@ -1,0 +1,3 @@
+# Support-only Wi-Fi transmit power profile. Standard builds leave power unset.
+wifi:
+  output_power: 11dB

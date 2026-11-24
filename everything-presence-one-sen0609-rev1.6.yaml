@@ -18,6 +18,7 @@ substitutions:
     bluetooth_enabled: false
     board_revision: "1.6"
     sensor_variant: "sen0609"
+    wifi_power_profile: "standard"
     firmware_channel: "stable"
     model: "everything-presence-one"
 

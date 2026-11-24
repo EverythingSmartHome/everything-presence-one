@@ -155,6 +155,7 @@ function generateFirmwareIndex() {
 
   const stableVariants = [];
   const betaVariants = [];
+  const wifi11Variants = [];
 
   for (const file of firmwareFiles) {
     const filePath = path.join(firmwareDir, file);
@@ -186,11 +187,14 @@ function generateFirmwareIndex() {
         bluetooth_enabled: deviceConfig.bluetooth_enabled !== false,
         board_revision: deviceConfig.board_revision || '1.5',
         sensor_variant: deviceConfig.sensor_variant || 'sen0395',
+        wifi_power_profile: deviceConfig.wifi_power_profile || 'standard',
         firmware_channel: channel
       }
     };
 
-    if (channel === 'beta') {
+    if (channel === 'stable-wifi11') {
+      wifi11Variants.push(variant);
+    } else if (channel === 'beta') {
       betaVariants.push(variant);
     } else {
       stableVariants.push(variant);
@@ -245,11 +249,22 @@ function generateFirmwareIndex() {
     });
   }
 
+  // A separate channel keeps older Configurator clients from matching these
+  // devices to standard firmware (those clients do not understand power profiles).
+  if (wifi11Variants.length > 0) {
+    firmwareIndex.firmwares.push({
+      version, channel: 'stable-wifi11',
+      releaseDate: new Date().toISOString().split('T')[0],
+      releaseNotes: 'Support-only 11 dBm Wi-Fi transmit power profile.',
+      minPreviousVersion: '1.0.0', variants: wifi11Variants
+    });
+  }
+
   // Write the output
   const outputPath = path.join(args.outputDir, 'firmware-index.json');
   fs.writeFileSync(outputPath, JSON.stringify(firmwareIndex, null, 2));
 
-  console.log(`\nGenerated firmware-index.json with ${stableVariants.length} stable and ${betaVariants.length} beta variants`);
+  console.log(`\nGenerated firmware-index.json with ${stableVariants.length} stable and ${betaVariants.length} beta and ${wifi11Variants.length} WiFi 11 dBm variants`);
   console.log(`Output written to: ${outputPath}`);
 
   return firmwareIndex;
