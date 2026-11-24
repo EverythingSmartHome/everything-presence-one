@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "linkedom": "^0.18.15"
-  },
-  "private": true,
-  "scripts": {
-    "test": "node --test installer.test.cjs"
-  }
-}

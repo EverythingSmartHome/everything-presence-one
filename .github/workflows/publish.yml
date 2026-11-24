@@ -3,18 +3,19 @@ name: Build and Publish ESPHome firmware and website
 on:
   workflow_dispatch:
   pull_request:
+    paths:
+      - '**.yaml'
+      - '.github/workflows/publish.yml'
   push:
     branches:
       - main
     paths:
       - '**.yaml'
-      - '.github/workflows/**'
-      - 'scripts/**'
-      - 'support/docs/**'
+      - '.github/workflows/publish.yml'
 
 jobs:
   validate-wifi-power-catalog:
-    name: Validate firmware catalog and support installer
+    name: Validate firmware catalog
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,9 +23,6 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/test-wifi-power.js
-      - run: node scripts/generate-firmware-index.js --version test --output-dir support/docs
-      - run: npm ci --prefix support/docs
-      - run: npm test --prefix support/docs
 
   # Existing Jobs
   publish-everything-presence-one-no-ble-stable:

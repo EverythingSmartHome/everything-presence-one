@@ -1,0 +1,26 @@
+name: Validate firmware catalog
+
+on:
+  pull_request:
+    paths:
+      - '**.yaml'
+      - 'scripts/**'
+      - '.github/workflows/publish.yml'
+      - '.github/workflows/validate-catalog.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-wifi-power.js
+      - name: Generate firmware index
+        run: |
+          mkdir -p "$RUNNER_TEMP/ep1-index"
+          node scripts/generate-firmware-index.js --version test --output-dir "$RUNNER_TEMP/ep1-index"
