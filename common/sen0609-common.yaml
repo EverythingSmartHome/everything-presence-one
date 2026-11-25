@@ -27,8 +27,8 @@ uart:
               data += char(bytes[i]);
             }
             
-            // Parse presence detection data: $DFHPD,1,,,*
-            if (data.find("$DFHPD") == 0) {
+            // Parse presence detection data: $$DFHPD,1,,,*
+            if (data.find("$$DFHPD") == 0) {
               size_t comma1 = data.find(',', 6);
               if (comma1 != std::string::npos) {
                 std::string presence_str = data.substr(comma1 + 1, 1);
@@ -91,8 +91,8 @@ uart:
               last_query_command = "";
             }
             
-            // Parse distance and speed data: $DFDMD,target_count,target_number,distance,speed,energy,,*
-            if (data.find("$DFDMD") == 0) {
+            // Parse distance and speed data: $$DFDMD,target_count,target_number,distance,speed,energy,,*
+            if (data.find("$$DFDMD") == 0) {
               // Throttling for distance/speed updates
               static uint32_t last_distance_update = 0;
               uint32_t now = millis();
